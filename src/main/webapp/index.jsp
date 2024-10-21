@@ -11,12 +11,12 @@
                 <style>
                     .promotion-banner--bootcamp {
                         background-color: #ffc107;
-                      
+
                     }
 
                     .promotion-banner--bootcamp .btn-danger {
                         background-color: #ff5722;
-                       
+
                         border: none;
                     }
                 </style>
@@ -54,10 +54,10 @@
 
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav ms-auto">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
                                         href="metroFetch">user details</a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
                                         href="getLoginByEmail">Login</a>
@@ -66,8 +66,8 @@
                         </div>
                     </div>
                 </nav>
-
-
+                <p class=" h2 text-center justify-content-center" style="color: #ff5722;">${indexMsg}</p>
+               
                 <!-- Main Section -->
                 <div class="container position-relative mt-5 text-center">
                     <h2 class="py-5">Welcome to Metro</h2>
@@ -75,6 +75,9 @@
                         <a href="Registration.jsp" class="btn btn-primary mx-2">New User Registration</a>
                     </div>
                 </div>
+
+               
+
 
                 <!-- Footer Section -->
                 <footer class="bg-dark text-white py-3 fixed-bottom">

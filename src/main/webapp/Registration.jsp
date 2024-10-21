@@ -19,7 +19,7 @@
 
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
-                    <div class="container d-flex justify-content-between align-items-center">
+                    <div class="container-fluid d-flex justify-content-between align-items-center">
                         <div>
                             <a class="navbar-brand" href="#">
                                 <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
@@ -41,7 +41,7 @@
                     style="z-index: 1; max-width: 450px;">
                     <div class="card  rounded-3 text-light"
                         style="background-color: rgb(36, 113, 139); padding: 20px 15px;">
-                        <h5 class="text-center text-dark justify-content-end ">${registrationSuccess}</h5>
+                        <h5 class="text-center text-dark justify-content-end ">${registrationMsg}</h5>
                         <div class="card-body p-3">
                             <h2 class="text-center mb-3">User Registration Form</h2>
                             <form action="onSaveRegistration" method="post" onblur="form()">
@@ -173,7 +173,7 @@
                 <script>
                     function fNameValidation() {
                         var names = document.getElementById("fName").value;
-                        
+
                         if (names.trim() !== '' && names.length > 3 && names.length <= 25 && !/\d/.test(names)) {
                             document.getElementById("firstName").innerHTML = "";
                         } else if (/\d/.test(names)) {
@@ -186,7 +186,7 @@
 
                     function lNameValidation() {
                         var names = document.getElementById("lName").value;
-                       
+
                         if (names.trim() !== '' && names.length > 0 && names.length <= 25 && !/\d/.test(names)) {
                             document.getElementById("lastName").innerHTML = "";
                         } else if (/\d/.test(names) || names.length < 1) {
@@ -217,7 +217,7 @@
                             var char = uName.charAt(i);
                             if (!((char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z') || (char >= '0' && char <= '9') || char === '_' || char === '-')) {
                                 userName.innerHTML = "<span style='color:yellow;'>Username can only contain letters, numbers, underscores, and hyphens.</span>";
-                                
+
                                 return;
                             }
 
@@ -233,10 +233,10 @@
 
                         if (pass.trim !== '' && pass.length >= 8 && pass.length <= 12) {
                             password.innerHTML = "";
-                            
+
                         } else {
                             password.innerHTML = "<span> password must have atleast 8 letters </span>";
-                            
+
                         }
                         checkForm();
                     }
@@ -257,10 +257,10 @@
                         }
                         if (pass === cpass) {
                             confirmPasswordMessage.innerHTML = "";
-                           
+
                         } else {
                             confirmPasswordMessage.innerHTML = "<span style='color:yellow;'>Passwords do not match.</span>";
-                           
+
                         }
                         checkForm();
                     }
@@ -268,36 +268,35 @@
                         var mNumber = document.getElementById("mNumber").value;
                         var button = document.getElementById("button");
                         var mobileNumber = document.getElementById("mobileNumber");
+
                         if (!(mNumber.length == 10)) {
-                            mobileNumber.innerHTML = "<span style='color:yellow'> Mobile Number length should be 10</span>";
-                            
+                            mobileNumber.innerHTML = "<span style='color:yellow'>Mobile Number length should be 10</span>";
+                            button.setAttribute("disabled", "disabled");
                         } else {
                             var response = await axios('http://localhost:8083/metro-application/isMobileNumberExists?mobileNumber=' + mNumber);
                             if (response.data === "Mobile Number Exists") {
-                                mobileNumber.innerHTML = "<span style='color:yellow'> Mobile Number Exists</span>";
-                                
-                            }
-                            if (response.data === "Mobile Number Accepted") {
+                                mobileNumber.innerHTML = "<span style='color:yellow'>Mobile Number Exists</span>";
+                                button.setAttribute("disabled", "disabled");
+                            } else if (response.data === "Mobile Number Accepted") {
                                 mobileNumber.innerHTML = "";
-                               
+                                checkForm(); 
                             }
-                            checkForm();
                         }
                     }
+
                     const checkEmail = async () => {
                         var email = document.getElementById("eId").value;
                         var button = document.getElementById("button");
                         var response = await axios('http://localhost:8083/metro-application/isEmailExists?emailId=' + email);
                         if (response.data === "Email Exists") {
-                            document.getElementById("emailId").innerHTML = "<span style ='color:yellow'> Email exists </span>";
-                            
-
+                            document.getElementById("emailId").innerHTML = "<span style='color:yellow'>Email exists</span>";
+                            button.setAttribute("disabled", "disabled");
                         } else if (response.data === "Email Accepted") {
                             document.getElementById("emailId").innerHTML = "";
-                           
+                            checkForm();
                         }
-                        checkForm();
                     }
+
                     function checkForm() {
                         var names = document.getElementById("fName").value;
                         var lnames = document.getElementById("lName").value;
@@ -314,9 +313,9 @@
                             (uName.length >= 4 && uName.length <= 20) &&
                             (pass.trim() !== '' && pass.length >= 8 && pass.length <= 12 && pass === cpass) &&
                             (mNumber.length == 10) &&
-                            (email.trim() !== "") 
-                            ) {
-                                button.removeAttribute("disabled")
+                            (email.trim() !== "")
+                        ) {
+                            button.removeAttribute("disabled")
                         } else {
                             document.getElementById("formMessage").innerHTML = "";
                             button.setAttribute("disabled", "");

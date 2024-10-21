@@ -109,7 +109,7 @@
                             confirmPassword.innerHTML = "";
                         }
                         if (pass === cpass) {
-                            confirmPassword.innerHTML = "<span style='color:white'> password matches</span>";
+                            confirmPassword.innerHTML = "";
                         } else {
                             confirmPassword.innerHTML = "<span style ='color:yellow'> password must have atleast 8 letters </span>";
                         }

@@ -74,7 +74,10 @@ public class LoginController {
         log.info("login dto email is ===========" + emailId);
 
         log.info("ON LOGIN SAVE DETAILS BY EMAIL ");
-
+        if (registrationDto == null) {
+            model.addAttribute("userLoginMsg","Enter correct email id");
+            return "LoginByEmail";
+        }
         if (registrationDto.isAccountBlocked()) {
             model.addAttribute("userLoginMsg", "User Account is blocked Please reset your password  ");
             model.addAttribute("details", registrationDto);

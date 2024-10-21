@@ -17,7 +17,7 @@ public class RegistrationDto {
     private String userName;
 
     @NotBlank(message = "Password must not be blank ,empty ")
-    @Size(min = 1,max = 8 ,message = "password length should be between 1 - 8 characters")
+    @Size(min = 8,max = 12 ,message = "password length should be between 1 - 8 characters")
     private String password;
 
     @NotBlank(message = "emailId must not be blank")

@@ -36,12 +36,12 @@ public class RegistrationController {
     public String onSaveRegistration(@Valid RegistrationDto registrationDto, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("registrationError", bindingResult.getAllErrors());
-            return "Message";
+            model.addAttribute("registrationMsg", "Please enter details correctly");
+            return "Registration";
         }
         metroService.onSaveRegistrationDetails(registrationDto);
-        model.addAttribute("registrationSuccess", "registration successful");
-        return "Registration";
+        model.addAttribute("indexMsg", "registration successful");
+        return "index";
     }
 
     @GetMapping("/registration")

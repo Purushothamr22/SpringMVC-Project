@@ -44,6 +44,7 @@
                 <div class="row justify-content-center py-5">
                     <div class="col-md-6 ">
                         <div class="card p-4 mx-auto " style="background-color: rgba(144, 177, 54, 0.7); width: 40vw;">
+                            <h3 class="text-dark justify-content-center">User Profile </h3>
                             <form action="updateDetails" method="post" enctype="multipart/form-data">
                                 <input type="number" name="id" value="${metroDto.id}" hidden>
                                 <!-- Row 1: First Name, Last Name -->

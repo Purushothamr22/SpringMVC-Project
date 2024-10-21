@@ -55,7 +55,7 @@
                                     <div class="mb-4 ">
                                         <label for="emailId" class="form-label text-light">Email id</label>
                                         <input type="email" id="emailId" name="emailId"
-                                            placeholder="Enter your email id" class="form-control" onblur="checkEmail()"
+                                            placeholder="Enter your email id" class="form-control" onblur="checkEmail()" value="${emailDto.emailId}"
                                             required>
                                         <span id="email"></span>
                                     </div>
