@@ -1,0 +1,14 @@
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:25:03 +0530] "GET /metro-application HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:25:06 +0530] "GET /metro-application/ HTTP/1.1" 200 1841
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:25:06 +0530] "GET /favicon.ico HTTP/1.1" 404 682
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:25:14 +0530] "GET /metro-application/Login.jsp HTTP/1.1" 200 5987
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:25:19 +0530] "GET /metro-application/ForgotPassword.jsp HTTP/1.1" 200 3944
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:25:45 +0530] "GET /metro-application/getOtpDetails?emailId=amith%40gmail.com HTTP/1.1" 200 8030
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:26:38 +0530] "POST /metro-application/validatedOtp HTTP/1.1" 400 879
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:30:08 +0530] "POST /metro-application/validatedOtp HTTP/1.1" 400 872
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:31:54 +0530] "GET /metro-application/ForgotPassword.jsp HTTP/1.1" 200 3944
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:32:03 +0530] "GET /metro-application/ HTTP/1.1" 200 1841
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:32:05 +0530] "GET /metro-application/Login.jsp HTTP/1.1" 200 5987
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:32:07 +0530] "GET /metro-application/ForgotPassword.jsp HTTP/1.1" 200 3944
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:32:18 +0530] "GET /metro-application/getOtpDetails?emailId=raj%40gmail.com HTTP/1.1" 200 8053
+0:0:0:0:0:0:0:1 - - [06/Oct/2024:18:32:46 +0530] "POST /metro-application/validatedOtp HTTP/1.1" 400 872

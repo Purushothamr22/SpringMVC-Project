@@ -1,0 +1,8 @@
+0:0:0:0:0:0:0:1 - - [17/Sep/2024:16:23:21 +0530] "GET /metro-application HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [17/Sep/2024:16:23:22 +0530] "GET /metro-application/ HTTP/1.1" 200 1841
+0:0:0:0:0:0:0:1 - - [17/Sep/2024:16:23:23 +0530] "GET /favicon.ico HTTP/1.1" 404 682
+0:0:0:0:0:0:0:1 - - [17/Sep/2024:16:23:25 +0530] "GET /metro-application/Login.jsp HTTP/1.1" 200 3124
+0:0:0:0:0:0:0:1 - - [17/Sep/2024:16:23:35 +0530] "POST /metro-application/onLoginSaveDetails HTTP/1.1" 200 146
+0:0:0:0:0:0:0:1 - - [17/Sep/2024:16:26:54 +0530] "POST /metro-application/onLoginSaveDetails HTTP/1.1" 200 146
+0:0:0:0:0:0:0:1 - - [17/Sep/2024:16:27:24 +0530] "GET /metro-application/Login.jsp HTTP/1.1" 200 3124
+0:0:0:0:0:0:0:1 - - [17/Sep/2024:16:27:40 +0530] "POST /metro-application/onLoginSaveDetails HTTP/1.1" 200 146
