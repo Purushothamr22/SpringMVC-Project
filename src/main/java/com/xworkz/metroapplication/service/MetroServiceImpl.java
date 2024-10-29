@@ -36,14 +36,18 @@ public class MetroServiceImpl implements MetroService {
 
     @Override
     public boolean onSaveRegistrationDetails(RegistrationDto registrationDto) {
-        RegistrationEntity registrationEntity = new RegistrationEntity();
-        registrationDto.setPassword(encryption.encrypt(registrationDto.getPassword()));
-        registrationDto.setUserImage("temp.jpg");
-        registrationDto.setImageType("Image/jpg");
-        log.info("B Day ===================" + registrationDto.getBirthdayDate());
-        BeanUtils.copyProperties(registrationDto, registrationEntity);
-        metroRepository.saveRegistrationDetails(registrationEntity);
-        return true;
+        RegistrationDto registrationDto1 = onFindByEmailId(registrationDto.getEmailId());
+        if (registrationDto1 == null) {
+            RegistrationEntity registrationEntity = new RegistrationEntity();
+            registrationDto.setPassword(encryption.encrypt(registrationDto.getPassword()));
+            registrationDto.setUserImage("temp.jpg");
+            registrationDto.setImageType("Image/jpg");
+            log.info("B Day ===================" + registrationDto.getBirthdayDate());
+            BeanUtils.copyProperties(registrationDto, registrationEntity);
+            metroRepository.saveRegistrationDetails(registrationEntity);
+            return true;
+        }
+       return false;
     }
 
     @Override
@@ -58,8 +62,9 @@ public class MetroServiceImpl implements MetroService {
             RegistrationEntity registrationEntity = new RegistrationEntity();
             BeanUtils.copyProperties(registrationDto, registrationEntity);
             metroRepository.userBlockedByEmail(emailId, registrationEntity.isAccountBlocked(), registrationEntity.getNoOfAttempts());
-            if (registrationDto.getNoOfAttempts() >= 3) {
 
+
+            if (registrationDto.getNoOfAttempts() >= 3) {
                 registrationDto.setAccountBlocked(true);
                 BeanUtils.copyProperties(registrationDto, registrationEntity);
 
@@ -70,7 +75,7 @@ public class MetroServiceImpl implements MetroService {
 
             LoginDto loginDto = new LoginDto();
             loginDto.setId(registrationDto.getId());
-            loginDto.setUserName(registrationDto.getUserName());
+            loginDto.setFirstName(registrationDto.getFirstName());
             loginDto.setPassword(encryption.encrypt(registrationDto.getPassword()));
             loginDto.setLoginTime(LocalDateTime.now().toString());
             loginDto.setLogoutTime(null);
@@ -108,11 +113,11 @@ public class MetroServiceImpl implements MetroService {
     }
 
     @Override
-    public RegistrationDto onFindByUserName(String userName) {
-        if (userName != null) {
+    public RegistrationDto onFindByName(String firstName) {
+        if (firstName != null) {
             log.info("this is on find by user name service ");
             RegistrationDto registrationDto = new RegistrationDto();
-            RegistrationEntity registrationEntity = metroRepository.findByUserName(userName);
+            RegistrationEntity registrationEntity = metroRepository.findByName(firstName);
             registrationEntity.setPassword(encryption.decrypt(registrationEntity.getPassword()));
             BeanUtils.copyProperties(registrationEntity, registrationDto);
 
@@ -178,8 +183,8 @@ public class MetroServiceImpl implements MetroService {
                 String encryptPassword = encryption.encrypt(password);
                 boolean updatePasswordByEmailId = metroRepository.updatePasswordByEmailId(encryptPassword, emailId);
                 log.info("Password update status :===========" + updatePasswordByEmailId);
-                if (updatePasswordByEmailId){
-                    metroRepository.userBlockedByEmail(emailId,false,0);
+                if (updatePasswordByEmailId) {
+                    metroRepository.userBlockedByEmail(emailId, false, 0);
                 }
 
                 return true;
@@ -193,7 +198,7 @@ public class MetroServiceImpl implements MetroService {
     public String updateProfile(RegistrationDto registrationDto) {
         if (registrationDto != null) {
 
-            RegistrationDto registrationDto1 = onFindByUserName(registrationDto.getUserName());
+            RegistrationDto registrationDto1 = onFindByName(registrationDto.getFirstName());
             RegistrationEntity registrationEntity = new RegistrationEntity();
             registrationDto1.setPassword(encryption.encrypt(registrationDto1.getPassword()));
             BeanUtils.copyProperties(registrationDto1, registrationEntity);
@@ -231,7 +236,7 @@ public class MetroServiceImpl implements MetroService {
                 registrationDto.setUserImage(file.getOriginalFilename());
                 registrationDto.setImageType(file.getContentType());
                 BeanUtils.copyProperties(registrationDto, registerEntity);
-                 metroRepository.updateUserProfile(registerEntity);
+                metroRepository.updateUserProfile(registerEntity);
                 return true;
             } catch (IOException ignored) {
 
@@ -244,5 +249,42 @@ public class MetroServiceImpl implements MetroService {
 
 
     }
+
+
+//    public String findByStationName(String fromStation, String toStation) {
+//        float baseTicketPrice;
+//        if (fromStation != null && toStation!= null) {
+//            AddTrainDetailsDto fromStationDto = onFindByStationNameService(fromStation);
+//            AddTrainDetailsDto toStationDto = onFindByStationNameService(toStation);
+//            if (toStationDto != null&&fromStationDto!=null) {
+//                Float fromDistance = fromStationDto.getDistance();
+//                Float toDistance = toStationDto.getDistance();
+//                float distanceBtwStations = fromDistance - toDistance;
+//                if (distanceBtwStations < 2.00) {
+//                    baseTicketPrice = 10F;
+//                } else if (distanceBtwStations <= 5) {
+//                    baseTicketPrice = 15F;
+//                } else if (distanceBtwStations <= 8) {
+//                    baseTicketPrice = 20F;
+//                } else {
+//                    baseTicketPrice = 20F;
+//                    float extraDistance = distanceBtwStations - 8F;
+//                    float extraFare = (float) Math.ceil(extraDistance / 2) * 3F;
+//                    baseTicketPrice += extraFare;
+//                }
+//                fromStationDto.setTicketPrice(baseTicketPrice);
+//                fromStationDto.setFromStation(fromStation);
+//                fromStationDto.setToStation(toStation);
+//                AddTrainDetailsEntity fromStationEntity = new AddTrainDetailsEntity();
+//                BeanUtils.copyProperties(fromStationDto,fromStationEntity);
+//                metroRepository.saveTrainDetails(fromStationEntity);
+//                return "The base ticket price is: ₹" + baseTicketPrice;
+//            }
+//            return "data no present";
+//        }
+//        return "Invalid station(s) provided.";
+//    }
+
+
 }
 

@@ -2,7 +2,7 @@ package com.xworkz.metroapplication.repository;
 
 import com.xworkz.metroapplication.entity.LoginEntity;
 import com.xworkz.metroapplication.entity.RegistrationEntity;
-import javafx.scene.chart.ScatterChart;
+import com.xworkz.metroapplication.entity.StationDetailsEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -31,13 +31,11 @@ public class MetroRepositoryImpl implements MetroRepository {
             entityManager.persist(registrationEntity);
             entityTransaction.commit();
         } catch (Exception e) {
-            System.err.println("Exception occurred in saveRegistrationDetails: " + e.getMessage());
             log.error("got error......"+e.getMessage());
-            throw new RuntimeException("Error saving registration details", e);
         } finally {
             entityManager.close();
         }
-        return "";
+        return "Save error";
     }
 
 
@@ -76,13 +74,13 @@ public class MetroRepositoryImpl implements MetroRepository {
     }
 
     @Override
-    public RegistrationEntity findByUserName(String userName) {
+    public RegistrationEntity findByName(String firstName) {
         log.info("this is on find by user name repo ");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             Query query = entityManager.createNamedQuery("fetchbyname");
-            query.setParameter("name", userName);
-            System.out.println("setting parameter : " + userName);
+            query.setParameter("name", firstName);
+            System.out.println("setting parameter : " + firstName);
             log.info("this is on find by user name repo  ");
             return (RegistrationEntity) query.getSingleResult();
         } catch (Exception e) {
@@ -186,7 +184,6 @@ public class MetroRepositoryImpl implements MetroRepository {
             transaction.begin();
             entityManager.merge(registrationEntity);
             transaction.commit();
-
         }catch (Exception e){
             log.error("error in update profile " +e.getMessage());
         }finally {
@@ -207,5 +204,34 @@ public class MetroRepositoryImpl implements MetroRepository {
             log.error("got error in find  by mobile number......"+e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public StationDetailsEntity findByStationName(String stationName) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            Query query = entityManager.createNamedQuery("findByStationName");
+            query.setParameter("stationName",stationName);
+            return (StationDetailsEntity) query.getSingleResult();
+        }catch (Exception e){
+            log.error("got error in find  by Station Name......"+e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public String saveTrainDetails(StationDetailsEntity trainDetailsEntity) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.persist(trainDetailsEntity);
+            transaction.commit();
+        }catch (Exception e){
+            log.error("got error in save train details ......................     "+e.getMessage());
+        }finally {
+            entityManager.close();
+        }
+        return "failed to save ";
     }
 }

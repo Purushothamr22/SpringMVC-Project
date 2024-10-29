@@ -8,13 +8,13 @@ import java.util.List;
 public interface MetroService {
     boolean onSaveRegistrationDetails(RegistrationDto registrationDto);
 
-//    String  onSaveLoginDetails(String userName, String password);
+
     String  onSaveLoginDetailsByEmail(String emailId, String password);
 
 
     List<RegistrationDto> onFetchAll();
 
-    RegistrationDto onFindByUserName(String userName);
+    RegistrationDto onFindByName(String firstName);
 
     RegistrationDto onFindByEmailId(String emailId);
 
@@ -25,5 +25,7 @@ public interface MetroService {
     String updateProfile(RegistrationDto registrationDto);
     RegistrationDto onFindByMobileNumber(Long mobileNumber);
      boolean saveEditedProfile(RegistrationDto registrationDto, MultipartFile file);
+//     String findByStationName(String fromStation,String toStation);
+
 
 }

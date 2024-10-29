@@ -9,6 +9,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
                 <title>Government Metro Service Login</title>
+                
                 <style>
                     body {
                         /* background-image: url('https://c1.wallpaperflare.com/preview/613/806/400/subway-city-metro-transportation.jpg'); */
@@ -20,17 +21,17 @@
                 </style>
             </head>
 
-            <body class="bg-dark">
+            <body class="bg bg-dark">
                 <!-- Navigation Bar -->
                 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
-                    <div class="container d-flex justify-content-between align-items-center">
+                    <div class="container-fluid d-flex justify-content-between align-items-center">
                         <div>
                             <a class="navbar-brand" href="#">
                                 <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
                             </a>
                         </div>
                         <div>
-                            <span class="navbar-text h5 text-dark  ">Government Metro </span>
+                            <span class="navbar-text h5 text-dark  ">Namma Metro </span>
                         </div>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -42,7 +43,7 @@
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getIndex">Home</a>
+                                        href="getIndex">Back</a>
                                 </li>
                             </ul>
                         </div>
@@ -53,23 +54,24 @@
                 <div class="container my-5">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
-                            <div class="card p-4" style="background-color: rgb(84, 110, 122,0.6);">
+                            <div class="card p-4" style="background-color: rgb(52, 73, 85,0.6);">
                                 <h5 class=" mb-4 text-white">${userLoginMsg}</h5>
                                 <h2 class="text-center mb-4 text-white">Login</h2>
 
                                 <form action="onLoginSaveDetailsByEmail" method="post" onblur="checkForm()">
                                     <div class="mb-3">
-                                        <label for="emailId" class="form-label text-light">E-mail</label>
+                                        <label  class="form-label text-light">E-mail</label>
                                         <input type="email" id="email" name="emailId" placeholder="Enter E-mail Id"
                                             class="form-control" onblur="checkEmail()" required>
                                         <span id="eId"></span>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="password" class="form-label text-light">Password</label>
+                                        <label  class="form-label text-light">Password</label>
                                         <input type="password" id="pass" name="password" placeholder="Enter Password"
                                             class="form-control" onblur="checkPassword()" required>
                                         <span id="password"></span>
                                     </div>
+                                  
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-danger">Login</button>
                                         <span id="button"></span>
@@ -77,10 +79,11 @@
                                     <div class=" row ">
                                         <p class=" text-center text-light">
                                             Forgot Password ? <a class="text-center text-warning"
-                                                href="ForgotPassword.jsp"> Reset</a>
+                                                href="getForgotPassword"> Reset</a>
                                         </p>
                                     </div>
                                 </form>
+                            
 
                             </div>
                         </div>
@@ -101,13 +104,16 @@
 
                 <!-- Bootstrap JS -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
                 <script>
 
                     const checkEmail = async () => {
                         var email = document.getElementById("email").value;
                         var button = document.getElementById("button");
                         console.log("emil in login is " + email);
-
+                       
+                        
                         var response = await axios('http://localhost:8083/metro-application/isEmailExists?emailId=' + email);
                         if (email.length < 5) {
                             document.getElementById("eId").innerHTML = "<span style='color:red;'>invalid email</span>";
@@ -124,50 +130,35 @@
                     function checkPassword() {
                         var pass = document.getElementById("pass").value;
                         var button = document.getElementById("button");
-                        var password = document.getElementById("password");
+                     
 
                         if (pass.trim !== '' && pass.length >= 8 && pass.length <= 12) {
-                            password.innerHTML = "";
+                            document.getElementById("password").innerHTML = "";
                             button.removeAttribute("disabled")
                         } else {
-                            password.innerHTML = "<span> password must have atleast 8 letters </span>";
-                            button.setAttribute("disabld", "");
+                            document.getElementById("password").innerHTML = "<span style = 'color :yellow'> password must have atleast 8 letters </span>";
+                            button.setAttribute("disabled", "");
                         }
                         checkForm();
                     }
-                    let noOfAttempts = ${ AccBlockDetails }; 
-                    console.log("No of attempts are ====  "+AccBlockDetails);
+                    
+
                     
                     function checkForm() {
                         var email = document.getElementById("email").value;
                         var pass = document.getElementById("pass").value;
                         var button = document.getElementById("button");
-
-                        if (noOfAttempts >= 3) {
-                            document.getElementById("loginMsg").innerHTML = "<span style='color:red;'>Account is blocked due to multiple failed attempts.</span>";
-                            button.setAttribute("disabled", "true");
-                            return;
-                        }
-
                         if (email.length >= 5 && pass.length >= 8 && pass.length <= 12) {
                             button.removeAttribute("disabled");
                         } else {
+                            // if (condition) {
+                                
+                            // }
                             button.setAttribute("disabled", "true");
                         }
                     }
-
-                    function handleLoginFailure() {
-                        noOfAttempts++;
-                        if (noOfAttempts >= 3) {
-                            document.getElementById("loginMsg").innerHTML = "<span style='color:red;'>Account is blocked due to multiple failed attempts.</span>";
-                            document.getElementById("button").setAttribute("disabled", "true");
-                        }
-                    }
-
-
-
                 </script>
-                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+                
 
             </body>
 

@@ -57,7 +57,7 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th>ID</th>
-                                    <th>User Name</th>
+                                    <th>first Name</th>
                                     <th>Password</th>
                                     <th>Email ID</th>
                                     <th>Mobile Number</th>
@@ -67,7 +67,7 @@
                                 <c:forEach items="${users}" var="dto">
                                     <tr>
                                         <td>${dto.id}</td>
-                                        <td>${dto.userName}</td>
+                                        <td>${dto.firstName}</td>
                                         <td>${dto.password}</td>
                                         <td>${dto.emailId}</td>
                                         <td>${dto.mobileNumber}</td>
@@ -78,16 +78,16 @@
                     </div>
                 </div>
 
-                <form action="onFindByUserName" method="post">
+                <form action="onFindByName" method="post">
                     <div class="container mt-4">
                         <div class="row justify-content-between">
                             <div class="card shadow-sm" style="max-width: 300px; border-color: aqua;">
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <label for="userName" class="form-label text-dark">User Name</label>
-                                        <input type="text" id="userName" name="userName"
+                                        <label for="firstName" class="form-label text-dark">User Name</label>
+                                        <input type="text" id="firstName" name="firstName"
                                             placeholder="Enter your user name" class="form-control"
-                                            value="${dto.userName}">
+                                            value="${dto.firstName}">
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100">Submit</button>
                                 </div>

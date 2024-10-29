@@ -13,8 +13,6 @@ import java.util.Date;
 public class RegistrationDto {
     private Integer id;
 
-    @NotBlank(message = "User Name must not be blank")
-    private String userName;
 
     @NotBlank(message = "Password must not be blank ,empty ")
     @Size(min = 8,max = 12 ,message = "password length should be between 1 - 8 characters")

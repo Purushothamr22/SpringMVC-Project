@@ -20,14 +20,25 @@
                         border: none;
                     }
                 </style>
+                <style>
+                    .bg-cover {
+                      background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240729/pngtree-yellow-train-in-budapest-metro-hungary-image_15933708.jpg');
+                      background-size: cover;
+                      background-position: center;
+                      background-repeat: no-repeat;
+                    }
+                    
+                    .overlay {
+                      background: rgba(0, 0, 0, 0.7); 
+                    }
+                  </style>
+                  
 
             </head>
 
-            <body class="bg-dark text-white" style="background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240729/pngtree-yellow-train-in-budapest-metro-hungary-image_15933708.jpg'); 
-    background-size: cover;
-     background-position: center; 
-     background-repeat: no-repeat; 
-     height: 100vh;">
+            <body class="bg-dark text-white bg-cover bg-center position-relative" style="height: 100vh;">
+                <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+
 
                 <!-- Promotion Banner with Bootcamp Modifier
                 <div class="promotion-banner promotion-banner--bootcamp text-center ">
@@ -39,7 +50,7 @@
 
 
                 </div>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark  ">
+                <nav class="navbar navbar-expand-lg  navbar-dark  " style="background-color: rgb(249, 170, 51);">
                     <div class="container-fluid ">
                         <a class="navbar-brand">
                             <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 40px;">
@@ -54,33 +65,30 @@
 
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav ms-auto">
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="metroFetch">user details</a>
-                                </li> -->
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getLoginByEmail">Login</a>
+                                    <a class="nav-link btn btn-primary  text-light" href="getRegistration"> New User
+                                        Registration</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-primary  text-light" href="getLoginByEmail">Login</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
-                <p class=" h2 text-center justify-content-center" style="color: #ff5722;">${indexMsg}</p>
-               
+                <span class=" h2 text-center justify-content-center" style="color: white;">${indexMsg}</span>
+
                 <!-- Main Section -->
                 <div class="container position-relative mt-5 text-center">
                     <h2 class="py-5">Welcome to Metro</h2>
-                    <div class="d-flex justify-content-center mt-4">
-                        <a href="Registration.jsp" class="btn btn-primary mx-2">New User Registration</a>
-                    </div>
+
                 </div>
 
-               
+
 
 
                 <!-- Footer Section -->
-                <footer class="bg-dark text-white py-3 fixed-bottom">
+                <footer class=" text-white py-3 fixed-bottom" style="background-color: rgb(3, 54, 255);">
                     <div class="container text-center">
                         <p class="mb-1">&copy; 2024 Metro Service. All rights reserved.</p>
                         <nav>

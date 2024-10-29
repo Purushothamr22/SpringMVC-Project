@@ -11,7 +11,7 @@
                 <title>Government Metro Service Login</title>
             </head>
 
-            <body class="bg-dark" >
+            <body class="bg-dark">
 
                 <!-- Navigation Bar -->
                 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(95, 101, 104);">
@@ -36,117 +36,122 @@
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
                                         href="getIndex">Home</a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
+                                        href="getUserPage?emailId=${metroDto.emailId}">Back</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
 
-                <div class="row justify-content-center py-5">
-                    <div class="col-md-6 ">
-                        <div class="card p-4 mx-auto " style="background-color: rgba(144, 177, 54, 0.7); width: 40vw;">
-                            <h3 class="text-dark justify-content-center">User Profile </h3>
+
+                <div class="row justify-content-center py-0 my-5">
+                    <div class="col-12 col-md-6 col-lg-8"> <!-- Increased card size -->
+                        <div class="card p-5 mx-auto shadow-lg hover-shadow-lg"
+                            style="background-color: rgba(159, 178, 255, 0.7);">
+
+                            <div class="card-header text-center bg-transparent border-0">
+                                <h3 class="text-dark">User Profile</h3>
+                            </div>
+
+                            <div class="mb-4 text-center">
+                                <img src="getImage/${metroDto.userImage}" alt="Profile Image"
+                                    class="img-thumbnail rounded-circle shadow-lg border border-warning"
+                                    style="width: 180px; height: 180px;"> <!-- Increased image size -->
+                            </div>
+
                             <form action="updateDetails" method="post" enctype="multipart/form-data">
                                 <input type="number" name="id" value="${metroDto.id}" hidden>
+
                                 <!-- Row 1: First Name, Last Name -->
-                                <div class="row mb-2">
-                                    <div class="col-md-6">
+                                <div class="row g-3 gx-5 mb-4"> <!-- Increased spacing between rows -->
+                                    <div class="col-12 col-md-6">
                                         <label class="form-label">First Name</label>
                                         <input type="text" id="fName" name="firstName" placeholder="Enter First Name"
-                                            class="form-control" value="${metroDto.firstName}"
+                                            class="form-control shadow-sm border border-dark" value="${metroDto.firstName}"
                                             onblur="fNameValidation()">
-                                        <span id="firstName"></span>
+                                        <span id="firstName" class="text-danger"></span>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-12 col-md-6">
                                         <label class="form-label">Last Name</label>
                                         <input type="text" id="lName" name="lastName" placeholder="Enter Last Name"
-                                            value="${metroDto.lastName} " class="form-control"
+                                            value="${metroDto.lastName}" class="form-control shadow-sm border border-dark"
                                             onblur="lNameValidation()">
-                                        <span id="lastName"></span>
+                                        <span id="lastName" class="text-danger"></span>
                                     </div>
                                 </div>
 
-                                <!-- Row 2: Birthday, Gender -->
-                                <div class="row mb-2">
-                                    <div class="col-md-6">
+                                <!-- Row 2: Birth Date, Email ID -->
+                                <div class="row g-3 gx-5 mb-4"> <!-- Increased spacing between rows -->
+                                    <div class="col-12 col-md-6">
                                         <label class="form-label">Birth Date:</label>
                                         <input type="date" id="birthDate" name="birthdayDate"
-                                            placeholder="Enter birth Date" value="${metroDto.birthdayDate}"
-                                            class="form-control">
+                                            class="form-control shadow-sm border border-dark" value="${metroDto.birthdayDate}">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label d-block" for="gender">Gender</label>
-                                        <input type="radio" id="male" name="gender" value="male"
-                                            ${metroDto.gender=='male' ? 'checked' : '' }>
-                                        <label for="male">Male</label>
-                                        <input type="radio" id="female" name="gender" value="female"
-                                            ${metroDto.gender=='female' ? 'checked' : '' }>
-                                        <label for="female">Female</label>
-                                        <input type="radio" id="other" name="gender" value="other"
-                                            ${metroDto.gender=='other' ? 'checked' : '' }>
-                                        <label for="other">Other</label>
-                                    </div>
-                                </div>
-
-
-                                <!-- Row 3: Username, Email ID -->
-                                <div class="row mb-2">
-                                    <div class="col-md-6">
-                                        <label class="form-label">User Name</label>
-                                        <input type="text" id="uName" name="userName" placeholder="Enter User Name"
-                                            value="${metroDto.userName}" class="form-control" onblur="checkUserName()">
-                                        <span id="userName"></span>
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-12 col-md-6">
                                         <label class="form-label">Email ID</label>
                                         <input type="email" id="eId" name="emailId" placeholder="Enter Email Id"
-                                            value="${metroDto.emailId}" class="form-control" onblur="checkEmail()">
-                                        <span id="emailId"></span>
+                                            value="${metroDto.emailId}" class="form-control shadow-sm border border-dark"
+                                            onblur="checkEmail()">
+                                        <span id="emailId" class="text-danger"></span>
                                     </div>
                                 </div>
 
-                                <div class="row mb-2">
-                                    <div class="col-md-6">
+                                <!-- Row 3: Mobile Number, Password -->
+                                <div class="row g-3 gx-5 mb-4"> <!-- Increased spacing between rows -->
+                                    <div class="col-12 col-md-6">
                                         <label class="form-label">Mobile Number</label>
                                         <input type="tel" id="mNumber" name="mobileNumber"
                                             placeholder="Enter Mobile Number" value="${metroDto.mobileNumber}"
-                                            class="form-control" onblur="checkMobileNumber()">
-                                        <span id="mobileNumber"></span>
+                                            class="form-control shadow-sm border border-dark" onblur="checkMobileNumber()">
+                                        <span id="mobileNumber" class="text-danger"></span>
                                     </div>
-
-                                    <div class="col-md-6">
+                                    <div class="col-12 col-md-6">
                                         <label class="form-label">Password</label>
                                         <input type="password" id="pass" name="password" placeholder="Enter Password"
-                                            value="${metroDto.password}" class="form-control" onblur="checkPassword()">
-                                        <span id="password"></span>
+                                            value="${metroDto.password}" class="form-control shadow-sm border border-dark"
+                                            onblur="checkPassword()">
+                                        <span id="password" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label class="form-label">Upload file </label>
-                                        <input type="file" id="file" name="file" class="form-control" />
-                                    </div>
-
-                                    <div class="col-md-6">
+                                <!-- Row 4: Confirm Password (Hidden) -->
+                                <div class="row g-3 gx-5 mb-3">
+                                    <div class="col-12 col-md-6" hidden>
+                                        <label class="form-label">Confirm Password</label>
                                         <input type="password" id="cpass" name="confirmPassword"
-                                            value="${metroDto.password}" class="form-control" onblur="confirmPassword()"
-                                            hidden>
-                                        <span id="password"></span>
+                                            placeholder="Confirm Password" class="form-control shadow-sm border border-dark"
+                                            onblur="confirmPasswordValidation()">
+                                        <span id="confirmPassword" class="text-danger"></span>
                                     </div>
-
-                                    
                                 </div>
 
-                                <div class="text-center mt-3">
-                                    <button id="button" type="submit" class="btn btn-primary w-100">Edit</button>
+
+                                <!-- Row 5: File Upload -->
+                                <div class="row g-3 gx-5 mb-4">
+                                    <div class="col-12">
+                                        <label class="form-label">Upload Profile Image</label>
+                                        <input type="file" id="file" name="file" class="form-control shadow-sm border border-dark" />
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="text-center mt-4">
+                                    <button id="button" type="submit" class="btn btn-primary w-100 py-2 shadow">Update
+                                        Profile</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+
+
+
                 <br>
                 <br>
                 <!-- Footer -->
-                <footer class="text-white text-center py-3 " style="background-color: rgb(153, 166, 172);">
+                <footer class="fixed-bottom text-white text-center py-3 " style="background-color: rgb(153, 166, 172);">
                     <div class="container">
                         <nav>
                             <a href="#" class="mx-2 text-white">Privacy Policy</a>
@@ -164,7 +169,7 @@
                             document.getElementById("firstName").innerHTML = "";
                             button.removeAttribute("disabled");
                         } else if (/\d/.test(names)) {
-                            document.getElementById("firstName").innerHTML = "<span style='color:yellow;'>Username cannot contain numbers.</span>";
+                            document.getElementById("firstName").innerHTML = "<span style='color:yellow;'>firstName cannot contain numbers.</span>";
                             button.setAttribute("disabled", "");
                         } else {
                             document.getElementById("firstName").innerHTML = "<span style='color:yellow;'>Must be between 4 & 25 characters.</span>";
@@ -186,39 +191,7 @@
 
                     }
 
-                    function checkUserName() {
-                        var uName = document.getElementById("uName").value;
-                        var button = document.getElementById("button");
-                        var userName = document.getElementById("userName");
-                        userName.innerHTML = "";
 
-
-
-                        var firstChar = uName.charAt(0);
-                        if (!((firstChar >= 'A' && firstChar <= 'Z') || (firstChar >= 'a' && firstChar <= 'z'))) {
-                            userName.innerHTML = "<span style='color:yellow;'>Username must start with a letter.</span>";
-                            button.setAttribute("disabled", "");
-                            return;
-                        }
-
-                        if (uName.length < 4 || uName.length > 20) {
-                            userName.innerHTML = "<span style='color:yellow;'>Username must be between 4 and 20 characters.</span>";
-                            button.setAttribute("disabled", "");
-                            return;
-                        }
-
-                        for (var i = 0; i < uName.length; i++) {
-                            var char = uName.charAt(i);
-                            if (!((char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z') || (char >= '0' && char <= '9') || char === '_' || char === '-')) {
-                                userName.innerHTML = "<span style='color:yellow;'>Username can only contain letters, numbers, underscores, and hyphens.</span>";
-                                button.setAttribute("disabled", "");
-                                return;
-                            }
-
-                        }
-                        userName.innerHTML = "";
-                        button.removeAttribute("disabled");
-                    }
 
                     function checkPassword() {
                         var pass = document.getElementById("pass").value;
@@ -270,14 +243,6 @@
                         }
 
                     }
-
-                    document.addEventListener("DOMContentLoaded", function () {
-                        const gender = "${metroDto.gender}";
-                        document.getElementById(gender).checked = true;
-                    });
-
-
-
                 </script>
             </body>
 

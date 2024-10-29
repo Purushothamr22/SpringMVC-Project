@@ -13,7 +13,7 @@ public class LoginEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String userName;
+    private String firstName;
     private String loginTime;
     private String logoutTime;
     private String password;

@@ -39,9 +39,12 @@ public class RegistrationController {
             model.addAttribute("registrationMsg", "Please enter details correctly");
             return "Registration";
         }
-        metroService.onSaveRegistrationDetails(registrationDto);
-        model.addAttribute("indexMsg", "registration successful");
-        return "index";
+        boolean isSaved = metroService.onSaveRegistrationDetails(registrationDto);
+        if(isSaved){
+            model.addAttribute("indexMsg", "registration successful");
+            return "index";
+        }
+        return  "Registration";
     }
 
     @GetMapping("/registration")
@@ -63,14 +66,14 @@ public class RegistrationController {
         return "MetroFetch";
     }
 
-    @PostMapping("/onFindByUserName")
-    public String onFindByUName(@RequestParam String userName, Model model) {
+    @PostMapping("/onFindByName")
+    public String onFindByUName(@RequestParam String firstName, Model model) {
         log.info("this is on find by user name controller ");
-        if (userName != null) {
-            RegistrationDto registrationDto = metroService.onFindByUserName(userName);
+        if (firstName != null) {
+            RegistrationDto registrationDto = metroService.onFindByName(firstName);
             List<RegistrationDto> registrationDtos =new ArrayList<>();
             registrationDtos.add(registrationDto);
-            log.info("this is on find by user name after calling  metroService.onFindByUserName(userName) ");
+            log.info("this is on find by user name after calling  metroService.onFindByName(firstName) ");
             model.addAttribute("users",registrationDtos);
             model.addAttribute("message", "Details found Successfully");
             return "MetroFetch";
@@ -79,13 +82,13 @@ public class RegistrationController {
         return "MetroFetch";
     }
     @PostMapping("/onFindByEmail")
-    public String onFindByEmail(@RequestParam String userName, Model model) {
-        if (userName != null) {
-            RegistrationDto registrationDto = metroService.onFindByUserName(userName);
+    public String onFindByEmail(@RequestParam String firstName, Model model) {
+        if (firstName != null) {
+            RegistrationDto registrationDto = metroService.onFindByName(firstName);
             model.addAttribute("metroDto", registrationDto);
             return "MetroFetch";
         }
-        model.addAttribute("FindByUserNameError", "details not found");
+        model.addAttribute("FindBYNameError", "details not found");
         return "MetroFetch";
     }
 

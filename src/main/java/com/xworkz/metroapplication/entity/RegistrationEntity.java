@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @Table(name = "registration_details")
 @NamedQuery(name = "fetchall", query = "select r from RegistrationEntity r")
-@NamedQuery(name = "fetchbyname", query = "SELECT r FROM RegistrationEntity r WHERE r.userName = :name ")
+@NamedQuery(name = "fetchbyname", query = "SELECT r FROM RegistrationEntity r WHERE r.firstName = :name ")
 @NamedQuery(name = "fetchByEmail", query = "SELECT r FROM RegistrationEntity r WHERE r.emailId = :emailId")
 @NamedQuery(name = "updateByEmail",query = "UPDATE  RegistrationEntity r SET r.otp = :otp WHERE r.emailId = :emailId")
 @NamedQuery(name = "updatePassword",query = "UPDATE  RegistrationEntity r SET r.password = :password WHERE r.emailId = :emailId")
@@ -23,7 +23,6 @@ public class RegistrationEntity {
     private Integer id;
     private String emailId;
     private Long mobileNumber;
-    private String userName;
     private String password;
     private String firstName;
     private String lastName;

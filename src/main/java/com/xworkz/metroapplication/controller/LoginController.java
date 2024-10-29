@@ -6,13 +6,16 @@ import com.xworkz.metroapplication.util.EmailClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 
 @Controller
@@ -64,6 +67,7 @@ public class LoginController {
     }
     @GetMapping("/getUserPage")
     public String getUserPage(){
+
         return "UserPage";
     }
 
@@ -81,7 +85,7 @@ public class LoginController {
         if (registrationDto.isAccountBlocked()) {
             model.addAttribute("userLoginMsg", "User Account is blocked Please reset your password  ");
             model.addAttribute("details", registrationDto);
-            model.addAttribute("AccBlockDetails", registrationDto.getNoOfAttempts());
+
             return "LoginByEmail";
         } else {
             String message = metroService.onSaveLoginDetailsByEmail(emailId, password);
@@ -90,12 +94,13 @@ public class LoginController {
                 model.addAttribute("details", registrationDto);
                 return "LoginByEmail";
 
-            } else {
-                model.addAttribute("userLoginMsg", message);
+            } else if (message.equals("Login Successful")){
+                model.addAttribute("userLoginMsg", "Login Successful");
                 model.addAttribute("details", registrationDto);
                 return "UserPage";
             }
         }
+        return "LoginByEmail";
     }
 
     @GetMapping("/getOtpDetails")
@@ -130,8 +135,6 @@ public class LoginController {
         log.info("onPasswordReset emailId is =================  " + emailId);
         log.info("onPasswordReset password is =================  " + password);
         if (password != null && emailId != null) {
-            log.info("onPasswordReset password is =================  " + password);
-            log.info("onPasswordReset confirm password is =================  " + confirmPassword);
             boolean isPasswordUpdated = metroService.onUpdatePasswordByEmailId(password, confirmPassword, emailId);
             if (isPasswordUpdated) {
                 return "LoginByEmail";
@@ -148,6 +151,12 @@ public class LoginController {
         model.addAttribute("metroDto", registrationDto);
 
         return "ProfileUpdate";
+    }
+    @GetMapping
+    public String getUserPageByMail(@RequestParam String emailId,Model model){
+        RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
+        model.addAttribute("details", registrationDto);
+        return "UserPage";
     }
 
     @PostMapping("updateDetails")
@@ -166,7 +175,7 @@ public class LoginController {
     }
 
     @GetMapping("getImage/{userImage}")
-    public void viewImage(@PathVariable String userImage, Model model, HttpServletResponse httpServletResponse) {
+    public void viewImage(@PathVariable String userImage, Model model, HttpServletResponse httpServletResponse, HttpServletRequest httpRequest) {
 
         File file1 = new File(path + userImage);
         log.info("user image stored is =============   " + userImage);
@@ -176,6 +185,8 @@ public class LoginController {
             InputStream inputStream = new BufferedInputStream(fileInputStream);
             ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
             IOUtils.copy(inputStream, servletOutputStream);
+            HttpSession session = httpRequest.getSession(true);
+            session.setAttribute("image",servletOutputStream);
             model.addAttribute("image", servletOutputStream);
             httpServletResponse.flushBuffer();
         } catch (IOException e) {

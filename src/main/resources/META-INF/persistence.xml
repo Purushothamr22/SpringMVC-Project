@@ -8,7 +8,7 @@
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/METRO"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="xworkzodc@123"/>
+            <property name="javax.persistence.jdbc.password" value="root"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/> <!-- Updated Driver class -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.show_sql" value="true"/>

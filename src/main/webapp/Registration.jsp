@@ -97,24 +97,15 @@
                                     </div>
                                 </div>
 
-                                <!-- Row 3: Username, Email ID -->
+                                <!-- Row 3: Mobile Number, Email ID -->
                                 <div class="row mb-2">
-                                    <div class="col-md-6">
-                                        <label class="form-label">User Name</label>
-                                        <input type="text" id="uName" name="userName" placeholder="Enter User Name"
-                                            class="form-control" onblur="checkUserName()" required>
-                                        <span id="userName"></span>
-                                    </div>
+                                    
                                     <div class="col-md-6">
                                         <label class="form-label">Email ID</label>
                                         <input type="email" id="eId" name="emailId" placeholder="Enter e-mail id"
                                             class="form-control" onblur="checkEmail()" required>
                                         <span id="emailId"></span>
                                     </div>
-                                </div>
-
-                                <!-- Row 4: Mobile Number -->
-                                <div class="row mb-2">
                                     <div class="col-md-6">
                                         <label class="form-label">Mobile Number</label>
                                         <input type="tel" id="mNumber" name="mobileNumber"
@@ -123,6 +114,8 @@
                                         <span id="mobileNumber"></span>
                                     </div>
                                 </div>
+
+                               
 
                                 <!-- Row 5: Password, Confirm Password -->
                                 <div class="row mb-2">
@@ -195,37 +188,7 @@
                         checkForm();
                     }
 
-                    function checkUserName() {
-                        var uName = document.getElementById("uName").value;
-                        var userName = document.getElementById("userName");
-                        userName.innerHTML = "";
-
-
-
-                        var firstChar = uName.charAt(0);
-                        if (!((firstChar >= 'A' && firstChar <= 'Z') || (firstChar >= 'a' && firstChar <= 'z'))) {
-                            userName.innerHTML = "<span style='color:yellow;'>Username must start with a letter.</span>";
-                            return;
-                        }
-
-                        if (uName.length < 4 || uName.length > 20) {
-                            userName.innerHTML = "<span style='color:yellow;'>Username must be between 4 and 20 characters.</span>";
-                            return;
-                        }
-
-                        for (var i = 0; i < uName.length; i++) {
-                            var char = uName.charAt(i);
-                            if (!((char >= 'A' && char <= 'Z') || (char >= 'a' && char <= 'z') || (char >= '0' && char <= '9') || char === '_' || char === '-')) {
-                                userName.innerHTML = "<span style='color:yellow;'>Username can only contain letters, numbers, underscores, and hyphens.</span>";
-
-                                return;
-                            }
-
-                        }
-                        userName.innerHTML = "";
-                        checkForm();
-                    }
-
+                   
                     function checkPassword() {
                         var pass = document.getElementById("pass").value;
                         var button = document.getElementById("button");
@@ -300,7 +263,6 @@
                     function checkForm() {
                         var names = document.getElementById("fName").value;
                         var lnames = document.getElementById("lName").value;
-                        var uName = document.getElementById("uName").value;
                         var pass = document.getElementById("pass").value;
                         const cpass = document.getElementById("cpass").value;
                         var mNumber = document.getElementById("mNumber").value;
@@ -310,7 +272,6 @@
 
                         if ((names.trim() !== '' && names.length > 3 && names.length <= 25 && !/\d/.test(names)) &&
                             (lnames.trim() !== '' && lnames.length > 0 && lnames.length <= 25 && !/\d/.test(lnames)) &&
-                            (uName.length >= 4 && uName.length <= 20) &&
                             (pass.trim() !== '' && pass.length >= 8 && pass.length <= 12 && pass === cpass) &&
                             (mNumber.length == 10) &&
                             (email.trim() !== "")

@@ -11,10 +11,10 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 public class LoginDto {
     private Integer id;
-    @NotNull(message = "User Name must not null")
-    @NotBlank(message = "User Name must not be blank")
-    @NotEmpty(message = "User Name must not be empty")
-    private String userName;
+    @NotNull(message = "first Name must not null")
+    @NotBlank(message = "first Name must not be blank")
+    @NotEmpty(message = "first Name must not be empty")
+    private String firstName;
 
     private String loginTime;
 
