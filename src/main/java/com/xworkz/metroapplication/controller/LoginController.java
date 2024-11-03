@@ -152,8 +152,9 @@ public class LoginController {
 
         return "ProfileUpdate";
     }
-    @GetMapping
+    @GetMapping("/getUserPageByMail")
     public String getUserPageByMail(@RequestParam String emailId,Model model){
+        log.info(" getUserPageByMail controller begin");
         RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
         model.addAttribute("details", registrationDto);
         return "UserPage";

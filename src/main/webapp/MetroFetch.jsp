@@ -17,7 +17,7 @@
                     <div class="container-fluid d-flex justify-content-between align-items-center">
                         <!-- Brand/Logo -->
                         <div class="d-flex align-items-center">
-                            <a class="navbar-brand text-white" href="#">
+                            <a class="navbar-brand text-white" href="getIndex">
                                 <img src="https://www.x-workz.in/Logo.png" alt="Logo" class="img-fluid "
                                     style="max-height: 50px;">
                             </a>
@@ -37,7 +37,7 @@
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
                                         href="getIndex">Home</a>
                                 </li>
-                               
+
                             </ul>
                         </div>
                     </div>

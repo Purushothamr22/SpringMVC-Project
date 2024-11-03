@@ -22,17 +22,17 @@
                 </style>
                 <style>
                     .bg-cover {
-                      background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240729/pngtree-yellow-train-in-budapest-metro-hungary-image_15933708.jpg');
-                      background-size: cover;
-                      background-position: center;
-                      background-repeat: no-repeat;
+                        background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240729/pngtree-yellow-train-in-budapest-metro-hungary-image_15933708.jpg');
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
                     }
-                    
+
                     .overlay {
-                      background: rgba(0, 0, 0, 0.7); 
+                        background: rgba(0, 0, 0, 0.7);
                     }
-                  </style>
-                  
+                </style>
+
 
             </head>
 
@@ -66,7 +66,11 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary  text-light" href="getRegistration"> New User
+                                    <a class="nav-link btn btn-primary  text-light" href="getUserRegistrationInfo"> New User
+                                        Registration</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-primary  text-light" href="getRegistration"> New Admin
                                         Registration</a>
                                 </li>
                                 <li class="nav-item">

@@ -15,9 +15,9 @@
 
             <body class="bg-dark">
                 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
-                    <div class="container d-flex justify-content-between align-items-center">
+                    <div class="container-fluid d-flex justify-content-between align-items-center">
                         <div>
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="getIndex">
                                 <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
                             </a>
                         </div>
@@ -36,6 +36,10 @@
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
                                         href="getIndex">Home</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
+                                        href="getForgotPassword">Back</a>
+                                </li>
                             </ul>
                         </div>
 
@@ -46,7 +50,8 @@
                 <div class="container my-5">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
-                            <div class="card p-4 mx-auto" style="background-color: rgba(145, 150, 161, 0.534); width: 35vw;">
+                            <div class="card p-4 mx-auto"
+                                style="background-color: rgba(145, 150, 161, 0.534); width: 35vw;">
                                 <h5>${passwordError}</h5>
                                 <h2 class="text-center text-light justify-content-center mb-3">Password Reset </h2>
                                 <form action="onPasswordReset" method="post" onblur="checkForm()">
@@ -58,8 +63,9 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label text-light">New Password</label>
-                                        <input type="password" id="pass" name="password" placeholder="Enter New Password"
-                                            onblur="checkPassword()" class="form-control" required>
+                                        <input type="password" id="pass" name="password"
+                                            placeholder="Enter New Password" onblur="checkPassword()"
+                                            class="form-control" required>
                                         <span id="password"></span>
                                     </div>
                                     <div class="mb-3">
@@ -71,7 +77,7 @@
                                     </div>
                                     <div class="d-grid">
                                         <button type="submit" id="button" class="btn btn-primary">Submit</button>
-                                        
+
                                     </div>
                                 </form>
 
@@ -118,15 +124,15 @@
                         checkForm();
                     }
 
-                    function checkForm(){
+                    function checkForm() {
                         var pass = document.getElementById("pass").value;
                         var cpass = document.getElementById("cPassword").value;
                         var button = document.getElementById("button");
 
-                        if ((pass.trim !== '' && pass.length >= 8 && pass.length <= 12) && (cpass.trim !== '' && cpass.length >= 8 && cpass.length <= 12) && (pass === cpass) ) {
+                        if ((pass.trim !== '' && pass.length >= 8 && pass.length <= 12) && (cpass.trim !== '' && cpass.length >= 8 && cpass.length <= 12) && (pass === cpass)) {
                             button.removeAttribute("disabled");
-                        }else{
-                            button.setAttribute("disabled","");
+                        } else {
+                            button.setAttribute("disabled", "");
                         }
                     }
 

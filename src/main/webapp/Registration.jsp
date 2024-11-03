@@ -21,7 +21,7 @@
                 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
                     <div class="container-fluid d-flex justify-content-between align-items-center">
                         <div>
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="getIndex">
                                 <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
                             </a>
                         </div>
@@ -99,7 +99,7 @@
 
                                 <!-- Row 3: Mobile Number, Email ID -->
                                 <div class="row mb-2">
-                                    
+
                                     <div class="col-md-6">
                                         <label class="form-label">Email ID</label>
                                         <input type="email" id="eId" name="emailId" placeholder="Enter e-mail id"
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
 
-                               
+
 
                                 <!-- Row 5: Password, Confirm Password -->
                                 <div class="row mb-2">
@@ -188,7 +188,7 @@
                         checkForm();
                     }
 
-                   
+
                     function checkPassword() {
                         var pass = document.getElementById("pass").value;
                         var button = document.getElementById("button");
@@ -242,7 +242,7 @@
                                 button.setAttribute("disabled", "disabled");
                             } else if (response.data === "Mobile Number Accepted") {
                                 mobileNumber.innerHTML = "";
-                                checkForm(); 
+                                checkForm();
                             }
                         }
                     }

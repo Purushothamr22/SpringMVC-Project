@@ -9,7 +9,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
                 <title>Government Metro Service Login</title>
-                
+
                 <style>
                     body {
                         /* background-image: url('https://c1.wallpaperflare.com/preview/613/806/400/subway-city-metro-transportation.jpg'); */
@@ -26,7 +26,7 @@
                 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
                     <div class="container-fluid d-flex justify-content-between align-items-center">
                         <div>
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="getIndex">
                                 <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
                             </a>
                         </div>
@@ -60,18 +60,18 @@
 
                                 <form action="onLoginSaveDetailsByEmail" method="post" onblur="checkForm()">
                                     <div class="mb-3">
-                                        <label  class="form-label text-light">E-mail</label>
+                                        <label class="form-label text-light">E-mail</label>
                                         <input type="email" id="email" name="emailId" placeholder="Enter E-mail Id"
                                             class="form-control" onblur="checkEmail()" required>
                                         <span id="eId"></span>
                                     </div>
                                     <div class="mb-3">
-                                        <label  class="form-label text-light">Password</label>
+                                        <label class="form-label text-light">Password</label>
                                         <input type="password" id="pass" name="password" placeholder="Enter Password"
                                             class="form-control" onblur="checkPassword()" required>
                                         <span id="password"></span>
                                     </div>
-                                  
+
                                     <div class="d-grid">
                                         <button type="submit" class="btn btn-danger">Login</button>
                                         <span id="button"></span>
@@ -83,7 +83,7 @@
                                         </p>
                                     </div>
                                 </form>
-                            
+
 
                             </div>
                         </div>
@@ -112,8 +112,8 @@
                         var email = document.getElementById("email").value;
                         var button = document.getElementById("button");
                         console.log("emil in login is " + email);
-                       
-                        
+
+
                         var response = await axios('http://localhost:8083/metro-application/isEmailExists?emailId=' + email);
                         if (email.length < 5) {
                             document.getElementById("eId").innerHTML = "<span style='color:red;'>invalid email</span>";
@@ -130,7 +130,7 @@
                     function checkPassword() {
                         var pass = document.getElementById("pass").value;
                         var button = document.getElementById("button");
-                     
+
 
                         if (pass.trim !== '' && pass.length >= 8 && pass.length <= 12) {
                             document.getElementById("password").innerHTML = "";
@@ -141,9 +141,9 @@
                         }
                         checkForm();
                     }
-                    
 
-                    
+
+
                     function checkForm() {
                         var email = document.getElementById("email").value;
                         var pass = document.getElementById("pass").value;
@@ -152,13 +152,13 @@
                             button.removeAttribute("disabled");
                         } else {
                             // if (condition) {
-                                
+
                             // }
                             button.setAttribute("disabled", "true");
                         }
                     }
                 </script>
-                
+
 
             </body>
 

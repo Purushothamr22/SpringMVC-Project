@@ -16,40 +16,49 @@
                 <div>
                     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
                         <div class="container-fluid">
-                            <a class="navbar-brand">
+                            <a class="navbar-brand" href="getIndex">
                                 <img src="https://www.x-workz.in/Logo.png" alt="Company Logo" style="max-height: 40px;">
                             </a>
                             <h1 class="h3 text-white mx-2">User Profile</h1>
-                
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-                                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                
+
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav ms-auto text-center align-items-center">
                                     <li class="nav-item mx-3">
-                                        <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#addStationDetails" href="#">Add Station Details</a>
+                                        <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal"
+                                            data-bs-target="#addStationDetails" href="#">Add Station Details</a>
                                     </li>
                                     <li class="nav-item mx-3">
-                                        <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#addTimeDetails" href="#">Add Time Details</a>
+                                        <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal"
+                                            data-bs-target="#addTimeDetails" href="#">Add Time Details</a>
                                     </li>
                                     <li class="nav-item mx-3">
-                                        <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal" data-bs-target="#savePriceDetails" href="#">Add Price Details</a>
+                                        <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal"
+                                            data-bs-target="#savePriceDetails" href="#">Add Price Details</a>
                                     </li>
-                                    
+
                                     <li class="nav-item mx-auto">
-                                        <img src="getImage/${details.userImage}" alt="User Image" class="rounded-circle border border-warning shadow-sm" style="width: 50px; height: 50px;">
+                                        <img src="getImage/${details.userImage}" alt="User Image"
+                                            class="rounded-circle border border-warning shadow-sm"
+                                            style="width: 50px; height: 50px; cursor: pointer;" data-bs-toggle="modal"
+                                            data-bs-target="#profileImageModal">
                                     </li>
-                
+
                                     <!-- Dropdown Menu -->
                                     <li class="nav-item dropdown mx-3">
-                                        <a class="nav-link dropdown-toggle btn btn-primary text-light" href="#" id="userDropdown" 
-                                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <a class="nav-link dropdown-toggle btn btn-primary text-light" href="#"
+                                            id="userDropdown" role="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
                                             ${details.firstName}
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                            <li><a class="dropdown-item" href="editProfile?emailId=${details.emailId}">Profile</a></li>
+                                            <li><a class="dropdown-item"
+                                                    href="editProfile?emailId=${details.emailId}">Profile</a></li>
                                             <li><a class="dropdown-item" href="getLoginByEmail">Log out</a></li>
                                         </ul>
                                     </li>
@@ -58,7 +67,7 @@
                         </div>
                     </nav>
                 </div>
-                
+
 
                 <!--ADD Station Details Modal -->
                 <div class="modal fade" id="addStationDetails" tabindex="-1" aria-labelledby="addStationDetailsLabel"
@@ -142,14 +151,31 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
-                                            <label class="form-label text-dark">From Day</label>
-                                            <input type="text" class="form-control" id="fromDay" name="fromDay"
-                                                placeholder="Select starting day" required>
+                                            <label for="day" class="form-label text-dark">From Day</label>
+                                            <select name="day" id="day" class="form-select">
+                                                <option selected disabled>Select Starting Day</option>
+                                                <option value="monday">Monday</option>
+                                                <option value="tuesday">Tuesday</option>
+                                                <option value="wednesday">Wednesday</option>
+                                                <option value="thursday">Thursday</option>
+                                                <option value="friday">Friday</option>
+                                                <option value="saturday">Saturday</option>
+                                                <option value="sunday">Sunday</option>
+                                            </select>
                                         </div>
+
                                         <div class="col-md-6">
-                                            <label class="form-label text-dark">To Day</label>
-                                            <input type="text" class="form-control" id="toDay" name="toDay"
-                                                placeholder="Select ending day" required>
+                                            <label for="day" class="form-label text-dark">To Day</label>
+                                            <select name="day" id="day" class="form-select">
+                                                <option selected disabled>Select Ending Day</option>
+                                                <option value="monday">Monday</option>
+                                                <option value="tuesday">Tuesday</option>
+                                                <option value="wednesday">Wednesday</option>
+                                                <option value="thursday">Thursday</option>
+                                                <option value="friday">Friday</option>
+                                                <option value="saturday">Saturday</option>
+                                                <option value="sunday">Sunday</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -253,6 +279,30 @@
 
                                     </div>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- image enlarge card -->
+                <div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="profileImageModalLabel">${details.firstName}'s Profile</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card">
+                                    <img src="getImage/${details.userImage}" class="card-img-top" alt="User Image">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">${details.firstName}</h5>
+
+                                        <!-- <a href="editProfile?emailId=${details.emailId}" class="btn btn-primary">Edit Profile</a> -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

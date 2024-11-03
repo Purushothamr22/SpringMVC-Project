@@ -17,7 +17,7 @@
                 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(95, 101, 104);">
                     <div class="container-fluid">
                         <div>
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="getIndex">
                                 <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
                             </a>
                         </div>
@@ -39,7 +39,7 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getUserPage?emailId=${metroDto.emailId}">Back</a>
+                                        href="getUserPageByMail?emailId=${metroDto.emailId}">Back</a>
                                 </li>
                             </ul>
                         </div>
@@ -70,14 +70,15 @@
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">First Name</label>
                                         <input type="text" id="fName" name="firstName" placeholder="Enter First Name"
-                                            class="form-control shadow-sm border border-dark" value="${metroDto.firstName}"
-                                            onblur="fNameValidation()">
+                                            class="form-control shadow-sm border border-dark"
+                                            value="${metroDto.firstName}" onblur="fNameValidation()">
                                         <span id="firstName" class="text-danger"></span>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Last Name</label>
                                         <input type="text" id="lName" name="lastName" placeholder="Enter Last Name"
-                                            value="${metroDto.lastName}" class="form-control shadow-sm border border-dark"
+                                            value="${metroDto.lastName}"
+                                            class="form-control shadow-sm border border-dark"
                                             onblur="lNameValidation()">
                                         <span id="lastName" class="text-danger"></span>
                                     </div>
@@ -88,13 +89,14 @@
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Birth Date:</label>
                                         <input type="date" id="birthDate" name="birthdayDate"
-                                            class="form-control shadow-sm border border-dark" value="${metroDto.birthdayDate}">
+                                            class="form-control shadow-sm border border-dark"
+                                            value="${metroDto.birthdayDate}">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Email ID</label>
                                         <input type="email" id="eId" name="emailId" placeholder="Enter Email Id"
-                                            value="${metroDto.emailId}" class="form-control shadow-sm border border-dark"
-                                            onblur="checkEmail()">
+                                            value="${metroDto.emailId}"
+                                            class="form-control shadow-sm border border-dark" onblur="checkEmail()">
                                         <span id="emailId" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -105,14 +107,15 @@
                                         <label class="form-label">Mobile Number</label>
                                         <input type="tel" id="mNumber" name="mobileNumber"
                                             placeholder="Enter Mobile Number" value="${metroDto.mobileNumber}"
-                                            class="form-control shadow-sm border border-dark" onblur="checkMobileNumber()">
+                                            class="form-control shadow-sm border border-dark"
+                                            onblur="checkMobileNumber()">
                                         <span id="mobileNumber" class="text-danger"></span>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Password</label>
                                         <input type="password" id="pass" name="password" placeholder="Enter Password"
-                                            value="${metroDto.password}" class="form-control shadow-sm border border-dark"
-                                            onblur="checkPassword()">
+                                            value="${metroDto.password}"
+                                            class="form-control shadow-sm border border-dark" onblur="checkPassword()">
                                         <span id="password" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -121,7 +124,8 @@
                                     <div class="col-12 col-md-6" hidden>
                                         <label class="form-label">Confirm Password</label>
                                         <input type="password" id="cpass" name="confirmPassword"
-                                            placeholder="Confirm Password" class="form-control shadow-sm border border-dark"
+                                            placeholder="Confirm Password"
+                                            class="form-control shadow-sm border border-dark"
                                             onblur="confirmPasswordValidation()">
                                         <span id="confirmPassword" class="text-danger"></span>
                                     </div>
@@ -132,7 +136,8 @@
                                 <div class="row g-3 gx-5 mb-4">
                                     <div class="col-12">
                                         <label class="form-label">Upload Profile Image</label>
-                                        <input type="file" id="file" name="file" class="form-control shadow-sm border border-dark" />
+                                        <input type="file" id="file" name="file"
+                                            class="form-control shadow-sm border border-dark" />
                                     </div>
                                 </div>
 

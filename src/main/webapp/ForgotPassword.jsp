@@ -19,9 +19,9 @@
             <body class="bg-dark">
 
                 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
-                    <div class="container d-flex justify-content-between align-items-center">
+                    <div class="container-fluid d-flex justify-content-between align-items-center">
                         <div>
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="getIndex">
                                 <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
                             </a>
                         </div>
@@ -40,6 +40,11 @@
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
                                         href="getIndex">Home</a>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
+                                        href="getLoginByEmail">Back</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -55,8 +60,8 @@
                                     <div class="mb-4 ">
                                         <label for="emailId" class="form-label text-light">Email id</label>
                                         <input type="email" id="emailId" name="emailId"
-                                            placeholder="Enter your email id" class="form-control" onblur="checkEmail()" value="${emailDto.emailId}"
-                                            required>
+                                            placeholder="Enter your email id" class="form-control" onblur="checkEmail()"
+                                            value="${emailDto.emailId}" required>
                                         <span id="email"></span>
                                     </div>
                                     <div class="d-grid col-4 mx-auto">
