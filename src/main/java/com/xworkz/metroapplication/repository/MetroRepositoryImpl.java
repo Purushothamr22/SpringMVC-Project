@@ -206,32 +206,7 @@ public class MetroRepositoryImpl implements MetroRepository {
         return null;
     }
 
-    @Override
-    public StationDetailsEntity findByStationName(String stationName) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            Query query = entityManager.createNamedQuery("findByStationName");
-            query.setParameter("stationName",stationName);
-            return (StationDetailsEntity) query.getSingleResult();
-        }catch (Exception e){
-            log.error("got error in find  by Station Name......"+e.getMessage());
-        }
-        return null;
-    }
 
-    @Override
-    public String saveTrainDetails(StationDetailsEntity trainDetailsEntity) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
-        try {
-            transaction.begin();
-            entityManager.persist(trainDetailsEntity);
-            transaction.commit();
-        }catch (Exception e){
-            log.error("got error in save train details ......................     "+e.getMessage());
-        }finally {
-            entityManager.close();
-        }
-        return "failed to save ";
-    }
+
+
 }

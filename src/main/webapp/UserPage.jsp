@@ -30,6 +30,10 @@
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav ms-auto text-center align-items-center">
                                     <li class="nav-item mx-3">
+                                        <a class="nav-link btn btn-primary text-light" 
+                                             href="displayMetroInfo">Metro Details</a>
+                                    </li>
+                                    <li class="nav-item mx-3">
                                         <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal"
                                             data-bs-target="#addStationDetails" href="#">Add Station Details</a>
                                     </li>
@@ -151,8 +155,8 @@
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
-                                            <label for="day" class="form-label text-dark">From Day</label>
-                                            <select name="day" id="day" class="form-select">
+                                            <label for="fromDay" class="form-label text-dark">From Day</label>
+                                            <select name="fromDay" id="fromDay" class="form-select">
                                                 <option selected disabled>Select Starting Day</option>
                                                 <option value="monday">Monday</option>
                                                 <option value="tuesday">Tuesday</option>
@@ -163,10 +167,10 @@
                                                 <option value="sunday">Sunday</option>
                                             </select>
                                         </div>
-
+                                        
                                         <div class="col-md-6">
-                                            <label for="day" class="form-label text-dark">To Day</label>
-                                            <select name="day" id="day" class="form-select">
+                                            <label for="toDay" class="form-label text-dark">To Day</label>
+                                            <select name="toDay" id="toDay" class="form-select">
                                                 <option selected disabled>Select Ending Day</option>
                                                 <option value="monday">Monday</option>
                                                 <option value="tuesday">Tuesday</option>
@@ -177,6 +181,7 @@
                                                 <option value="sunday">Sunday</option>
                                             </select>
                                         </div>
+                                        
                                     </div>
 
                                     <div class="row mb-3">
@@ -321,6 +326,10 @@
                 <h6 style="color: green;">${msg}</h6>
                 <h6 style="color: rgb(68, 44, 46);">${errMsg}</h6>
                 <h6 style="color: green;">${successMsg}</h6>
+
+
+                
+               
 
                 <!-- Footer Section -->
                 <footer class="text-white py-3 fixed-bottom" style="background-color: rgb(87, 93, 95);">

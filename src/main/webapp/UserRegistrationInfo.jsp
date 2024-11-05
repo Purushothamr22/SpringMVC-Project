@@ -37,7 +37,7 @@
                     <div class="row w-100">
 
                         <!-- Image Section -->
-                        <div class="col-md-6 py-3">
+                        <div class="col-md-6 py-5 mx-0  ">
                             <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
@@ -62,7 +62,7 @@
                         <!-- Registration Card Section -->
                         <div class="col-md-6 d-flex align-items-center py-5">
                             <div class="card rounded-0 text-dark w-100"
-                                style="background-color: rgb(251, 253, 253); padding: 20px 15px;">
+                                style="background-color: rgb(251, 253, 253); padding: 10px 15px;">
                                 <h5 class="text-center text-dark">${userInfoMsg}</h5>
                                 <div class="card-body p-3">
                                     <h2 class="text-center mb-3">User Registration Form</h2>

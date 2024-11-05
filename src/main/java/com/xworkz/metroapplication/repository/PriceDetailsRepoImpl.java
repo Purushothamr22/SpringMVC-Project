@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 @Slf4j
@@ -44,6 +45,22 @@ public class PriceDetailsRepoImpl implements  PriceDetailsRepo{
             return  (PriceDetailsEntity) query.getSingleResult();
         }catch (Exception e){
             log.error("error in findPriceBySourceAndDestination repo ..............." +e.getMessage());
+        }finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    @Override
+    public List<PriceDetailsEntity> findAll() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            Query query = entityManager.createNamedQuery("findAllPrice");
+
+            List<PriceDetailsEntity> resultList = query.getResultList();
+            return  resultList;
+        }catch (Exception e){
+            log.error("error in findPriceByTrainTypeSourceAndDestination repo ..............." +e.getMessage());
         }finally {
             entityManager.close();
         }

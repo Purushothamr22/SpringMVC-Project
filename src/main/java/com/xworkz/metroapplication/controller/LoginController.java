@@ -79,23 +79,23 @@ public class LoginController {
 
         log.info("ON LOGIN SAVE DETAILS BY EMAIL ");
         if (registrationDto == null) {
-            model.addAttribute("userLoginMsg","Enter correct email id");
+            model.addAttribute("adminLoginMsg","Enter correct email id");
             return "LoginByEmail";
         }
         if (registrationDto.isAccountBlocked()) {
-            model.addAttribute("userLoginMsg", "User Account is blocked Please reset your password  ");
+            model.addAttribute("adminLoginMsg", "User Account is blocked Please reset your password  ");
             model.addAttribute("details", registrationDto);
 
             return "LoginByEmail";
         } else {
             String message = metroService.onSaveLoginDetailsByEmail(emailId, password);
             if (message.equals("Invalid Login")) {
-                model.addAttribute("userLoginMsg", "Email or  password is incorrect");
+                model.addAttribute("adminLoginMsg", "Email or  password is incorrect");
                 model.addAttribute("details", registrationDto);
                 return "LoginByEmail";
 
             } else if (message.equals("Login Successful")){
-                model.addAttribute("userLoginMsg", "Login Successful");
+                model.addAttribute("adminLoginMsg", "Login Successful");
                 model.addAttribute("details", registrationDto);
                 return "UserPage";
             }
@@ -104,9 +104,9 @@ public class LoginController {
     }
 
     @GetMapping("/getOtpDetails")
-    public String getOtpDetails(@RequestParam String emailId, String otp, Model model) {
+    public String getOtpDetails(@RequestParam String emailId, Model model) {
         RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
-        metroService.onUpdateByEmailId(emailId, otp);
+        metroService.onUpdateByEmailId(emailId);
         log.info("the dto provided by email is ==========================");
         log.info(String.valueOf(registrationDto));
         model.addAttribute("emailDto", registrationDto);

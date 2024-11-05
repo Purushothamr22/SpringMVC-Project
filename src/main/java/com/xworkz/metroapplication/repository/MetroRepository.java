@@ -22,7 +22,6 @@ public interface MetroRepository {
     boolean userBlockedByEmail(String emailId, boolean isAccountBlocked, Integer noOfAttempts);
     String updateUserProfile(RegistrationEntity registrationEntity);
     RegistrationEntity findByMobileNumber(Long mobileNumber);
-    StationDetailsEntity findByStationName(String stationName);
-    String saveTrainDetails(StationDetailsEntity trainDetailsEntity);
+
 
 }

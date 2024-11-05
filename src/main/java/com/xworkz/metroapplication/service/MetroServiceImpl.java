@@ -142,7 +142,7 @@ public class MetroServiceImpl implements MetroService {
     }
 
     @Override
-    public String onUpdateByEmailId(String emailId, String otp) {
+    public String onUpdateByEmailId(String emailId) {
 
         if (emailId != null) {
             String sentEmail = emailClass.emailSend(emailId);
@@ -154,21 +154,16 @@ public class MetroServiceImpl implements MetroService {
 
     @Override
     public boolean verifyOtp(String emailId, String otpEntered) {
-        RegistrationEntity repositoryEntity = metroRepository.findByEmail(emailId);
-        if (repositoryEntity != null) {
-            String decrypt = encryption.decrypt(repositoryEntity.getOtp());
-            repositoryEntity.setOtp(decrypt);
-            RegistrationDto registrationDto = new RegistrationDto();
-            BeanUtils.copyProperties(repositoryEntity, registrationDto);
-
+        RegistrationDto registrationDto = onFindByEmailId(emailId);
+        if (registrationDto != null) {
+            String decrypt = encryption.decrypt(registrationDto.getOtp());
+            registrationDto.setOtp(decrypt);
             if (otpEntered.equals(registrationDto.getOtp())) {
                 log.info("otp is present");
                 return true;
             }
             return false;
         }
-
-
         return false;
     }
 

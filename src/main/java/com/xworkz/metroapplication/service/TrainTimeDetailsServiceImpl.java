@@ -8,6 +8,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 
@@ -39,6 +42,21 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
                 BeanUtils.copyProperties(trainTimeDetailsEntity,trainTimeDetailsDto);
                 return trainTimeDetailsDto;
             }
+        }
+        return null;
+    }
+
+    @Override
+    public List<TrainTimeDetailsDto> findAll() {
+        List<TrainTimeDetailsEntity> timeEntityList = trainTimeDetailsRepo.findAll();
+        List<TrainTimeDetailsDto> trainTimeDetailsDtoList = new ArrayList<>();
+        if (!timeEntityList.isEmpty()){
+            for (TrainTimeDetailsEntity trainTimeDetailsEntity : timeEntityList){
+                TrainTimeDetailsDto trainTimeDetailsDto = new TrainTimeDetailsDto();
+                BeanUtils.copyProperties(trainTimeDetailsEntity,trainTimeDetailsDto);
+                trainTimeDetailsDtoList.add(trainTimeDetailsDto);
+            }
+            return trainTimeDetailsDtoList;
         }
         return null;
     }

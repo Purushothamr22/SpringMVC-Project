@@ -9,6 +9,10 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "user_registration_details")
+@NamedQuery(name ="findByUserEmail", query = "SELECT r FROM UserRegistrationEntity r WHERE r.emailId = :emailId")
+@NamedQuery(name = "passwordWrongAttemptByUserEmail",query = "UPDATE  UserRegistrationEntity r SET r.isAccountBlocked = :isAccountBlocked,r.noOfAttempts = :noOfAttempts WHERE r.emailId = :emailId")
+@NamedQuery(name = "findUserOtpDetailsByEmail",query = "SELECT u.otp FROM UserRegistrationEntity u WHERE u.emailId =:emailId ")
+@NamedQuery(name = "updateUserOtp",query = "UPDATE UserRegistrationEntity u SET u.otp =:otp WHERE u.emailId =: emailId ")
 public class UserRegistrationEntity {
 
     @Id

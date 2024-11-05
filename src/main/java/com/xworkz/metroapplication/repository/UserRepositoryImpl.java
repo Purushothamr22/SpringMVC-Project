@@ -37,19 +37,20 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public UserRegistrationEntity findBYUserEmail(String emailId) {
+    public UserRegistrationEntity findByUserEmail(String emailId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
-            Query query = entityManager.createNamedQuery("");
+            Query query = entityManager.createNamedQuery("findByUserEmail");
             query.setParameter("emailId", emailId);
             UserRegistrationEntity singleResult = (UserRegistrationEntity) query.getSingleResult();
             return singleResult;
         } catch (Exception e) {
             log.error("error in onFindByUserEmail repo ............. " + e.getMessage());
-            return null;
+
         }finally {
             entityManager.close();
         }
+        return null;
     }
 
     @Override
@@ -67,6 +68,66 @@ public class UserRepositoryImpl implements UserRepository {
       }finally {
           entityManager.close();
       }
+
+    }
+
+    @Override
+    public boolean userBlockedByEmail(String emailId, boolean isAccountBlocked, Integer noOfAttempts) {
+        log.info("userBlockedByEmail method started ===========================");
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            EntityTransaction entityTransaction = entityManager.getTransaction();
+            entityTransaction.begin();
+            Query query = entityManager.createNamedQuery("passwordWrongAttemptByUserEmail");
+            query.setParameter("emailId", emailId);
+            query.setParameter("noOfAttempts", noOfAttempts);
+            query.setParameter("isAccountBlocked", isAccountBlocked);
+            query.executeUpdate();
+            entityTransaction.commit();
+            return true;
+        } catch (Exception e) {
+            log.error("got error......"+e.getMessage());
+            log.error("error in  repo  userBlockedByEmail method");
+            return false;
+        }finally {
+            entityManager.close();
+        }
+    }
+
+    @Override
+    public UserRegistrationEntity findUserOtpDetailsByEmail(String emailId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try{
+            Query query = entityManager.createNamedQuery("findUserOtpDetailsByEmail");
+            query.setParameter("emailId",emailId);
+            UserRegistrationEntity result = (UserRegistrationEntity) query.getSingleResult();
+            return result;
+        }catch(Exception e){
+            log.error("error in  repo  findUserOtpDetailsByEmail method");
+        }finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    @Override
+    public String updateUserOtp(String emailId, String otp) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try{
+            EntityTransaction transaction = entityManager.getTransaction();
+            Query query = entityManager.createNamedQuery("updateUserOtp");
+            transaction.begin();
+            query.setParameter("emailId",emailId);
+            query.setParameter("otp",otp);
+            query.executeUpdate();
+            transaction.commit();
+            return "Otp Updated";
+        }catch(Exception e){
+            log.error("error in  repo  updateUserOtp method");
+            return "Update Error";
+        }finally {
+            entityManager.close();
+        }
 
     }
 }

@@ -9,6 +9,7 @@ import java.sql.Time;
 @Entity
 @Slf4j
 @Data
+@NamedQuery(name = "findAllTime",query = "SELECT T FROM TrainTimeDetailsEntity T")
 @NamedQuery(name = "findBySourceAndDestination",query = "SELECT T FROM TrainTimeDetailsEntity T WHERE T.source=:source AND T.destination=:destination ")
 @Table(name = "time_details")
 public class TrainTimeDetailsEntity {

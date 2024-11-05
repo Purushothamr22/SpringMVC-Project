@@ -18,7 +18,7 @@ public interface MetroService {
 
     RegistrationDto onFindByEmailId(String emailId);
 
-    String onUpdateByEmailId(String emailId, String otp);
+    String onUpdateByEmailId(String emailId);
 
     boolean verifyOtp(String emailId, String otpEntered);
     boolean onUpdatePasswordByEmailId(String password,String confirmPassword,String emailId);

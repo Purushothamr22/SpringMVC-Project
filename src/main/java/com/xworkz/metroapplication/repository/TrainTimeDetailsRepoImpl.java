@@ -9,9 +9,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import java.util.List;
 
 @Repository
 @Slf4j
+
 
 public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
     @Autowired
@@ -47,6 +49,21 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
             return  (TrainTimeDetailsEntity) query.getSingleResult();
         }catch (Exception e){
             log.error("got error in findBySourceAndDestination.....................  " +e.getMessage());
+        }finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    @Override
+    public List<TrainTimeDetailsEntity> findAll() {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            Query query = entityManager.createNamedQuery("findAllTime");
+            List<TrainTimeDetailsEntity>  resultList = query.getResultList();
+            return resultList;
+        }catch (Exception e){
+            log.error("got error in findBySource.....................  " +e.getMessage());
         }finally {
             entityManager.close();
         }

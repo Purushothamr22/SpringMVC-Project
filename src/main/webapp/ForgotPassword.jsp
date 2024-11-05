@@ -99,8 +99,12 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
                 <script>
                     const checkEmail = async () => {
+                       
                         var email = document.getElementById("emailId").value;
                         var button = document.getElementById("button");
+
+                        console.log("email id in otp is "+ email);
+
                         var response = await axios('http://localhost:8083/metro-application/isEmailExists?emailId=' + email);
                         if (response.data === "Email Exists") {
                             document.getElementById("emailId").innerHTML = "";
