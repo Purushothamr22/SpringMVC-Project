@@ -31,7 +31,7 @@
                                 <ul class="navbar-nav ms-auto text-center align-items-center">
                                     <li class="nav-item mx-3">
                                         <a class="nav-link btn btn-primary text-light" 
-                                             href="displayMetroInfo">Metro Details</a>
+                                             href="getMetroDetails?emailId=${details.emailId}">Metro Details</a>
                                     </li>
                                     <li class="nav-item mx-3">
                                         <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal"

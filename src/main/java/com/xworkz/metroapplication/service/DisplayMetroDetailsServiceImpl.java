@@ -4,7 +4,9 @@ import com.xworkz.metroapplication.dto.DisplayMetroDetailsDto;
 import com.xworkz.metroapplication.dto.PriceDetailsDto;
 import com.xworkz.metroapplication.dto.StationDetailsDto;
 import com.xworkz.metroapplication.dto.TrainTimeDetailsDto;
+import com.xworkz.metroapplication.entity.DisplayMetroDetailsEntity;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,10 +25,14 @@ public class DisplayMetroDetailsServiceImpl implements DisplayMetroDetailsServic
     @Autowired
     private TrainTimeDetailsService timeDetailsService;
 
+
+
+
+
     @Override
     public List<DisplayMetroDetailsDto> getMetroDetails() {
 
-        List<DisplayMetroDetailsDto> metroDetailsDtos =new ArrayList<>();
+        List<DisplayMetroDetailsDto> metroDetailsDtos = new ArrayList<>();
 
         List<PriceDetailsDto> priceDetails = priceDetailsService.onFindAll();
         List<StationDetailsDto> stationDetails = stationDetailsService.onFindAll();
@@ -34,14 +40,13 @@ public class DisplayMetroDetailsServiceImpl implements DisplayMetroDetailsServic
 
         for (StationDetailsDto stationDetail : stationDetails) {
             for (TrainTimeDetailsDto trainTimeDetails : timeDetails) {
-                log.info("entered for each loop");
-                log.info("dtos in loop are================== "+stationDetail);
-                log.info("time dtos in loop are ==================== "+trainTimeDetails);
-                if (equalsIgnoreCaseAndSpaces(trainTimeDetails.getSource(), stationDetail.getStationName()))  {
+                if (equalsIgnoreCaseAndSpaces(trainTimeDetails.getSource(), stationDetail.getStationName())) {
                     log.info("entered for each loop if condition");
                     DisplayMetroDetailsDto displayDto = new DisplayMetroDetailsDto();
 
+                    displayDto.setId(stationDetail.getId());
                     displayDto.setTrainType(stationDetail.getStationType());
+                    displayDto.setTrainNumber(stationDetail.getStationNumber());
                     displayDto.setStationName(stationDetail.getStationName());
 
 
@@ -61,22 +66,21 @@ public class DisplayMetroDetailsServiceImpl implements DisplayMetroDetailsServic
                             break;
                         }
                     }
-
                     log.info("entered for each loop if condition check price================== " + matchingPrice);
-
                     if (matchingPrice != null) {
                         displayDto.setPrice(matchingPrice.getPrice());
                     }
                     metroDetailsDtos.add(displayDto);
-
                 }
-
-
             }
         }
-        log.info("the list of dtos are ================= "+metroDetailsDtos);
+
         return metroDetailsDtos;
     }
+
+
+
+
     public boolean equalsIgnoreCaseAndSpaces(String str1, String str2) {
         if (str1 == null || str2 == null) {
             return false;

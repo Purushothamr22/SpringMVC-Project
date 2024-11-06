@@ -43,7 +43,7 @@ public class UserLoginController {
             } else if (message.equals("Login Successful")) {
                 model.addAttribute("userLoginMsg", "Login Successful");
                 model.addAttribute("details", userRegistrationDto);
-                return "UserPage";
+                return "";
             }
         }
         return "LoginByEmail";

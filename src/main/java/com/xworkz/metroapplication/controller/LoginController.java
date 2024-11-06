@@ -1,6 +1,8 @@
 package com.xworkz.metroapplication.controller;
 
+import com.xworkz.metroapplication.dto.DisplayMetroDetailsDto;
 import com.xworkz.metroapplication.dto.RegistrationDto;
+import com.xworkz.metroapplication.service.DisplayMetroDetailsService;
 import com.xworkz.metroapplication.service.MetroService;
 import com.xworkz.metroapplication.util.EmailClass;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -32,6 +35,8 @@ public class LoginController {
     MetroService metroService;
     @Autowired
     EmailClass emailClass;
+    @Autowired
+    DisplayMetroDetailsService metroDetailsService;
 
     @GetMapping("/getLoginByEmail")
     public String getLogin() {
@@ -151,6 +156,18 @@ public class LoginController {
         model.addAttribute("metroDto", registrationDto);
 
         return "ProfileUpdate";
+    }
+    @GetMapping("/getMetroDetails")
+    public String getMetroDetails(@RequestParam String emailId, Model model) {
+        RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
+        model.addAttribute("metroDto", registrationDto);
+        List<DisplayMetroDetailsDto> metroDetails = metroDetailsService.getMetroDetails();
+        if (metroDetails == null) {
+            model.addAttribute("DisplayMsg","Data error");
+            return "UserPage";
+        }
+        model.addAttribute("metroInfo",metroDetails);
+        return "MetroDetailsAdmin";
     }
     @GetMapping("/getUserPageByMail")
     public String getUserPageByMail(@RequestParam String emailId,Model model){

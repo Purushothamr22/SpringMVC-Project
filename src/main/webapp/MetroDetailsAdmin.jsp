@@ -32,6 +32,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link btn btn-primary text-white" href="getIndex">Home</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-primary text-white" href="getUserPageByMail?emailId=${metroDto.emailId}">back</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -47,6 +50,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Train Type</th>
+                                    <th>Station Number</th>
                                     <th>Station Name</th>
                                     <th>Source</th>
                                     <th>Destination</th>
@@ -62,6 +66,7 @@
                                     <tr>
                                         <td>${metroDetail.id}</td>
                                         <td>${metroDetail.trainType}</td>
+                                        <td>${metroDetail.trainNumber}</td>
                                         <td>${metroDetail.stationName}</td>
                                         <td>${metroDetail.source}</td>
                                         <td>${metroDetail.destination}</td>
@@ -78,7 +83,7 @@
                 </div>
 
                 <!-- Footer -->
-                <footer class="bg-dark text-white py-3">
+                <footer class="footer fixed-bottom bg-dark text-white py-3">
                     <div class="container text-center">
                         <p class="mb-0">Metro Management Portal &copy; 2024</p>
                     </div>
