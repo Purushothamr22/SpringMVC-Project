@@ -8,13 +8,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 
-public class PriceDetailsServiceImpl implements PriceDetailsService{
+public class PriceDetailsServiceImpl implements PriceDetailsService {
     @Autowired
     PriceDetailsRepo priceDetailsRepo;
     @Autowired
@@ -22,13 +22,13 @@ public class PriceDetailsServiceImpl implements PriceDetailsService{
 
     @Override
     public String onSavePriceDetails(PriceDetailsDto priceDetailsDto) {
-        if (priceDetailsDto==null){
+        if (priceDetailsDto == null) {
             return "Data Error";
         }
         PriceDetailsDto priceDetailsDto1 = onFindPriceBySourceAndDestination(priceDetailsDto.getSource(), priceDetailsDto.getDestination());
         if (priceDetailsDto1 == null) {
-            PriceDetailsEntity priceDetailsEntity =new PriceDetailsEntity();
-            BeanUtils.copyProperties(priceDetailsDto,priceDetailsEntity);
+            PriceDetailsEntity priceDetailsEntity = new PriceDetailsEntity();
+            BeanUtils.copyProperties(priceDetailsDto, priceDetailsEntity);
             priceDetailsRepo.savePriceDetails(priceDetailsEntity);
             return "Data Saved";
         }
@@ -37,11 +37,11 @@ public class PriceDetailsServiceImpl implements PriceDetailsService{
 
     @Override
     public PriceDetailsDto onFindPriceBySourceAndDestination(String source, String destination) {
-        if (source != null&& destination!=null) {
+        if (source != null && destination != null) {
             PriceDetailsEntity priceDetailsEntity = priceDetailsRepo.findPriceBySourceAndDestination(source, destination);
             if (priceDetailsEntity != null) {
-                PriceDetailsDto priceDetailsDto =new PriceDetailsDto();
-                BeanUtils.copyProperties(priceDetailsEntity,priceDetailsDto);
+                PriceDetailsDto priceDetailsDto = new PriceDetailsDto();
+                BeanUtils.copyProperties(priceDetailsEntity, priceDetailsDto);
                 return priceDetailsDto;
             }
         }
@@ -50,17 +50,13 @@ public class PriceDetailsServiceImpl implements PriceDetailsService{
 
     @Override
     public List<PriceDetailsDto> onFindAll() {
-        List<PriceDetailsEntity> priceDetailsEntitys = priceDetailsRepo.findAll();
-        List<PriceDetailsDto> priceDetailsDtoList = new ArrayList<>();
-        if (!priceDetailsEntitys.isEmpty()) {
-            for (PriceDetailsEntity priceDetailsEntity :priceDetailsEntitys){
-                PriceDetailsDto priceDetailsDto =new PriceDetailsDto();
-                BeanUtils.copyProperties(priceDetailsEntity,priceDetailsDto);
-                priceDetailsDtoList.add(priceDetailsDto);
+        List<PriceDetailsEntity> priceDetailsEntity = priceDetailsRepo.findAll();
 
-            }
-            return priceDetailsDtoList;
-        }
-        return null;
+        return priceDetailsEntity.stream().map(priceDetailEntity -> {
+            PriceDetailsDto priceDetailsDto = new PriceDetailsDto();
+            BeanUtils.copyProperties(priceDetailsEntity, priceDetailsDto);
+            return priceDetailsDto;
+        }).collect(Collectors.toList());
+
     }
 }

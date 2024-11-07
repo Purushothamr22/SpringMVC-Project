@@ -8,8 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -23,7 +23,7 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
         if (trainTimeDetailsDto == null) {
             return "Data Error";
         }
-        log.info("the given dto to the Service is .................   "+trainTimeDetailsDto);
+        log.info("the given dto to the Service is .................   " + trainTimeDetailsDto);
         TrainTimeDetailsDto trainTimeDetailsDto1 = onFindBySourceAndDestination(trainTimeDetailsDto.getSource(), trainTimeDetailsDto.getDestination());
         if (trainTimeDetailsDto1 == null) {
             TrainTimeDetailsEntity trainTimeDetailsEntity = new TrainTimeDetailsEntity();
@@ -33,13 +33,14 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
         }
         return "Save Error";
     }
+
     @Override
     public TrainTimeDetailsDto onFindBySourceAndDestination(String source, String destination) {
-        if (source!=null&&destination!=null){
+        if (source != null && destination != null) {
             TrainTimeDetailsEntity trainTimeDetailsEntity = trainTimeDetailsRepo.findBySourceAndDestination(source, destination);
             if (trainTimeDetailsEntity != null) {
-                TrainTimeDetailsDto trainTimeDetailsDto= new TrainTimeDetailsDto();
-                BeanUtils.copyProperties(trainTimeDetailsEntity,trainTimeDetailsDto);
+                TrainTimeDetailsDto trainTimeDetailsDto = new TrainTimeDetailsDto();
+                BeanUtils.copyProperties(trainTimeDetailsEntity, trainTimeDetailsDto);
                 return trainTimeDetailsDto;
             }
         }
@@ -48,16 +49,13 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
 
     @Override
     public List<TrainTimeDetailsDto> findAll() {
+
         List<TrainTimeDetailsEntity> timeEntityList = trainTimeDetailsRepo.findAll();
-        List<TrainTimeDetailsDto> trainTimeDetailsDtoList = new ArrayList<>();
-        if (!timeEntityList.isEmpty()){
-            for (TrainTimeDetailsEntity trainTimeDetailsEntity : timeEntityList){
-                TrainTimeDetailsDto trainTimeDetailsDto = new TrainTimeDetailsDto();
-                BeanUtils.copyProperties(trainTimeDetailsEntity,trainTimeDetailsDto);
-                trainTimeDetailsDtoList.add(trainTimeDetailsDto);
-            }
-            return trainTimeDetailsDtoList;
-        }
-        return null;
+        return timeEntityList.stream().map(trainTimeDetailsEntity -> {
+            TrainTimeDetailsDto trainTimeDetailsDto = new TrainTimeDetailsDto();
+            BeanUtils.copyProperties(trainTimeDetailsEntity, trainTimeDetailsDto);
+            return trainTimeDetailsDto;
+        }).collect(Collectors.toList());
+
     }
 }

@@ -72,7 +72,6 @@ public class LoginController {
     }
     @GetMapping("/getUserPage")
     public String getUserPage(){
-
         return "UserPage";
     }
 

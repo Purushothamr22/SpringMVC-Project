@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -21,8 +22,11 @@ public class StationDetailsServiceImpl implements StationDetailsService {
 
     @Override
     public String saveTrainDetails(StationDetailsDto addStationDetailsDto) {
+        if (addStationDetailsDto!=null){
+            return "save error";
+        }
         StationDetailsDto findByStationNameService = onFindByStationNameService(addStationDetailsDto.getStationName());
-        if (addStationDetailsDto ==null ||findByStationNameService != null) {
+        if ( findByStationNameService != null) {
             return "save error";
         }
         StationDetailsEntity addStationDetailsEntity = new StationDetailsEntity();
@@ -47,16 +51,12 @@ public class StationDetailsServiceImpl implements StationDetailsService {
     @Override
     public List<StationDetailsDto> onFindAll() {
         List<StationDetailsEntity> stationEntityList = stationInfoRepo.findAll();
-        List<StationDetailsDto> stationDetailsDtoList = new ArrayList<>();
-        if (!stationEntityList.isEmpty()){
-            for (StationDetailsEntity stationDetailsEntity :stationEntityList){
-                StationDetailsDto stationDetailsDto =new StationDetailsDto();
-                BeanUtils.copyProperties(stationDetailsEntity,stationDetailsDto);
-                stationDetailsDtoList.add(stationDetailsDto);
-            }
-            return stationDetailsDtoList;
-        }
-        return null;
+
+        return stationEntityList.stream().map(stationDetailsEntity->{
+            StationDetailsDto stationDetailsDto =new StationDetailsDto();
+            BeanUtils.copyProperties(stationDetailsEntity,stationDetailsDto);
+            return stationDetailsDto;
+        }).collect(Collectors.toList());
     }
 
 

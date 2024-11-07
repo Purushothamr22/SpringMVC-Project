@@ -315,13 +315,13 @@
 
                 <!-- Main Section -->
                 <div class="container position-relative mt-5 text-center">
-                    <h3 class="text-dark justify-content-center">${trainMsg}</h3>
+                    <h3 class="text-light justify-content-center">${trainMsg}</h3>
                 </div>
                 <div class="container position-relative mt-5 text-center">
-                    <h3 class="text-dark justify-content-center">${TimeDetailsMsg}</h3>
+                    <h3 class="text-light justify-content-center">${TimeDetailsMsg}</h3>
                 </div>
                 <div class="container position-relative mt-5 text-center">
-                    <h3 class="text-dark justify-content-center">${PriceMsg}</h3>
+                    <h3 class="text-light justify-content-center">${PriceMsg}</h3>
                 </div>
                 <h6 style="color: green;">${msg}</h6>
                 <h6 style="color: rgb(68, 44, 46);">${errMsg}</h6>
