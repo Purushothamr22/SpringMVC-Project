@@ -9,5 +9,9 @@ public interface TrainTimeDetailsRepo {
     TrainTimeDetailsEntity findBySourceAndDestination(String source,String destination);
     List<TrainTimeDetailsEntity> findAll();
 
+    TrainTimeDetailsEntity findByTrainId(Integer trainId);
+
+
+
 
 }

@@ -20,9 +20,9 @@ import javax.validation.Valid;
 @RequestMapping("/")
 public class PriceDetailsController {
     @Autowired
-    PriceDetailsService priceDetailsService;
+    private PriceDetailsService priceDetailsService;
     @Autowired
-    MetroService metroService;
+    private MetroService metroService;
     public PriceDetailsController() {
         log.info("PriceDetails Controller created");
     }
@@ -34,19 +34,19 @@ public class PriceDetailsController {
         if (bindingResult.hasErrors()){
             model.addAttribute("PriceMsg","Enter correct data ");
             model.addAttribute("details",registrationDto);
-            return "UserPage";
+            return "AdminPage";
         }
         String onSavePriceDetails = priceDetailsService.onSavePriceDetails(priceDetailsDto);
         if (onSavePriceDetails.equals("Data Saved")) {
             model.addAttribute("PriceMsg","Data Saved successfully ");
             model.addAttribute("details",registrationDto);
-            return "UserPage";
+            return "AdminPage";
         } else if (onSavePriceDetails.equals("Save Error")) {
             model.addAttribute("PriceMsg","Data already Present ");
             model.addAttribute("details",registrationDto);
-            return "UserPage";
+            return "AdminPage";
         }
-        return "UserPage";
+        return "AdminPage";
 
     }
 }

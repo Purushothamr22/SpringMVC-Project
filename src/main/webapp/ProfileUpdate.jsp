@@ -8,8 +8,15 @@
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+                <link rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <title>Government Metro Service Login</title>
             </head>
+            <style>
+                i {
+                    cursor: pointer;
+                }
+            </style>
 
             <body class="bg-dark">
 
@@ -39,7 +46,7 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getUserPageByMail?emailId=${metroDto.emailId}">Back</a>
+                                        href="getAdminPageByMail?emailId=${metroDto.emailId}">Back</a>
                                 </li>
                             </ul>
                         </div>
@@ -53,20 +60,20 @@
                             style="background-color: rgba(159, 178, 255, 0.7);">
 
                             <div class="card-header text-center bg-transparent border-0">
-                                <h3 class="text-dark">User Profile</h3>
+                                <h3 class="text-dark">User Details</h3>
                             </div>
 
                             <div class="mb-4 text-center">
                                 <img src="getImage/${metroDto.userImage}" alt="Profile Image"
                                     class="img-thumbnail rounded-circle shadow-lg border border-warning"
-                                    style="width: 180px; height: 180px;"> <!-- Increased image size -->
+                                    style="width: 180px; height: 180px;">
                             </div>
 
                             <form action="updateDetails" method="post" enctype="multipart/form-data">
                                 <input type="number" name="id" value="${metroDto.id}" hidden>
 
                                 <!-- Row 1: First Name, Last Name -->
-                                <div class="row g-3 gx-5 mb-4"> <!-- Increased spacing between rows -->
+                                <div class="row g-3 gx-5 mb-4">
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">First Name</label>
                                         <input type="text" id="fName" name="firstName" placeholder="Enter First Name"
@@ -85,7 +92,7 @@
                                 </div>
 
                                 <!-- Row 2: Birth Date, Email ID -->
-                                <div class="row g-3 gx-5 mb-4"> <!-- Increased spacing between rows -->
+                                <div class="row g-3 gx-5 mb-4">
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Birth Date:</label>
                                         <input type="date" id="birthDate" name="birthdayDate"
@@ -102,7 +109,7 @@
                                 </div>
 
                                 <!-- Row 3: Mobile Number, Password -->
-                                <div class="row g-3 gx-5 mb-4"> <!-- Increased spacing between rows -->
+                                <div class="row g-3 gx-5 mb-4">
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Mobile Number</label>
                                         <input type="tel" id="mNumber" name="mobileNumber"
@@ -113,11 +120,19 @@
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Password</label>
-                                        <input type="password" id="pass" name="password" placeholder="Enter Password"
-                                            value="${metroDto.password}"
-                                            class="form-control shadow-sm border border-dark" onblur="checkPassword()">
+                                        <div class="input-group">
+                                            <input type="password" id="pass" name="password"
+                                                placeholder="Enter Password" value="${metroDto.password}"
+                                                class="form-control shadow-sm border border-dark"
+                                                onblur="checkPassword()" />
+                                            <button class="btn btn-outline-dark" type="button"
+                                                onclick="myFunction()">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </div>
                                         <span id="password" class="text-danger"></span>
                                     </div>
+
                                 </div>
                                 <!-- Row 4: Confirm Password (Hidden) -->
                                 <div class="row g-3 gx-5 mb-3">
@@ -129,7 +144,15 @@
                                             onblur="confirmPasswordValidation()">
                                         <span id="confirmPassword" class="text-danger"></span>
                                     </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">gender </label>
+                                        <input type="text" id="gen" name="gender" placeholder=" Enter gender"
+                                            value="${metroDto.gender}"
+                                            class="form-control shadow-sm border border-dark">
+                                        <span id="gender" class="text-danger"></span>
+                                    </div>
                                 </div>
+
 
 
                                 <!-- Row 5: File Upload -->
@@ -248,6 +271,15 @@
                         }
 
                     }
+
+                    function myFunction() {
+                        var x = document.getElementById("pass");
+                        if (x.type === "password") {
+                            x.type = "text";
+                        } else {
+                            x.type = "password";
+                        }
+                    } 
                 </script>
             </body>
 

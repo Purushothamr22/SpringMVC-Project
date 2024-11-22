@@ -21,5 +21,4 @@ public class DisplayMetroDetailsDto {
     private String price;
 
 
-
 }

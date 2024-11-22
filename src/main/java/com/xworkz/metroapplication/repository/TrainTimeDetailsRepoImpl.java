@@ -69,4 +69,20 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
         }
         return null;
     }
+
+    @Override
+    public TrainTimeDetailsEntity findByTrainId(Integer trainId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            Query query = entityManager.createNamedQuery("findByTrainId");
+            query.setParameter("trainId",trainId);
+            return (TrainTimeDetailsEntity) query.getSingleResult();
+        }catch (Exception e ){
+            log.error("error in findByTrainId repo    "+e.getMessage());
+            return null;
+        }finally {
+            entityManager.close();
+        }
+
+    }
 }

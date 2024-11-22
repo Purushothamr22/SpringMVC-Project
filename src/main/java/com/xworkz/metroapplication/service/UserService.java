@@ -5,7 +5,8 @@ import com.xworkz.metroapplication.dto.UserRegistrationDto;
 public interface UserService {
     String onSaveUserInfo(UserRegistrationDto userRegistrationDto);
     UserRegistrationDto onFindByUserEmail(String  emailId);
-    String onSaveLoginInfo(String emailId, String password);
+    UserRegistrationDto onFindByMobileNo(Long mobileNumber);
+    String onSaveLoginInfo(String emailId, String otp);
 
     UserRegistrationDto getUserOtpDetails(String emailId);
     String updateUserOtp(String emailId);

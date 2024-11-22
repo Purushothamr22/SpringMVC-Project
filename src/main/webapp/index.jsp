@@ -69,12 +69,12 @@
                                     <a class="nav-link btn btn-primary  text-light" href="getUserRegistrationInfo"> New User
                                         Registration</a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link btn btn-primary  text-light" href="getRegistration"> New Admin
                                         Registration</a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary  text-light" href="getLoginByEmail">Login</a>
+                                    <a class="nav-link btn btn-primary  text-light" href="getLoginPage">Login</a>
                                 </li>
                             </ul>
                         </div>
@@ -84,7 +84,7 @@
 
                 <!-- Main Section -->
                 <div class="container position-relative mt-5 text-center">
-                    <h2 class="py-5">Welcome to Metro</h2>
+                    <h2 class="py-5">Welcome to Namma Metro</h2>
 
                 </div>
 

@@ -15,8 +15,8 @@ public class UserLoginEntity {
     private String firstName;
     private String loginTime;
     private String logoutTime;
-    private String password;
     private String emailId;
+
 
 
 }

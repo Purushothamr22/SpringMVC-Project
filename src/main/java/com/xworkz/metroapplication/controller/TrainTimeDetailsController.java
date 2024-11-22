@@ -19,9 +19,9 @@ import javax.validation.Valid;
 @Slf4j
 public class TrainTimeDetailsController {
     @Autowired
-    TrainTimeDetailsService timeDetailsService;
+    private TrainTimeDetailsService timeDetailsService;
     @Autowired
-    MetroService metroService;
+    private MetroService metroService;
     public TrainTimeDetailsController() {
         log.info("TrainTimeDetails Controller created ");
     }
@@ -33,24 +33,24 @@ public class TrainTimeDetailsController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("TimeDetailsMsg", "Please Enter Correct Details");
             model.addAttribute("details", registrationDto);
-            return "UserPage";
+            return "AdminPage";
         }
         String onSaveTimeDetails = timeDetailsService.onSaveTimeDetails(trainTimeDetailsDto);
         if (onSaveTimeDetails.equals("Data Saved")) {
             model.addAttribute("TimeDetailsMsg","Data Saved Successfully");
             model.addAttribute("details", registrationDto);
-            return "UserPage";
+            return "AdminPage";
         } else if (onSaveTimeDetails.equals("Data Error")) {
             model.addAttribute("TimeDetailsMsg","Error in Data ");
             model.addAttribute("details", registrationDto);
-            return "UserPage";
+            return "AdminPage";
         } else if (onSaveTimeDetails.equals("Save Error")) {
             model.addAttribute("TimeDetailsMsg","Data Save UnSuccessful");
             model.addAttribute("details", registrationDto);
-            return "UserPage";
+            return "AdminPage";
         }
 
-        return "UserPage";
+        return "AdminPage";
     }
 
 }

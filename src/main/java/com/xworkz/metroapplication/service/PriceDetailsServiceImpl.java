@@ -1,7 +1,9 @@
 package com.xworkz.metroapplication.service;
 
 import com.xworkz.metroapplication.dto.PriceDetailsDto;
+import com.xworkz.metroapplication.dto.TrainTimeDetailsDto;
 import com.xworkz.metroapplication.entity.PriceDetailsEntity;
+import com.xworkz.metroapplication.entity.TrainTimeDetailsEntity;
 import com.xworkz.metroapplication.repository.PriceDetailsRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -17,8 +20,9 @@ import java.util.stream.Collectors;
 public class PriceDetailsServiceImpl implements PriceDetailsService {
     @Autowired
     PriceDetailsRepo priceDetailsRepo;
+
     @Autowired
-    MetroService metroService;
+    TrainTimeDetailsService timeDetailsService;
 
     @Override
     public String onSavePriceDetails(PriceDetailsDto priceDetailsDto) {
@@ -26,11 +30,20 @@ public class PriceDetailsServiceImpl implements PriceDetailsService {
             return "Data Error";
         }
         PriceDetailsDto priceDetailsDto1 = onFindPriceBySourceAndDestination(priceDetailsDto.getSource(), priceDetailsDto.getDestination());
+        log.info("priceDetailsDto1 of onFindPriceBySourceAndDestination is ============  "+priceDetailsDto1);
+
         if (priceDetailsDto1 == null) {
             PriceDetailsEntity priceDetailsEntity = new PriceDetailsEntity();
-            BeanUtils.copyProperties(priceDetailsDto, priceDetailsEntity);
-            priceDetailsRepo.savePriceDetails(priceDetailsEntity);
-            return "Data Saved";
+            TrainTimeDetailsDto trainTimeDetailsDto = timeDetailsService.onFindBySourceAndDestination(priceDetailsDto.getSource(), priceDetailsDto.getDestination());
+            log.info("trainTimeDetailsDto of timeDetailsService.onFindBySourceAndDestination is ============  "+trainTimeDetailsDto);
+            if (trainTimeDetailsDto != null) {
+                TrainTimeDetailsEntity trainTimeDetailsEntity = timeDetailsService.onFindByTrainId(trainTimeDetailsDto.getTrainId());
+                BeanUtils.copyProperties(priceDetailsDto, priceDetailsEntity);
+                priceDetailsEntity.setTrainTimeDetail(trainTimeDetailsEntity);
+                priceDetailsRepo.savePriceDetails(priceDetailsEntity);
+                return "Data Saved";
+            }
+
         }
         return "Save Error";
     }
@@ -41,6 +54,7 @@ public class PriceDetailsServiceImpl implements PriceDetailsService {
             PriceDetailsEntity priceDetailsEntity = priceDetailsRepo.findPriceBySourceAndDestination(source, destination);
             if (priceDetailsEntity != null) {
                 PriceDetailsDto priceDetailsDto = new PriceDetailsDto();
+
                 BeanUtils.copyProperties(priceDetailsEntity, priceDetailsDto);
                 return priceDetailsDto;
             }
@@ -51,12 +65,14 @@ public class PriceDetailsServiceImpl implements PriceDetailsService {
     @Override
     public List<PriceDetailsDto> onFindAll() {
         List<PriceDetailsEntity> priceDetailsEntity = priceDetailsRepo.findAll();
-
-        return priceDetailsEntity.stream().map(priceDetailEntity -> {
+        Stream<PriceDetailsDto> priceDetailsDtoStream = priceDetailsEntity.stream().map(priceDetailEntity -> {
             PriceDetailsDto priceDetailsDto = new PriceDetailsDto();
-            BeanUtils.copyProperties(priceDetailsEntity, priceDetailsDto);
+            BeanUtils.copyProperties(priceDetailEntity, priceDetailsDto);
             return priceDetailsDto;
-        }).collect(Collectors.toList());
+        });
+        List<PriceDetailsDto> collect = priceDetailsDtoStream.collect(Collectors.toList());
+        log.info("price details is ========== " + collect);
+        return collect;
 
     }
 }

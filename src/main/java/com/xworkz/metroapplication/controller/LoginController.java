@@ -1,14 +1,12 @@
 package com.xworkz.metroapplication.controller;
 
-import com.xworkz.metroapplication.dto.DisplayMetroDetailsDto;
 import com.xworkz.metroapplication.dto.RegistrationDto;
-import com.xworkz.metroapplication.service.DisplayMetroDetailsService;
 import com.xworkz.metroapplication.service.MetroService;
 import com.xworkz.metroapplication.util.EmailClass;
+import com.xworkz.metroapplication.util.Encryption;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -32,14 +29,14 @@ public class LoginController {
     }
 
     @Autowired
-    MetroService metroService;
+    private MetroService metroService;
     @Autowired
-    EmailClass emailClass;
+    private EmailClass emailClass;
     @Autowired
-    DisplayMetroDetailsService metroDetailsService;
+    private Encryption encryption;
 
-    @GetMapping("/getLoginByEmail")
-    public String getLogin() {
+    @GetMapping("/getAdminLogin")
+    public String getAdminLogin() {
         return "LoginByEmail";
     }
 
@@ -48,11 +45,10 @@ public class LoginController {
         return "index";
     }
 
-    @GetMapping("/getRegistration")
-    public String getRegistration() {
-        return "Registration";
+    @GetMapping("/getLoginPage")
+    public String getLoginPage(){
+        return "LoginPage";
     }
-
     @GetMapping("/getForgotPassword")
     public String getForgotPassword() {
         return "ForgotPassword";
@@ -70,10 +66,7 @@ public class LoginController {
     public String getResetPassword() {
         return "ResetPassword";
     }
-    @GetMapping("/getUserPage")
-    public String getUserPage(){
-        return "UserPage";
-    }
+
 
 
     @PostMapping("/onLoginSaveDetailsByEmail")
@@ -101,7 +94,7 @@ public class LoginController {
             } else if (message.equals("Login Successful")){
                 model.addAttribute("adminLoginMsg", "Login Successful");
                 model.addAttribute("details", registrationDto);
-                return "UserPage";
+                return "AdminPage";
             }
         }
         return "LoginByEmail";
@@ -152,28 +145,19 @@ public class LoginController {
     @GetMapping("/editProfile")
     public String getEditProfile(@RequestParam String emailId, Model model) {
         RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
+        log.info("image name is ========== "+registrationDto.getUserImage());
+        registrationDto.setPassword(encryption.decrypt(registrationDto.getPassword()));
         model.addAttribute("metroDto", registrationDto);
 
         return "ProfileUpdate";
     }
-    @GetMapping("/getMetroDetails")
-    public String getMetroDetails(@RequestParam String emailId, Model model) {
-        RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
-        model.addAttribute("metroDto", registrationDto);
-        List<DisplayMetroDetailsDto> metroDetails = metroDetailsService.getMetroDetails();
-        if (metroDetails == null) {
-            model.addAttribute("DisplayMsg","Data error");
-            return "UserPage";
-        }
-        model.addAttribute("metroInfo",metroDetails);
-        return "MetroDetailsAdmin";
-    }
-    @GetMapping("/getUserPageByMail")
-    public String getUserPageByMail(@RequestParam String emailId,Model model){
-        log.info(" getUserPageByMail controller begin");
+
+    @GetMapping("/getAdminPageByMail")
+    public String getAdminPageByMail(@RequestParam String emailId,Model model) {
+        log.info(" getAdminPageByMail controller begin");
         RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
         model.addAttribute("details", registrationDto);
-        return "UserPage";
+        return "AdminPage";
     }
 
     @PostMapping("updateDetails")
@@ -188,7 +172,7 @@ public class LoginController {
             model.addAttribute("details", registrationDto1);
             model.addAttribute("errMsg", "data not updated");
         }
-        return "UserPage";
+        return "AdminPage";
     }
 
     @GetMapping("getImage/{userImage}")

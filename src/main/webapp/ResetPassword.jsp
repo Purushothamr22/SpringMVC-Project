@@ -47,7 +47,7 @@
                 </nav>
 
 
-                <div class="container my-5">
+                <div class="container-fluid my-5">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="card p-4 mx-auto"
@@ -115,11 +115,13 @@
                         var confirmPassword = document.getElementById("confirPassword");
                         if (cpass.trim !== '' && cpass.length >= 8 && cpass.length <= 12) {
                             confirmPassword.innerHTML = "";
+                        }else{
+                            confirmPassword.innerHTML = "<span style ='color:yellow'> password must have atleast 8 letters </span>";
                         }
                         if (pass === cpass) {
                             confirmPassword.innerHTML = "";
                         } else {
-                            confirmPassword.innerHTML = "<span style ='color:yellow'> password must have atleast 8 letters </span>";
+                            confirmPassword.innerHTML = "<span style ='color:yellow'> password does not match </span>";
                         }
                         checkForm();
                     }

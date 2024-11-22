@@ -33,7 +33,7 @@
                                     <a class="nav-link btn btn-primary text-white" href="getIndex">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary text-white" href="getUserPageByMail?emailId=${metroDto.emailId}">back</a>
+                                    <a class="nav-link btn btn-primary text-white" href="getAdminPageByMail?emailId=${metroDto.emailId}">back</a>
                                 </li>
                             </ul>
                         </div>
@@ -62,21 +62,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="metroDetail" items="${metroInfo}">
+                                <c:forEach var="stationDetailsDtoList" items="${metroInfo}">
+                                 
                                     <tr>
-                                        <td>${metroDetail.id}</td>
-                                        <td>${metroDetail.trainType}</td>
-                                        <td>${metroDetail.trainNumber}</td>
-                                        <td>${metroDetail.stationName}</td>
-                                        <td>${metroDetail.source}</td>
-                                        <td>${metroDetail.destination}</td>
-                                        <td>${metroDetail.fromDay}</td>
-                                        <td>${metroDetail.toDay}</td>
-                                        <td>${metroDetail.sourceTime}</td>
-                                        <td>${metroDetail.destinationTime}</td>
-                                        <td>${metroDetail.price}</td>
+                                        <td>${stationDetailsDtoList.id}</td>
+                                        <td>${stationDetailsDtoList.trainType}</td>
+                                        <td>${stationDetailsDtoList.trainNumber}</td>
+                                        <td>${stationDetailsDtoList.stationName}</td>
+                                        <td>${stationDetailsDtoList.source}</td>
+                                        <td>${stationDetailsDtoList.destination}</td>
+                                        <td>${stationDetailsDtoList.fromDay}</td>
+                                        <td>${stationDetailsDtoList.toDay}</td>
+                                        <td>${stationDetailsDtoList.sourceTime}</td>
+                                        <td>${stationDetailsDtoList.destinationTime}</td>
+                                        <td>${stationDetailsDtoList.price}</td>
                                     </tr>
-                                </c:forEach>
+                               
+                                 </c:forEach>
                             </tbody>
                         </table>
                     </div>

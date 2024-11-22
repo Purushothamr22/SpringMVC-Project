@@ -10,4 +10,5 @@ public interface PriceDetailsRepo {
     List<PriceDetailsEntity> findAll();
 
 
+
 }

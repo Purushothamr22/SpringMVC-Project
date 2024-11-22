@@ -1,5 +1,6 @@
 package com.xworkz.metroapplication.dto;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import java.sql.Time;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TrainTimeDetailsDto {
-    private Integer id;
+    private Integer trainId;
     private String fromDay;
     private String toDay;
     private String source;
@@ -17,4 +18,6 @@ public class TrainTimeDetailsDto {
     private String trainType;
     private String sourceTime;
     private String destinationTime;
+    private PriceDetailsDto priceDetails;
+    private StationDetailsDto station;
 }

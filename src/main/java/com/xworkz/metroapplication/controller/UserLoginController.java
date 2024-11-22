@@ -1,5 +1,6 @@
 package com.xworkz.metroapplication.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import com.xworkz.metroapplication.dto.UserRegistrationDto;
 import com.xworkz.metroapplication.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,50 +17,55 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/")
 public class UserLoginController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
-    @PostMapping("/saveLoginInfo")
-    public String saveLoginInfo(@RequestParam String emailId, @RequestParam String password, Model model) {
-        UserRegistrationDto userRegistrationDto = userService.onFindByUserEmail(emailId);
-        log.info("login dto email is ===========" + emailId);
-
-        log.info("ON LOGIN SAVE DETAILS BY EMAIL ");
-        if (userRegistrationDto == null) {
-            model.addAttribute("userLoginMsg", "Enter correct email id");
-            return "LoginByEmail";
-        }
-        if (userRegistrationDto.isAccountBlocked()) {
-            model.addAttribute("userLoginMsg", "User Account is blocked Please reset your password  ");
-            model.addAttribute("details", userRegistrationDto);
-
-            return "LoginByEmail";
-        } else {
-            String message = userService.onSaveLoginInfo(emailId, password);
-            if (message.equals("Invalid Login")) {
-                model.addAttribute("userLoginMsg", "Email or  password is incorrect");
-                model.addAttribute("details", userRegistrationDto);
-                return "LoginByEmail";
-
-            } else if (message.equals("Login Successful")) {
-                model.addAttribute("userLoginMsg", "Login Successful");
-                model.addAttribute("details", userRegistrationDto);
-                return "";
-            }
-        }
-        return "LoginByEmail";
+    @GetMapping("/getUserLogin")
+    public String getUserLogin(){
+        return "UserLogin";
     }
 
     @GetMapping("/getUserOtpDetails")
     public String getUserOtpDetails(@RequestParam String emailId, Model model) {
         if (emailId == null) {
-            model.addAttribute("UserOtpMsg", "Enter correct otp");
-            return "UserOtpValidation";
+            model.addAttribute("UserLoginMsg", "Enter correct emailId");
+            return "UserLogin";
         }
         UserRegistrationDto userOtpDetails = userService.getUserOtpDetails(emailId);
+
         if (userOtpDetails != null) {
-            userService.updateUserOtp(emailId);
+            model.addAttribute("userDto",userOtpDetails);
+            return "UserLogin";
         }
-        return "";
+        return "UserLogin";
+    }
+
+    @PostMapping("/verifyUserOtp")
+    public String verifyUserOtp( String otp, @RequestParam String emailId,Model model){
+        if (otp == null||emailId==null) {
+            model.addAttribute("UserLoginMsg","Enter valid details ");
+            return "UserLogin";
+        }
+        UserRegistrationDto userRegistrationDto = userService.onFindByUserEmail(emailId);
+
+        boolean isPresent = userService.verifyUserOtp(emailId, otp);
+        if (isPresent){
+            model.addAttribute("verifyUserOtpDto",userRegistrationDto);
+            return "UserPage";
+        }
+        return "UserLogin";
+    }
+
+    @GetMapping("/getUserPageByEmail")
+    public String getUserPageByEmail(@RequestParam String emailId, Model model){
+        if (emailId==null){
+            model.addAttribute("getUserPageMsg","Data error");
+        }
+        UserRegistrationDto userRegistrationDto = userService.onFindByUserEmail(emailId);
+        if (userRegistrationDto==null){
+            model.addAttribute("getUserPageMsg","Data not found");
+        }
+        model.addAttribute("userDto",userRegistrationDto);
+        return "UserPage";
     }
 
 

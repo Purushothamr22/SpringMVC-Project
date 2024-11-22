@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PriceDetailsRepoImpl implements  PriceDetailsRepo{
     @Autowired
-    EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
 
 
     @Override

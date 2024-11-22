@@ -1,5 +1,4 @@
 package com.xworkz.metroapplication.dto;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +7,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PriceDetailsDto {
-    private Integer id;
+    private Integer priceId;
     private String trainType;
     private String source;
     private String destination;
     private String price;
+    private TrainTimeDetailsDto trainTimeDetail;
 }

@@ -26,11 +26,11 @@ import java.util.List;
 @Slf4j
 public class MetroServiceImpl implements MetroService {
     @Autowired
-    MetroRepository metroRepository;
+    private MetroRepository metroRepository;
     @Autowired
-    Encryption encryption;
+    private Encryption encryption;
     @Autowired
-    EmailClass emailClass;
+    private EmailClass emailClass;
 
     private static String UPLOADED_FOLDER = "C://Users//NEW//IdeaProjects//metro-application//fileUploadImages//";
 
@@ -234,51 +234,22 @@ public class MetroServiceImpl implements MetroService {
                 metroRepository.updateUserProfile(registerEntity);
                 return true;
             } catch (IOException ignored) {
-
+                log.info("Error in saveEditedProfile       {}",ignored.getMessage());
             }
+        }else {
+            registrationDto.setUserImage(existingDto.getUserImage());
+            registrationDto.setImageType(existingDto.getImageType());
+            BeanUtils.copyProperties(registrationDto, registerEntity);
+            metroRepository.updateUserProfile(registerEntity);
+
+            return true;
         }
 
-        registrationDto.setUserImage(existingDto.getUserImage());
-        registrationDto.setImageType(existingDto.getImageType());
         return false;
-
 
     }
 
 
-//    public String findByStationName(String fromStation, String toStation) {
-//        float baseTicketPrice;
-//        if (fromStation != null && toStation!= null) {
-//            AddTrainDetailsDto fromStationDto = onFindByStationNameService(fromStation);
-//            AddTrainDetailsDto toStationDto = onFindByStationNameService(toStation);
-//            if (toStationDto != null&&fromStationDto!=null) {
-//                Float fromDistance = fromStationDto.getDistance();
-//                Float toDistance = toStationDto.getDistance();
-//                float distanceBtwStations = fromDistance - toDistance;
-//                if (distanceBtwStations < 2.00) {
-//                    baseTicketPrice = 10F;
-//                } else if (distanceBtwStations <= 5) {
-//                    baseTicketPrice = 15F;
-//                } else if (distanceBtwStations <= 8) {
-//                    baseTicketPrice = 20F;
-//                } else {
-//                    baseTicketPrice = 20F;
-//                    float extraDistance = distanceBtwStations - 8F;
-//                    float extraFare = (float) Math.ceil(extraDistance / 2) * 3F;
-//                    baseTicketPrice += extraFare;
-//                }
-//                fromStationDto.setTicketPrice(baseTicketPrice);
-//                fromStationDto.setFromStation(fromStation);
-//                fromStationDto.setToStation(toStation);
-//                AddTrainDetailsEntity fromStationEntity = new AddTrainDetailsEntity();
-//                BeanUtils.copyProperties(fromStationDto,fromStationEntity);
-//                metroRepository.saveTrainDetails(fromStationEntity);
-//                return "The base ticket price is: ₹" + baseTicketPrice;
-//            }
-//            return "data no present";
-//        }
-//        return "Invalid station(s) provided.";
-//    }
 
 
 }

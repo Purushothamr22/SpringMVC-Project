@@ -16,7 +16,7 @@ import java.util.List;
 
 public class StationInfoImpl implements StationInfoRepo {
    @Autowired
-    EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
     @Override
     public String saveTrainDetails(StationDetailsEntity trainDetailsEntity) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -56,6 +56,21 @@ public class StationInfoImpl implements StationInfoRepo {
             return resultList;
         }catch (Exception e){
             log.error("got error in find  by Station Name......"+e.getMessage());
+        }finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    @Override
+    public StationDetailsEntity findById(Integer stationId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            Query query = entityManager.createNamedQuery("findById");
+            query.setParameter("stationId",stationId);
+            return (StationDetailsEntity) query.getSingleResult();
+        }catch (Exception e){
+            log.error("error in findById repo "+e.getMessage());
         }finally {
             entityManager.close();
         }

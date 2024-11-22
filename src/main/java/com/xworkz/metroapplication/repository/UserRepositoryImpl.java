@@ -16,7 +16,7 @@ import javax.persistence.Query;
 
 public class UserRepositoryImpl implements UserRepository {
     @Autowired
-    EntityManagerFactory entityManagerFactory;
+    private EntityManagerFactory entityManagerFactory;
 
     @Override
     public String saveUserInfo(UserRegistrationEntity userRegistrationEntity) {
@@ -59,7 +59,7 @@ public class UserRepositoryImpl implements UserRepository {
       try {
           EntityTransaction transaction = entityManager.getTransaction();
           transaction.begin();
-          entityManager.persist(userLoginEntity);
+          entityManager.merge(userLoginEntity);
           transaction.commit();
           return "Login Saved";
       }catch (Exception e){
@@ -129,5 +129,20 @@ public class UserRepositoryImpl implements UserRepository {
             entityManager.close();
         }
 
+    }
+
+    @Override
+    public UserRegistrationEntity findByMobileNo(Long mobileNumber) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            Query query = entityManager.createNamedQuery("");
+            query.setParameter("mobileNumber",mobileNumber);
+            return (UserRegistrationEntity) query.getSingleResult();
+        }catch (Exception e){
+            log.error("error in UserRepository repo findByMobileNo ============= {}",e.getMessage());
+        }finally {
+            entityManager.close();
+        }
+        return null;
     }
 }

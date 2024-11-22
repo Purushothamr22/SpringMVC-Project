@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,7 +26,5 @@ public class UserLoginDto {
     @NotBlank(message = "emailId must not be blank")
     private String emailId;
 
-    @NotBlank(message = "Password must not be blank ,empty ")
-    @Size(min = 1, max = 8, message = "password length should be between 1 - 8 characters")
-    private String password;
+
 }

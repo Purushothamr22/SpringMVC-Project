@@ -9,12 +9,30 @@ import javax.persistence.*;
 @Table(name = "price_details")
 @NamedQuery(name = "findAllPrice", query = "SELECT P FROM PriceDetailsEntity P ")
 @NamedQuery(name = "findPriceBySourceAndDestination", query = "SELECT P FROM PriceDetailsEntity P WHERE P.source=:source AND P.destination=:destination")
+
+
+
 public class PriceDetailsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer priceId;
     private String trainType;
     private String source;
     private String destination;
     private String price;
+
+    @OneToOne
+    @JoinColumn(name = "trainId")
+    private TrainTimeDetailsEntity trainTimeDetail;
+
+    @Override
+    public String toString() {
+        return "PriceDetailsEntity{" +
+                "priceId=" + priceId +
+                ", trainType='" + trainType + '\'' +
+                ", source='" + source + '\'' +
+                ", destination='" + destination + '\'' +
+                ", price='" + price + '\'' +
+                '}';
+    }
 }

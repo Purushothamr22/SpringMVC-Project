@@ -13,12 +13,6 @@ import javax.validation.constraints.*;
 public class UserRegistrationDto {
 
     private Integer id;
-
-
-    @NotBlank(message = "Password must not be blank ,empty ")
-    @Size(min = 8, max = 12, message = "password length should be between 1 - 8 characters")
-    private String password;
-
     @NotBlank(message = "emailId must not be blank")
     @Email(message = "Email should be a valid email address")
     private String emailId;
@@ -39,8 +33,8 @@ public class UserRegistrationDto {
     private Integer noOfAttempts;
     private boolean isAccountBlocked;
     @NotBlank
-    @NotNull
     private String birthdayDate;
+
     private String userImage;
     private String imageType;
 

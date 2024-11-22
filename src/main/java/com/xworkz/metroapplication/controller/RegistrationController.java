@@ -21,15 +21,15 @@ import java.util.List;
 @RequestMapping("/")
 @Slf4j
 public class RegistrationController {
-
-
-
     @Autowired
-
-    MetroService metroService;
+    private MetroService metroService;
 
     public RegistrationController() {
         System.out.println("Registration controller created");
+    }
+    @GetMapping("/getRegistration")
+    public String getRegistration() {
+        return "Registration";
     }
 
     @PostMapping("/onSaveRegistration")

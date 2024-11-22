@@ -9,5 +9,6 @@ public interface StationInfoRepo {
     StationDetailsEntity findByStationName(String stationName);
     List<StationDetailsEntity> findAll();
 
+    StationDetailsEntity findById(Integer id);
 
 }

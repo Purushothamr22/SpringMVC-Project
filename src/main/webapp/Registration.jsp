@@ -41,7 +41,7 @@
                     style="z-index: 1; max-width: 450px;">
                     <div class="card  rounded-3 text-light"
                         style="background-color: rgb(36, 113, 139); padding: 20px 15px;">
-                        <h5 class="text-center text-dark justify-content-end ">${registrationMsg}</h5>
+                        <h5 class="text-center  justify-content-end " style="color: #ff5722;">${registrationMsg}</h5>
                         <div class="card-body p-3">
                             <h2 class="text-center mb-3">User Registration Form</h2>
                             <form action="onSaveRegistration" method="post" onblur="form()">

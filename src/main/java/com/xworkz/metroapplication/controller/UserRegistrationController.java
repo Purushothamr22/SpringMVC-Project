@@ -21,7 +21,7 @@ import javax.validation.Valid;
 public class UserRegistrationController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping("/getUserRegistrationInfo")
     public String getUserRegistrationInfo() {
@@ -55,5 +55,17 @@ public class UserRegistrationController {
         }
         return ResponseEntity.ok("Email Does not exists");
     }
+    @GetMapping("/isMobileNoExists")
+    public ResponseEntity<String> isMobileNoExists(@RequestParam Long mobileNumber) {
+        if (mobileNumber != null) {
+            UserRegistrationDto userRegistrationDto = userService.onFindByMobileNo(mobileNumber);
+
+            if (userRegistrationDto != null) {
+                return ResponseEntity.ok("Mobile Number Exists ");
+            }
+        }
+        return ResponseEntity.ok("Mobile Number Accepted");
+    }
+
 
 }

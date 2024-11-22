@@ -25,7 +25,7 @@ public interface MetroService {
     String updateProfile(RegistrationDto registrationDto);
     RegistrationDto onFindByMobileNumber(Long mobileNumber);
      boolean saveEditedProfile(RegistrationDto registrationDto, MultipartFile file);
-//     String findByStationName(String fromStation,String toStation);
+
 
 
 }

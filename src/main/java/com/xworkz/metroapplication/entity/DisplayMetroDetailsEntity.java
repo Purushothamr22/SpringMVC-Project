@@ -8,8 +8,26 @@ import javax.persistence.*;
 @Entity
 @Data
 @Slf4j
-@Table(name = "TrainStation")
+@Table(name = "metro_details")
 @NamedQuery(name = "isExistsByPrice",query = "SELECT D FROM DisplayMetroDetailsEntity D WHERE D.price =:price")
+@NamedQuery(name = "metroList",query =  "SELECT "
+        +"td.stationId AS id, "
+        +"td.stationNumber AS trainNumber, "
+        +"td.stationType AS trainType, "
+        +"td.stationName AS stationName, "
+        +"td2.fromDay AS fromDay, "
+        +"td2.toDay AS toDay ,"
+        +"td2.source AS source, "
+        +"td2.destination AS destination ,"
+        +"td2.sourceTime AS sourceTime, "
+        +"td2.destinationTime AS destinationTime, "
+        +"pd.price AS price "
+
+        + "FROM StationDetailsEntity td "
+        + "JOIN td.trainTimeDetails td2 "
+        + "JOIN td2.priceDetails pd"
+)
+
 public class DisplayMetroDetailsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
