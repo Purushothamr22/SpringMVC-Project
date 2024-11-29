@@ -41,10 +41,7 @@
                                         <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal"
                                             data-bs-target="#addTimeDetails" href="#">Add Time Details</a>
                                     </li>
-                                    <li class="nav-item mx-3">
-                                        <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal"
-                                            data-bs-target="#savePriceDetails" href="#">Add Price Details</a>
-                                    </li>
+
 
                                     <li class="nav-item mx-auto">
                                         <img src="getImage/${details.userImage}" alt="User Image"
@@ -63,7 +60,7 @@
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                             <li><a class="dropdown-item"
                                                     href="editProfile?emailId=${details.emailId}">Profile Edit</a></li>
-                                            <li><a class="dropdown-item" href="getLoginByEmail">Log out</a></li>
+                                            <li><a class="dropdown-item" href="getLoginPage">Log out</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -106,7 +103,14 @@
                                         <div class="col-md-12">
                                             <label class="form-label text-dark">Train Number</label>
                                             <input type="text" class="form-control" id="trainNumber"
-                                                name="stationNumber" placeholder="Enter train number" required>
+                                                name="stationNumber" placeholder="Enter Metro number" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-12">
+                                            <label class="form-label text-dark">Distance </label>
+                                            <input type="text" class="form-control" id="distance"
+                                                name="distance" placeholder="Enter Distance" required>
                                         </div>
                                     </div>
 
@@ -228,67 +232,7 @@
                 </div>
 
 
-                <!-- train Price Details Model -->
-                <div class="modal fade" id="savePriceDetails" tabindex="-1" aria-labelledby="savePriceDetailsLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content" style="background-color: #FEDBD0">
-                            <div class="modal-header text-white text-center rounded-top"
-                                style="background-color: #442C2E;">
-                                <h5 class="modal-title text-light" id="addDeatilsLabel">Add Price Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="savePriceDetails" method="post">
-                                    <input type="email" name="emailId" value="${details.emailId}" hidden>
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label class="form-label text-dark">Train type</label>
-                                            <input type="text" class="form-control " id="traintype" name="trainType"
-                                                placeholder="Enter train Type" required>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label class="form-label text-dark">Train Source</label>
-                                            <input type="text" class="form-control text-white" id="trainSource"
-                                                name="source" placeholder="Enter train Type" required>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label class="form-label text-dark">Train Destination</label>
-                                            <input type="text" class="form-control" id="destination" name="destination"
-                                                placeholder="Enter train Destination" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label class="form-label text-dark">Ticket Price</label>
-                                            <input type="text" class="form-control" id="price" name="price"
-                                                placeholder="Enter Ticket Price" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="modal-footer rounded-bottom">
-                                        <button type="button" class="btn  text-dark"
-                                            style="background-color: rgb(252, 176, 228);" data-bs-dismiss="modal">
-                                            Close
-                                        </button>
-                                        <button type="submit" class="btn text-dark"
-                                            style="background-color: rgb(228, 252, 176);">
-                                            Save changes
-                                        </button>
-
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                
                 <!-- image enlarge card -->
                 <div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel"
                     aria-hidden="true">

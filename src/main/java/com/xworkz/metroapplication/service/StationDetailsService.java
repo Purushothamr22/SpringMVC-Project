@@ -1,6 +1,5 @@
 package com.xworkz.metroapplication.service;
 
-import com.xworkz.metroapplication.dto.PriceDetailsDto;
 import com.xworkz.metroapplication.dto.StationDetailsDto;
 import com.xworkz.metroapplication.entity.StationDetailsEntity;
 

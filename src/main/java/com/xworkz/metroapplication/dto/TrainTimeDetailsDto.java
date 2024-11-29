@@ -18,6 +18,6 @@ public class TrainTimeDetailsDto {
     private String trainType;
     private String sourceTime;
     private String destinationTime;
-    private PriceDetailsDto priceDetails;
+    private String price;
     private StationDetailsDto station;
 }

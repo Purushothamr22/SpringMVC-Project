@@ -1,10 +1,7 @@
 package com.xworkz.metroapplication.controller;
 
-import com.xworkz.metroapplication.dto.DisplayMetroDetailsDto;
 import com.xworkz.metroapplication.dto.StationDetailsDto;
 import com.xworkz.metroapplication.dto.RegistrationDto;
-import com.xworkz.metroapplication.entity.StationDetailsEntity;
-import com.xworkz.metroapplication.service.DisplayMetroDetailsService;
 import com.xworkz.metroapplication.service.StationDetailsService;
 import com.xworkz.metroapplication.service.MetroService;
 import lombok.extern.slf4j.Slf4j;
@@ -33,8 +30,7 @@ public class StationDetailsController {
    private StationDetailsService stationDetailsService;
     @Autowired
     private   MetroService metroService;
-    @Autowired
-   private DisplayMetroDetailsService metroDetailsService;
+
     @GetMapping("/getAdminPage")
     public String getAdminPage(){
         return "AdminPage";
@@ -70,7 +66,7 @@ public class StationDetailsController {
         log.info("=====================onFindByEmailId in  getMetroDetails dto details is ========== "+registrationDto);
         model.addAttribute("metroDto", registrationDto);
 
-        List<StationDetailsDto> stationDetailsDtoList = stationDetailsService.onFindAllDetails();
+        List<StationDetailsDto> stationDetailsDtoList = stationDetailsService.onFindAll();
         log.info(" =============stationDetailsService in  onFindAllDetails ========== "+stationDetailsDtoList);
         if (stationDetailsDtoList == null) {
             model.addAttribute("DisplayMsg","Data error");

@@ -10,23 +10,24 @@ import javax.persistence.*;
 @Slf4j
 @Data
 @NamedQuery(name = "findAllTime", query = "SELECT T FROM TrainTimeDetailsEntity T")
+@NamedQuery(name = "FindSandD", query = "SELECT T FROM TrainTimeDetailsEntity T WHERE T.source=:source AND T.destination=:destination ")
 @NamedQuery(name = "findBySourceAndDestination", query = "SELECT T FROM TrainTimeDetailsEntity T WHERE T.source=:source AND T.destination=:destination ")
+@NamedQuery(name = "findBySourceDestinationAndTimings", query = "SELECT T FROM TrainTimeDetailsEntity T WHERE T.source=:source AND T.destination=:destination AND T.sourceTime=:sourceTime AND T.destinationTime=:destinationTime ")
 @NamedQuery(name = "findByTrainId", query = "SELECT T FROM TrainTimeDetailsEntity T WHERE T.trainId =:trainId")
 @Table(name = "time_details")
 public class TrainTimeDetailsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer trainId;
-    private String fromDay;
-    private String toDay;
+    private String trainType;
     private String source;
     private String destination;
-    private String trainType;
+    private String fromDay;
+    private String toDay;
     private String sourceTime;
     private String destinationTime;
+    private String price;
 
-    @OneToOne(mappedBy = "trainTimeDetail",fetch = FetchType.EAGER)
-    private PriceDetailsEntity priceDetails;
     @ManyToOne 
     @JoinColumn(name = "stationId")
     private StationDetailsEntity station;
@@ -43,7 +44,6 @@ public class TrainTimeDetailsEntity {
                 ", trainType='" + trainType + '\'' +
                 ", sourceTime='" + sourceTime + '\'' +
                 ", destinationTime='" + destinationTime + '\'' +
-                ", priceDetails=" + priceDetails +
                 '}';
     }
 }

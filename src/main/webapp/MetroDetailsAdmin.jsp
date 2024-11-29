@@ -33,7 +33,8 @@
                                     <a class="nav-link btn btn-primary text-white" href="getIndex">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary text-white" href="getAdminPageByMail?emailId=${metroDto.emailId}">back</a>
+                                    <a class="nav-link btn btn-primary text-white"
+                                        href="getAdminPageByMail?emailId=${metroDto.emailId}">back</a>
                                 </li>
                             </ul>
                         </div>
@@ -62,23 +63,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="stationDetailsDtoList" items="${metroInfo}">
-                                 
-                                    <tr>
-                                        <td>${stationDetailsDtoList.id}</td>
-                                        <td>${stationDetailsDtoList.trainType}</td>
-                                        <td>${stationDetailsDtoList.trainNumber}</td>
-                                        <td>${stationDetailsDtoList.stationName}</td>
-                                        <td>${stationDetailsDtoList.source}</td>
-                                        <td>${stationDetailsDtoList.destination}</td>
-                                        <td>${stationDetailsDtoList.fromDay}</td>
-                                        <td>${stationDetailsDtoList.toDay}</td>
-                                        <td>${stationDetailsDtoList.sourceTime}</td>
-                                        <td>${stationDetailsDtoList.destinationTime}</td>
-                                        <td>${stationDetailsDtoList.price}</td>
-                                    </tr>
-                               
-                                 </c:forEach>
+                                <c:forEach var="metroInfo" items="${stationDetailsDtoList}">
+                                    <c:forEach var="train" items="${metroInfo.trainTimeDetails}">
+                                        <tr>
+                                            <td>${metroInfo.stationId}</td>
+                                            <td>${metroInfo.stationType}</td>
+                                            <td>${metroInfo.stationNumber}</td>
+                                            <td>${station.stationName}</td>
+                                            <td>${train.source}</td>
+                                            <td>${train.destination}</td>
+                                            <td>${train.fromDay}</td>
+                                            <td>${train.toDay}</td>
+                                            <td>${train.sourceTime}</td>
+                                            <td>${train.destinationTime}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:forEach>
                             </tbody>
                         </table>
                     </div>

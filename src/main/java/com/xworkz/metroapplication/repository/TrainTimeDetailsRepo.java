@@ -7,6 +7,7 @@ import java.util.List;
 public interface TrainTimeDetailsRepo {
     String saveTimeDetails(TrainTimeDetailsEntity trainTimeDetailsEntity);
     TrainTimeDetailsEntity findBySourceAndDestination(String source,String destination);
+    TrainTimeDetailsEntity findBySourceDestinationAndTimings(String source,String destination,String sourceTime,String destinationTime);
     List<TrainTimeDetailsEntity> findAll();
 
     TrainTimeDetailsEntity findByTrainId(Integer trainId);

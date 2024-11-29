@@ -56,6 +56,24 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
     }
 
     @Override
+    public TrainTimeDetailsEntity findBySourceDestinationAndTimings(String source, String destination, String sourceTime, String destinationTime) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            Query query = entityManager.createNamedQuery("findBySourceDestinationAndTimings");
+            query.setParameter("source",source);
+            query.setParameter("destination",destination);
+            query.setParameter("sourceTime",sourceTime);
+            query.setParameter("destinationTime",destinationTime);
+            return  (TrainTimeDetailsEntity) query.getSingleResult();
+        }catch (Exception e){
+            log.error("got error in findBySourceAndDestination.....................  " +e.getMessage());
+        }finally {
+            entityManager.close();
+        }
+        return null;
+    }
+
+    @Override
     public List<TrainTimeDetailsEntity> findAll() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {

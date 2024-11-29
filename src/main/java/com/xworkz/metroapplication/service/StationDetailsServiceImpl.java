@@ -1,8 +1,8 @@
 package com.xworkz.metroapplication.service;
 
 import com.xworkz.metroapplication.dto.StationDetailsDto;
+import com.xworkz.metroapplication.dto.TrainTimeDetailsDto;
 import com.xworkz.metroapplication.entity.StationDetailsEntity;
-import com.xworkz.metroapplication.entity.TrainTimeDetailsEntity;
 import com.xworkz.metroapplication.repository.StationInfoRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @Slf4j
@@ -55,12 +54,24 @@ public class StationDetailsServiceImpl implements StationDetailsService {
     @Override
     public List<StationDetailsDto> onFindAll() {
         List<StationDetailsEntity> stationEntityList = stationInfoRepo.findAll();
-        Stream<StationDetailsDto> stationDetailsDtoStream = stationEntityList.stream().map(stationDetailsEntity -> {
+
+        List<StationDetailsDto> stationDetailsDtoList = stationEntityList.stream().map(stationDetailsEntity -> {
             StationDetailsDto stationDetailsDto = new StationDetailsDto();
             BeanUtils.copyProperties(stationDetailsEntity, stationDetailsDto);
+            if (stationDetailsEntity.getTrainTimeDetails() != null) {
+                List<TrainTimeDetailsDto> trainTimeDetailsDtoList = stationDetailsEntity.getTrainTimeDetails().stream()
+                        .map(trainEntity -> {
+                            TrainTimeDetailsDto detailsDto = new TrainTimeDetailsDto();
+                            BeanUtils.copyProperties(trainEntity, detailsDto);
+                            return detailsDto;
+                        }).collect(Collectors.toList());
+                stationDetailsDto.setTrainTimeDetails(trainTimeDetailsDtoList);
+            }
             return stationDetailsDto;
-        });
-        return stationDetailsDtoStream.collect(Collectors.toList());
+        }).collect(Collectors.toList());
+
+        return stationDetailsDtoList;
+
     }
 
     @Override
@@ -70,7 +81,7 @@ public class StationDetailsServiceImpl implements StationDetailsService {
         List<StationDetailsDto> detailsDtoList = new ArrayList<>();
         for (StationDetailsEntity entity : entities) {
             log.info("entered for loop      ========= ");
-            
+
         }
         log.info("the dto list of stationInfoRepo.findAll() is =============== {}", detailsDtoList);
         return detailsDtoList;

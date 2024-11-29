@@ -16,4 +16,5 @@ public interface UserRepository {
     String updateUserOtp(String emailId,String otp);
 
     UserRegistrationEntity findByMobileNo(Long mobileNumber);
+
 }

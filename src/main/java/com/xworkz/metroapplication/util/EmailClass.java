@@ -22,7 +22,7 @@ public class EmailClass {
 
     public String getOtp(){
         Random random = new Random();
-        int randomNum = random.nextInt(999999);
+        int randomNum =100000+ random.nextInt(99999);
         return String.format("%6d", randomNum);
     }
 

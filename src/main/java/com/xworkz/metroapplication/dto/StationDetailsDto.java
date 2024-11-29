@@ -21,6 +21,7 @@ public class StationDetailsDto {
     private String stationType;
     @NotBlank
     private  String stationNumber;
+    private Double distance;
 
 
     private List<TrainTimeDetailsDto> trainTimeDetails;

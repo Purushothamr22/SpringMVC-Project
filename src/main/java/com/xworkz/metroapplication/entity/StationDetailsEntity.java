@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "train_details")
 @NamedQuery(name = "findAllStation", query = "SELECT A FROM StationDetailsEntity A")
+@NamedQuery(name = "findStationDetails", query = "SELECT A FROM StationDetailsEntity A")
 @NamedQuery(name = "findByStationName", query = "SELECT A FROM StationDetailsEntity A WHERE A.stationName=:stationName ")
 @NamedQuery(name = "findById" ,query = "SELECT S FROM StationDetailsEntity S WHERE S.stationId = :stationId")
 public class StationDetailsEntity {
@@ -22,6 +23,7 @@ public class StationDetailsEntity {
     private String stationType;
     @Column(name = "trainNumber")
     private String stationNumber;
+    private Double distance;
 
     @OneToMany(mappedBy = "station",fetch = FetchType.EAGER)
     private List<TrainTimeDetailsEntity> trainTimeDetails;

@@ -29,7 +29,7 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
         if (trainTimeDetailsDto == null) {
             return "Data Error";
         }
-        TrainTimeDetailsDto trainTimeDetailsDto1 = onFindBySourceAndDestination(trainTimeDetailsDto.getSource(), trainTimeDetailsDto.getDestination());
+        TrainTimeDetailsDto trainTimeDetailsDto1 = onFindBySourceDestinationAndTimings(trainTimeDetailsDto.getSource(), trainTimeDetailsDto.getDestination(),trainTimeDetailsDto.getSourceTime(),trainTimeDetailsDto.getDestinationTime());
         if (trainTimeDetailsDto1 == null) {
             TrainTimeDetailsEntity trainTimeDetailsEntity = new TrainTimeDetailsEntity();
             StationDetailsDto stationDetailsDto = stationDetailsService.onFindByStationNameService(trainTimeDetailsDto.getSource());
@@ -37,6 +37,7 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
                 StationDetailsEntity stationDetailsEntity = stationDetailsService.onFindById(stationDetailsDto.getStationId());
                 BeanUtils.copyProperties(trainTimeDetailsDto, trainTimeDetailsEntity);
                 trainTimeDetailsEntity.setStation(stationDetailsEntity);
+                trainTimeDetailsEntity.setPrice(null);
                 trainTimeDetailsRepo.saveTimeDetails(trainTimeDetailsEntity);
                 return "Data Saved";
             }
@@ -53,6 +54,20 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
                 BeanUtils.copyProperties(trainTimeDetailsEntity, trainTimeDetailsDto);
                 return trainTimeDetailsDto;
             }
+        }
+        return null;
+    }
+
+    @Override
+    public TrainTimeDetailsDto onFindBySourceDestinationAndTimings(String source, String destination, String sourceTime, String destinationTime) {
+        if (source != null&& destination != null && destinationTime != null && sourceTime!=null) {
+            TrainTimeDetailsEntity sourceDestinationAndTimings = trainTimeDetailsRepo.findBySourceDestinationAndTimings(source, destination, sourceTime, destinationTime);
+            if (sourceDestinationAndTimings != null) {
+                TrainTimeDetailsDto trainTimeDetailsDto = new TrainTimeDetailsDto();
+                BeanUtils.copyProperties(sourceDestinationAndTimings, trainTimeDetailsDto);
+                return trainTimeDetailsDto;
+            }
+
         }
         return null;
     }

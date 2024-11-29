@@ -9,7 +9,7 @@
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
             </head>
 
-            <body class="bg-dark text-white">
+            <body class="bg-light text-dark">
 
                 <!-- Navigation Bar -->
                 <div>
@@ -60,13 +60,15 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="profileImageModalLabel">${verifyUserOtpDto.firstName}'s Profile</h5>
+                                <h5 class="modal-title" id="profileImageModalLabel">${verifyUserOtpDto.firstName}'s
+                                    Profile</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="card">
-                                    <img src="getImage/${details.userImage}" class="card-img-top" alt="User Image">
+                                    <img src="getImage/${verifyUserOtpDto.userImage}" class="card-img-top"
+                                        alt="User Image">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">${verifyUserOtpDto.firstName}</h5>
 
@@ -78,9 +80,47 @@
                     </div>
                 </div>
 
+                <div class="card container-fluid  p-3" style="width:50%; margin:6rem;">
+                    <form id="stationForm">
+                        <h3 class="text-dark justify-content-center py-3"> Want to book your ticket </h3>
+                        <div class="row ">
+
+                            <!-- Source Selection -->
+                            <div class=" col-md-6 mb-3 ">
+                                <select id="sourceId" class="form-select rounded-0 shadow border-warning" name="source">
+                                    <option value="" disabled selected>Select Source</option>
+                                    <c:forEach var="station" items="${stationDetailsDtoList}">
+                                        <option value="${station.stationName}">${station.stationName}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <!-- Destination Selection -->
+                            <div class=" col-md-6 mb-3  ">
+                                <select id="destinationId" class="form-select rounded-0 shadow border-warning"
+                                    name="destination" onblur="checkPrice()">
+                                    <option value="" disabled selected>Select Destination</option>
+                                    <c:forEach var="station" items="${stationDetailsDtoList}">
+                                        <option name="destination" value="${station.stationName}">${station.stationName}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        <div class="row ">
+                            <div class="col-md-4 mb-3 mx-3">
+                                <h3 id="price" class="justify-content-center "></h3>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+
 
                 <!-- Footer Section -->
-                <footer class="text-white py-3 fixed-bottom" style="background-color: rgb(87, 93, 95);">
+                <footer class=" text-white py-3 fixed-bottom" style="background-color: rgb(87, 93, 95);">
                     <div class="container text-center">
                         <p class="mb-1">&copy; 2024 Metro Service. All rights reserved.</p>
                         <nav>
@@ -91,7 +131,36 @@
                 </footer>
 
                 <!-- Bootstrap JS -->
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+                <script>
+                    const checkPrice = async () => {
+                        var sourceId = document.getElementById("sourceId").value;
+                        var destinationId = document.getElementById("destinationId").value;
+                        console.log("source is  =============== " + sourceId);
+                        console.log("destination  is  =============== " + destinationId);
+                        if (sourceId && destinationId) {
+                            const response = await axios('http://localhost:8083/metro-application/isPriceExists?source=' + sourceId + '&destination=' + destinationId);
+
+                            if (response.data) {
+                                var price = response.data;
+                                console.log("response price given is " + price);
+                                document.getElementById("price").textContent = "Amount is :-  "+ price;
+                            } else {
+                                document.getElementById("price").textContent =  "Amount is:  not found";
+                            }
+
+                        }
+
+
+                    }
+
+
+
+                </script>
             </body>
 
             </html>
