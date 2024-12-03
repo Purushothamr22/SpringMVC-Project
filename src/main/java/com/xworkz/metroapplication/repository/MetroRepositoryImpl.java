@@ -57,40 +57,19 @@ public class MetroRepositoryImpl implements MetroRepository {
         }
         return null;
     }
-
     @Override
-    public List<RegistrationEntity> fetchAll() {
+    public RegistrationEntity findById(Integer id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
-            Query namedQuery = entityManager.createNamedQuery("fetchall");
-            List<RegistrationEntity> resultList = (List<RegistrationEntity>) namedQuery.getResultList();
-            return resultList;
-        } catch (Exception e) {
-            log.error("got error......"+e.getMessage());
-            throw new RuntimeException();
-        } finally {
-            entityManager.close();
-        }
-    }
-
-    @Override
-    public RegistrationEntity findByName(String firstName) {
-        log.info("this is on find by user name repo ");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            Query query = entityManager.createNamedQuery("fetchbyname");
-            query.setParameter("name", firstName);
-            System.out.println("setting parameter : " + firstName);
-            log.info("this is on find by user name repo  ");
+            Query query = entityManager.createNamedQuery("fetchById");
+            query.setParameter("id", id);
             return (RegistrationEntity) query.getSingleResult();
         } catch (Exception e) {
             log.error("got error......"+e.getMessage());
-            System.err.println("find by name method catch block ");
         } finally {
             entityManager.close();
         }
-        return null;
-    }
+        return null;    }
 
     @Override
     public RegistrationEntity findByEmail(String emailId) {

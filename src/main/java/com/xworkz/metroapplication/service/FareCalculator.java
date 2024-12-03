@@ -4,4 +4,6 @@ public interface FareCalculator {
 
     Long calculatePrice(String source ,String destination);
 
+    String generateTokenNumber();
+
 }

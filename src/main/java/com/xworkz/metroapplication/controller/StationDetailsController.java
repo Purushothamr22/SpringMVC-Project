@@ -1,9 +1,9 @@
 package com.xworkz.metroapplication.controller;
 
-import com.xworkz.metroapplication.dto.StationDetailsDto;
 import com.xworkz.metroapplication.dto.RegistrationDto;
-import com.xworkz.metroapplication.service.StationDetailsService;
+import com.xworkz.metroapplication.dto.StationDetailsDto;
 import com.xworkz.metroapplication.service.MetroService;
+import com.xworkz.metroapplication.service.StationDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,23 +25,14 @@ public class StationDetailsController {
     public StationDetailsController() {
         log.info("AddTrainDetailsController controller created");
     }
-
     @Autowired
-   private StationDetailsService stationDetailsService;
+    private StationDetailsService stationDetailsService;
     @Autowired
-    private   MetroService metroService;
-
-    @GetMapping("/getAdminPage")
-    public String getAdminPage(){
-        return "AdminPage";
-    }
+    private MetroService metroService;
     @PostMapping("/addStationDetails")
     public String addStationDetails(@Valid StationDetailsDto addStationDetailsDto, String emailId, BindingResult bindingResult, Model model) {
-
-        log.error(emailId + " ============== is the given email id ");
         RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
         String saveTrainDetails = stationDetailsService.saveTrainDetails(addStationDetailsDto);
-
         if (bindingResult.hasErrors()) {
             model.addAttribute("trainMsg", "Error in saving");
             model.addAttribute("details", registrationDto);
@@ -58,21 +49,16 @@ public class StationDetailsController {
         }
         return "AdminPage";
     }
-
     @GetMapping("/getDetails")
-    public String getDetails(@RequestParam String emailId, Model model){
-            RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
-        log.info(" =============onFindByEmailId in  getMetroDetails ========== ");
-        log.info("=====================onFindByEmailId in  getMetroDetails dto details is ========== "+registrationDto);
+    public String getDetails(@RequestParam String emailId, Model model) {
+        RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
         model.addAttribute("metroDto", registrationDto);
-
         List<StationDetailsDto> stationDetailsDtoList = stationDetailsService.onFindAll();
-        log.info(" =============stationDetailsService in  onFindAllDetails ========== "+stationDetailsDtoList);
-        if (stationDetailsDtoList == null) {
-            model.addAttribute("DisplayMsg","Data error");
-            return "AdminPage";
+        if (stationDetailsDtoList != null) {
+            model.addAttribute("stationDetailsDtoList", stationDetailsDtoList);
+            return "MetroDetailsAdmin";
         }
-        model.addAttribute("metroInfo",stationDetailsDtoList);
+        model.addAttribute("DisplayMsg", "Data error");
         return "MetroDetailsAdmin";
     }
 

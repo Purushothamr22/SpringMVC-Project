@@ -46,13 +46,16 @@
                     </div>
                 </nav>
 
+                <span class="text text-success justify-content-center shadow ">Password Update status :  ${passwordSuccess}</span>
+                <span class="text text-success justify-content-center shadow ">Password Update status :  ${passwordError}</span>
+
 
                 <div class="container-fluid my-5">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="card p-4 mx-auto"
                                 style="background-color: rgba(145, 150, 161, 0.534); width: 35vw;">
-                                <h5>${passwordError}</h5>
+
                                 <h2 class="text-center text-light justify-content-center mb-3">Password Reset </h2>
                                 <form action="onPasswordReset" method="post" onblur="checkForm()">
                                     <div class="mb-3">

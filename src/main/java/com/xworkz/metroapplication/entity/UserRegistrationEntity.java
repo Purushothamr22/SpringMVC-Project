@@ -11,11 +11,12 @@ import javax.persistence.*;
 @NamedQuery(name = "passwordWrongAttemptByUserEmail",query = "UPDATE  UserRegistrationEntity r SET r.isAccountBlocked = :isAccountBlocked,r.noOfAttempts = :noOfAttempts WHERE r.emailId = :emailId")
 @NamedQuery(name = "findUserOtpDetailsByEmail",query = "SELECT u FROM UserRegistrationEntity u WHERE u.emailId =:emailId ")
 @NamedQuery(name = "updateUserOtp",query = "UPDATE UserRegistrationEntity u SET u.otp =:otp WHERE u.emailId =: emailId ")
+@NamedQuery(name = "findByUserMobileNo" ,query = "SELECT U FROM UserRegistrationEntity U WHERE U.mobileNumber=:mobileNumber")
 public class UserRegistrationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer userRegistrationId;
     private String emailId;
     private Long mobileNumber;
     private String firstName;

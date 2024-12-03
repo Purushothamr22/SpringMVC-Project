@@ -8,14 +8,9 @@ import java.util.List;
 public interface MetroService {
     boolean onSaveRegistrationDetails(RegistrationDto registrationDto);
 
-
     String  onSaveLoginDetailsByEmail(String emailId, String password);
 
-
-    List<RegistrationDto> onFetchAll();
-
-    RegistrationDto onFindByName(String firstName);
-
+    RegistrationDto onFindById(Integer id);
     RegistrationDto onFindByEmailId(String emailId);
 
     String onUpdateByEmailId(String emailId);

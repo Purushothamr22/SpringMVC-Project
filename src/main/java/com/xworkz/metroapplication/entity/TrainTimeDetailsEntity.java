@@ -14,6 +14,7 @@ import javax.persistence.*;
 @NamedQuery(name = "findBySourceAndDestination", query = "SELECT T FROM TrainTimeDetailsEntity T WHERE T.source=:source AND T.destination=:destination ")
 @NamedQuery(name = "findBySourceDestinationAndTimings", query = "SELECT T FROM TrainTimeDetailsEntity T WHERE T.source=:source AND T.destination=:destination AND T.sourceTime=:sourceTime AND T.destinationTime=:destinationTime ")
 @NamedQuery(name = "findByTrainId", query = "SELECT T FROM TrainTimeDetailsEntity T WHERE T.trainId =:trainId")
+@NamedQuery(name = "updateTicketPrice",query = "UPDATE TrainTimeDetailsEntity T SET T.price=:price WHERE T.trainId=:trainId")
 @Table(name = "time_details")
 public class TrainTimeDetailsEntity {
     @Id

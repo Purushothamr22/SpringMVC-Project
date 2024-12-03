@@ -55,7 +55,7 @@
 
 
                 <div class="row justify-content-center py-0 my-5">
-                    <div class="col-12 col-md-6 col-lg-8"> <!-- Increased card size -->
+                    <div class="col-12 col-md-6 "> <!-- Increased card size -->
                         <div class="card p-5 mx-auto shadow-lg hover-shadow-lg"
                             style="background-color: rgba(159, 178, 255, 0.7);">
 
@@ -204,6 +204,7 @@
                             button.setAttribute("disabled", "");
                         }
                     }
+
                     function lNameValidation() {
                         var names = document.getElementById("lName").value;
                         console.log(names)
@@ -219,8 +220,6 @@
 
                     }
 
-
-
                     function checkPassword() {
                         var pass = document.getElementById("pass").value;
                         var button = document.getElementById("button");
@@ -235,8 +234,6 @@
                         }
 
                     }
-
-
 
                     const checkMobileNumber = async () => {
                         var mNumber = document.getElementById("mNumber").value;
@@ -257,6 +254,7 @@
                             }
                         }
                     }
+                    
                     const checkEmail = async () => {
                         var email = document.getElementById("eId").value;
                         var button = document.getElementById("button");
@@ -280,6 +278,9 @@
                             x.type = "password";
                         }
                     } 
+
+                    
+
                 </script>
             </body>
 

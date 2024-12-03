@@ -48,7 +48,9 @@
                     </div>
                 </nav>
                 <h5 class="mb-4 text-danger">${userLoginMsg}</h5>
-                <h5 class="mb-4 text-white">${adminLoginMsg}</h5>
+                <h5 class="mb-4 text-danger">${adminLoginMsg}</h5>
+                <h5 class="mb-4 text-success">${adminLoginSuccessMsg}</h5>
+
 
 
                 <div class="container my-5">
@@ -103,8 +105,7 @@
                 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
                 <script>
-
-
+                    
                     const checkEmail = async () => {
                         
                         var email = document.getElementById("email").value;
@@ -149,11 +150,8 @@
                         }
                     }
 
-
                     
 
-                    
-                    
 
                 </script>
             </body>

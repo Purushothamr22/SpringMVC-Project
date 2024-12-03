@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
             UserRegistrationDto userRegistrationDto = onFindByUserEmail(emailId);
             log.info("user dto from onSaveLoginInfo is ============== "+userRegistrationDto);
             UserLoginDto userLoginDto = new UserLoginDto();
-            userLoginDto.setId(userRegistrationDto.getId());
+            userLoginDto.setUserLoginId(userRegistrationDto.getUserRegistrationId());
             userLoginDto.setFirstName(userRegistrationDto.getFirstName());
             userLoginDto.setLoginTime(LocalDateTime.now().toString());
             userLoginDto.setLogoutTime(null);

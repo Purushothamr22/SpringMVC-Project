@@ -30,8 +30,8 @@
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav ms-auto text-center align-items-center">
                                     <li class="nav-item mx-3">
-                                        <a class="nav-link btn btn-primary text-light" 
-                                             href="getDetails?emailId=${details.emailId}">Metro Details</a>
+                                        <a class="nav-link btn btn-primary text-light"
+                                            href="getDetails?emailId=${details.emailId}">Metro Details</a>
                                     </li>
                                     <li class="nav-item mx-3">
                                         <a class="nav-link btn btn-primary text-light" data-bs-toggle="modal"
@@ -75,8 +75,8 @@
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content" style="background-color: white">
-                            <div class="modal-header text-white text-center rounded-top"
-                                style="background-color: rgb(177, 228, 252);">
+                            <div class="modal-header text-white text-center rounded-0"
+                                style="background-color: rgb(93, 182, 223);">
                                 <h5 class="modal-title text-dark" id="addDeatilsLabel">Add Train Details</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
@@ -86,42 +86,48 @@
                                     <input type="email" name="emailId" value="${details.emailId}" hidden>
 
                                     <div class="row mb-3">
-                                        <div class="col-md-12">
-                                            <label class="form-label text-dark">Train type</label>
-                                            <input type="text" class="form-control" id="traintype" name="stationType"
-                                                placeholder="Enter train Type" required>
+                                        <div class="col-md-12 ">
+                                            <label class="form-label text-dark ">Train Type</label>
+                                            <select class="form-select rounded-0 border-dark shadow " id="traintype"
+                                                name="stationType" required>
+                                                <option value="" disabled selected>Select train type</option>
+                                                <option value="Purple Line">Purple Line</option>
+                                                <option value="Green Line">Green Line</option>
+
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-12">
                                             <label class="form-label text-dark">Station Name</label>
-                                            <input type="text" class="form-control" id="trainName" name="stationName"
-                                                placeholder="Enter train name" required>
+                                            <input type="text" class="form-control rounded-0 border-dark shadow"
+                                                id="trainName" name="stationName" placeholder="Enter train name"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-12">
                                             <label class="form-label text-dark">Train Number</label>
-                                            <input type="text" class="form-control" id="trainNumber"
-                                                name="stationNumber" placeholder="Enter Metro number" required>
+                                            <input type="text" class="form-control rounded-0 border-dark shadow"
+                                                id="trainNumber" name="stationNumber" placeholder="Enter Metro number"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-12">
                                             <label class="form-label text-dark">Distance </label>
-                                            <input type="text" class="form-control" id="distance"
-                                                name="distance" placeholder="Enter Distance" required>
+                                            <input type="text" class="form-control rounded-0 border-dark shadow"
+                                                id="distance" name="distance" placeholder="Enter Distance" required>
                                         </div>
                                     </div>
 
-                                    <div class="modal-footer rounded-bottom"
-                                        style="background-color:rgb(252, 176, 228);">
-                                        <button type="button" class="btn btn-outline-light text-dark"
-                                            style="color: rgb(156, 161, 145);" data-bs-dismiss="modal">
+                                    <div class="modal-footer rounded-bottom">
+                                        <button type="button" class="btn btn-outline-light text-light"
+                                            style="background-color: rgb(8, 10, 3);" data-bs-dismiss="modal">
                                             Close
                                         </button>
                                         <button type="submit" class="btn text-dark"
-                                            style="background-color: rgb(228, 252, 176);">
+                                            style="background-color: rgb(91, 230, 56);">
                                             Save changes
                                         </button>
 
@@ -138,7 +144,7 @@
                 <div class="modal fade" id="addTimeDetails" tabindex="-1" aria-labelledby="addDetailsLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-md" role="document">
-                        <div class="modal-content rounded-3" style="background-color: white">
+                        <div class="modal-content rounded-0" style="background-color: rgb(89, 145, 248)">
                             <div class="modal-header  text-white text-center rounded-top "
                                 style="background-color: rgb(177, 228, 252);">
 
@@ -153,14 +159,19 @@
                                     <div class="row mb-3">
                                         <div class="col-md-6 mx-auto">
                                             <label class="form-label text-dark ">Train Type</label>
-                                            <input type="text" class="form-control" id="trainType" name="trainType"
-                                                placeholder="Enter train type" required>
+                                            <select class="form-select rounded-0 border-dark shadow " id="traintype"
+                                                name="trainType" required>
+                                                <option value="" disabled selected>Select train type</option>
+                                                <option value="Purple Line">Purple Line</option>
+                                                <option value="Green Line">Green Line</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label for="fromDay" class="form-label text-dark">From Day</label>
-                                            <select name="fromDay" id="fromDay" class="form-select">
+                                            <select name="fromDay" id="fromDay"
+                                                class="form-select  rounded-0 shadow border-dark">
                                                 <option selected disabled>Select Starting Day</option>
                                                 <option value="monday">Monday</option>
                                                 <option value="tuesday">Tuesday</option>
@@ -171,10 +182,11 @@
                                                 <option value="sunday">Sunday</option>
                                             </select>
                                         </div>
-                                        
+
                                         <div class="col-md-6">
                                             <label for="toDay" class="form-label text-dark">To Day</label>
-                                            <select name="toDay" id="toDay" class="form-select">
+                                            <select name="toDay" id="toDay"
+                                                class="form-select  rounded-0 shadow border-dark">
                                                 <option selected disabled>Select Ending Day</option>
                                                 <option value="monday">Monday</option>
                                                 <option value="tuesday">Tuesday</option>
@@ -185,45 +197,57 @@
                                                 <option value="sunday">Sunday</option>
                                             </select>
                                         </div>
-                                        
+
                                     </div>
 
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label text-dark">Source</label>
-                                            <input type="text" class="form-control" id="source" name="source"
-                                                placeholder="Enter source station" required>
+                                            <select id="sourceId" class="form-select rounded-0 shadow border-dark"
+                                                name="source">
+                                                <option value="" disabled selected>Select Source</option>
+                                                <c:forEach var="station" items="${stationDetailsDtoList}">
+                                                    <option name="source" value="${station.stationName}">
+                                                        ${station.stationName}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label text-dark">Destination</label>
-                                            <input type="text" class="form-control" id="destination" name="destination"
-                                                placeholder="Enter destination station" required>
+                                            <select id="destinationId" class="form-select rounded-0 shadow border-dark"
+                                                name="destination">
+                                                <option value="" disabled selected>Select Destination</option>
+                                                <c:forEach var="station" items="${stationDetailsDtoList}">
+                                                    <option name="destination" value="${station.stationName}">
+                                                        ${station.stationName}
+                                                    </option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <label class="form-label text-dark">Source Time</label>
-                                            <input type="time" class="form-control" id="sourceTime" name="sourceTime"
-                                                required>
+                                            <input type="time" class="form-control  rounded-0 shadow border-dark"
+                                                id="sourceTime" name="sourceTime" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label text-dark ">Destination Time</label>
-                                            <input type="time" class="form-control" id="destinationTime"
-                                                name="destinationTime" required>
+                                            <input type="time" class="form-control  rounded-0 shadow border-dark"
+                                                id="destinationTime" name="destinationTime" required>
                                         </div>
                                     </div>
 
-                                    <div class="modal-footer rounded-bottom"
-                                        style="background-color:rgb(252, 176, 228);">
-                                        <button type="button" class="btn btn-outline-light text-dark"
-                                            style="color: rgb(156, 161, 145);" data-bs-dismiss="modal">
+                                    <div class="modal-footer rounded-bottom">
+                                        <button type="button" class="btn btn-outline-light text-light"
+                                            style="background-color: rgb(8, 10, 3);" data-bs-dismiss="modal">
                                             Close
                                         </button>
                                         <button type="submit" class="btn text-dark"
-                                            style="background-color: rgb(228, 252, 176);">
+                                            style="background-color: rgb(91, 230, 56);">
                                             Save changes
                                         </button>
-
                                     </div>
                                 </form>
                             </div>
@@ -232,14 +256,15 @@
                 </div>
 
 
-                
+
                 <!-- image enlarge card -->
                 <div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title text-dark" id="profileImageModalLabel">${details.firstName}'s Profile</h5>
+                                <h5 class="modal-title text-dark" id="profileImageModalLabel">${details.firstName}'s
+                                    Profile</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
@@ -272,8 +297,8 @@
                 <h6 style="color: green;">${successMsg}</h6>
 
 
-                
-               
+
+
 
                 <!-- Footer Section -->
                 <footer class="text-white py-3 fixed-bottom" style="background-color: rgb(87, 93, 95);">

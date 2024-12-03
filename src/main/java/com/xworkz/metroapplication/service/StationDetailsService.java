@@ -10,7 +10,6 @@ public interface StationDetailsService {
     String saveTrainDetails(StationDetailsDto addStationDetailsDto);
     StationDetailsDto onFindByStationNameService(String stationName);
     List<StationDetailsDto> onFindAll();
-    List<StationDetailsDto> onFindAllDetails();
     StationDetailsEntity onFindById(Integer id);
 
 }

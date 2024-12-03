@@ -12,10 +12,7 @@ public interface MetroRepository {
 
     String saveLoginDetails(LoginEntity loginEntity);
 
-    List<RegistrationEntity> fetchAll();
-
-    RegistrationEntity findByName(String firstName);
-
+    RegistrationEntity findById(Integer id);
     RegistrationEntity findByEmail(String emailId);
     String updateOtp(String  otp,String emailId);
     boolean updatePasswordByEmailId(String encryptedPassword,String emailId);

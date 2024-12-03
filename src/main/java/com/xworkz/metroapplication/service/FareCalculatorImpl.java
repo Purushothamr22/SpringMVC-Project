@@ -6,6 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+
 @Service
 @Slf4j
 
@@ -21,16 +25,11 @@ public class FareCalculatorImpl implements FareCalculator {
         StationDetailsDto sourceDto = stationDetailsService.onFindByStationNameService(source);
         StationDetailsDto destinationDto = stationDetailsService.onFindByStationNameService(destination);
         if (sourceDto != null && destinationDto != null) {
-            log.info("Source distance: {}", sourceDto.getDistance());
-            log.info("Destination distance: {}", destinationDto.getDistance());
             Double distanceTravelled = Math.abs(sourceDto.getDistance() - destinationDto.getDistance());
-            log.info("Distance travelled: {}", distanceTravelled);
             if (distanceTravelled <= 2) {
-                log.info("Total fare: {}", BASE_FARE);
                 return  Math.round(BASE_FARE);
             } else {
                 double fare = BASE_FARE + (distanceTravelled * RATE_PER_KM);
-                log.info("Total fare: {}", fare);
                 return  Math.round(fare);
             }
         } else {
@@ -39,6 +38,20 @@ public class FareCalculatorImpl implements FareCalculator {
         }
     }
 
+    @Override
+    public String generateTokenNumber() {
+        StringBuilder builder =new StringBuilder();
+        Random random=new Random();
+        for (int i = 0; i < 6; i++) {
+            builder.append(random.nextInt(10));
+        }
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+        String dateTime = now.format(formatter);
+        String uniqueID = builder.toString() + dateTime;
+        log.info("Token generates is ================-------------    {}",uniqueID);
+        return uniqueID;
+    }
 
 
 }

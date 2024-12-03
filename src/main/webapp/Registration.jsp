@@ -11,7 +11,7 @@
                 <title>Registration Page</title>
             </head>
 
-            <body class="bg-dark text-light">
+            <body class="bg-light text-dark">
 
                 <!-- Full Mask Overlay -->
                 <!-- <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.7);">
@@ -37,17 +37,16 @@
                 </nav>
                 <br>
 
-                <div class="container position-relative d-flex justify-content-end align-items-center flex-grow-1"
-                    style="z-index: 1; max-width: 450px;">
-                    <div class="card  rounded-3 text-light"
-                        style="background-color: rgb(36, 113, 139); padding: 20px 15px;">
+                <div class="container-fluid  col-md-6  align-items-center py-3  ">
+                    <div class="card  rounded-0 text-dark shadow border-dark"
+                        style=" padding: 20px 15px;">
                         <h5 class="text-center  justify-content-end " style="color: #ff5722;">${registrationMsg}</h5>
                         <div class="card-body p-3">
-                            <h2 class="text-center mb-3">User Registration Form</h2>
+                            <h2 class="text-center text-warning mb-3">User Registration Form</h2>
                             <form action="onSaveRegistration" method="post" onblur="form()">
                                 <span id="formMessage"></span>
 
-                                <input type="text" class="form-control" id="id" placeholder="Enter your id" name="id"
+                                <input type="text" class="form-control rounded-0 " id="id" placeholder="Enter your id" name="id"
                                     hidden>
 
                                 <!-- Row 1: First Name, Last Name -->
@@ -55,43 +54,41 @@
                                     <div class="col-md-6">
                                         <label class="form-label">First Name</label>
                                         <input type="text" id="fName" name="firstName" placeholder="Enter First Name"
-                                            class="form-control" onblur="fNameValidation()" required>
+                                            class="form-control rounded-0 border-dark" onblur="fNameValidation()" required>
                                         <span id="firstName"></span>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Last Name</label>
                                         <input type="text" id="lName" name="lastName" placeholder="Enter Last Name"
-                                            class="form-control" onblur="lNameValidation()" required>
+                                            class="form-control rounded-0 border-dark" onblur="lNameValidation()" required>
                                         <span id="lastName"></span>
                                     </div>
                                 </div>
 
                                 <!-- Row 2: Birthday, Gender -->
                                 <div class="row mb-2">
-
-
                                     <div class="col-md-6">
-                                        <label class="form-label">Birth Date:</label>
-                                        <input type="date" id="birthDate" name="birthdayDate" class="form-control">
+                                        <label class="form-label ">Birth Date:</label>
+                                        <input type="date" id="birthDate" name="birthdayDate" class="form-control rounded-0 border-dark">
                                     </div>
 
 
-                                    <div class="col-md-6">
-                                        <label class="form-label d-block">Gender</label>
+                                    <div class="col-md-6 rounded-0 border-dark">
+                                        <label class="form-label d-block  ">Gender</label>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="femaleGender"
+                                            <input class="form-check-input  border-dark " type="radio" name="gender" id="femaleGender"
                                                 value="Female" required>
                                             <label class="form-check-label" for="femaleGender">Female</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="maleGender"
+                                            <input class="form-check-input  border-dark " type="radio" name="gender" id="maleGender"
                                                 value="Male">
                                             <label class="form-check-label" for="maleGender">Male</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="otherGender"
+                                            <input class="form-check-input border-dark" type="radio" name="gender" id="otherGender"
                                                 value="Other">
-                                            <label class="form-check-label" for="otherGender">Other</label>
+                                            <label class="form-check-label " for="otherGender">Other</label>
                                         </div>
                                         <span id="gender"></span>
                                     </div>
@@ -103,13 +100,13 @@
                                     <div class="col-md-6">
                                         <label class="form-label">Email ID</label>
                                         <input type="email" id="eId" name="emailId" placeholder="Enter e-mail id"
-                                            class="form-control" onblur="checkEmail()" required>
+                                            class="form-control rounded-0 border-dark" onblur="checkEmail()" required>
                                         <span id="emailId"></span>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Mobile Number</label>
                                         <input type="tel" id="mNumber" name="mobileNumber"
-                                            placeholder="Enter mobile number" class="form-control"
+                                            placeholder="Enter mobile number" class="form-control rounded-0 border-dark"
                                             onblur="checkMobileNumber()" required>
                                         <span id="mobileNumber"></span>
                                     </div>
@@ -122,13 +119,13 @@
                                     <div class="col-md-6">
                                         <label class="form-label">Password</label>
                                         <input type="password" id="pass" name="password" placeholder="Enter password"
-                                            class="form-control" onblur="checkPassword()" required>
+                                            class="form-control rounded-0 border-dark" onblur="checkPassword()" required>
                                         <span id="password"></span>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Confirm Password</label>
                                         <input type="password" id="cpass" placeholder="Confirm password"
-                                            class="form-control" onblur="confirmPassword()" required>
+                                            class="form-control rounded-0 border-dark" onblur="confirmPassword()" required>
                                         <span id="cPassword"></span>
                                     </div>
                                 </div>
@@ -137,13 +134,13 @@
 
                                 <!-- Submit Button -->
                                 <div class="text-center mt-3">
-                                    <button id="button" type="submit" class="btn btn-primary w-100">Submit</button>
+                                    <button id="button" type="submit" class="btn btn-primary w-100 rounded-0 border-dark">Submit</button>
                                 </div>
 
                             </form>
 
                         </div>
-                        <div class="mt-2 text-center text-light justify-content-center   ">
+                        <div class="mt-2 text-center text-dark justify-content-center   ">
                             Already have an account? <a href="LoginByEmail.jsp" class="text-warning mx-2">Login</a>
                         </div>
                     </div>
@@ -170,9 +167,9 @@
                         if (names.trim() !== '' && names.length > 3 && names.length <= 25 && !/\d/.test(names)) {
                             document.getElementById("firstName").innerHTML = "";
                         } else if (/\d/.test(names)) {
-                            document.getElementById("firstName").innerHTML = "<span style='color:yellow;'>First Name cannot contain numbers.</span>";
+                            document.getElementById("firstName").innerHTML = "<span style='color:red;'>First Name cannot contain numbers.</span>";
                         } else {
-                            document.getElementById("firstName").innerHTML = "<span style='color:yellow;'>Must be between 4 & 25 characters.</span>";
+                            document.getElementById("firstName").innerHTML = "<span style='color:red;'>Must be between 4 & 25 characters.</span>";
                         }
                         checkForm();
                     }
@@ -183,7 +180,7 @@
                         if (names.trim() !== '' && names.length > 0 && names.length <= 25 && !/\d/.test(names)) {
                             document.getElementById("lastName").innerHTML = "";
                         } else if (/\d/.test(names) || names.length < 1) {
-                            document.getElementById("lastName").innerHTML = "<span style='color:yellow;'>Last name cannot be a number and must be atleast 1.</span>";
+                            document.getElementById("lastName").innerHTML = "<span style='color:red;'>Last name cannot be a number and must be atleast 1.</span>";
                         }
                         checkForm();
                     }
@@ -211,18 +208,18 @@
                         const confirmPasswordMessage = document.getElementById("cPassword");
                         confirmPasswordMessage.innerHTML = "";
                         if (cpass.trim() === '') {
-                            confirmPasswordMessage.innerHTML = "<span style='color:yellow;'>Password cannot be empty.</span>";
+                            confirmPasswordMessage.innerHTML = "<span style='color:red;'>Password cannot be empty.</span>";
                             return;
                         }
                         if (cpass.length < 8 || cpass.length > 12) {
-                            confirmPasswordMessage.innerHTML = "<span style='color:yellow;'>Password must be between 8 and 12 characters.</span>";
+                            confirmPasswordMessage.innerHTML = "<span style='color:red;'>Password must be between 8 and 12 characters.</span>";
                             return;
                         }
                         if (pass === cpass) {
                             confirmPasswordMessage.innerHTML = "";
 
                         } else {
-                            confirmPasswordMessage.innerHTML = "<span style='color:yellow;'>Passwords do not match.</span>";
+                            confirmPasswordMessage.innerHTML = "<span style='color:red;'>Passwords do not match.</span>";
 
                         }
                         checkForm();
@@ -233,12 +230,12 @@
                         var mobileNumber = document.getElementById("mobileNumber");
 
                         if (!(mNumber.length == 10)) {
-                            mobileNumber.innerHTML = "<span style='color:yellow'>Mobile Number length should be 10</span>";
+                            mobileNumber.innerHTML = "<span style='color:red'>Mobile Number length should be 10</span>";
                             button.setAttribute("disabled", "disabled");
                         } else {
                             var response = await axios('http://localhost:8083/metro-application/isMobileNumberExists?mobileNumber=' + mNumber);
                             if (response.data === "Mobile Number Exists") {
-                                mobileNumber.innerHTML = "<span style='color:yellow'>Mobile Number Exists</span>";
+                                mobileNumber.innerHTML = "<span style='color:red'>Mobile Number Exists</span>";
                                 button.setAttribute("disabled", "disabled");
                             } else if (response.data === "Mobile Number Accepted") {
                                 mobileNumber.innerHTML = "";
@@ -252,7 +249,7 @@
                         var button = document.getElementById("button");
                         var response = await axios('http://localhost:8083/metro-application/isEmailExists?emailId=' + email);
                         if (response.data === "Email Exists") {
-                            document.getElementById("emailId").innerHTML = "<span style='color:yellow'>Email exists</span>";
+                            document.getElementById("emailId").innerHTML = "<span style='color:red'>Email exists</span>";
                             button.setAttribute("disabled", "disabled");
                         } else if (response.data === "Email Accepted") {
                             document.getElementById("emailId").innerHTML = "";

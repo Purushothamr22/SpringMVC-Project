@@ -13,18 +13,13 @@ import javax.validation.constraints.NotNull;
 
 
 public class UserLoginDto {
-    private Integer id;
+    private Integer userLoginId;
     @NotNull(message = "first Name must not null")
     @NotBlank(message = "first Name must not be blank")
     @NotEmpty(message = "first Name must not be empty")
     private String firstName;
-
     private String loginTime;
-
     private String logoutTime;
-
     @NotBlank(message = "emailId must not be blank")
     private String emailId;
-
-
 }

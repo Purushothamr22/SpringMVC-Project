@@ -22,29 +22,23 @@ public class UserRegistrationController {
 
     @Autowired
     private UserService userService;
-
     @GetMapping("/getUserRegistrationInfo")
     public String getUserRegistrationInfo() {
         return "UserRegistrationInfo";
     }
-
     @PostMapping("/saveUserInfo")
     public String saveUserInfo(@Valid UserRegistrationDto userRegistrationDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("userInfoMsg", "Error in the given details ");
-            log.info("Input  error ============= controller ");
             return "UserRegistrationInfo";
         }
-
         String onSaveUserInfo = userService.onSaveUserInfo(userRegistrationDto);
         if (onSaveUserInfo.equals("Data saved")) {
             model.addAttribute("indexMsg", "Data Successfully Saved ");
-            log.info("Data is saved ======== controller ");
             return "index";
         }
         return "UserRegistrationInfo";
     }
-
     @GetMapping("/isUserEmailExists")
     public ResponseEntity<String> isUserEmailExists(@RequestParam String emailId) {
         if (emailId != null) {
@@ -59,7 +53,6 @@ public class UserRegistrationController {
     public ResponseEntity<String> isMobileNoExists(@RequestParam Long mobileNumber) {
         if (mobileNumber != null) {
             UserRegistrationDto userRegistrationDto = userService.onFindByMobileNo(mobileNumber);
-
             if (userRegistrationDto != null) {
                 return ResponseEntity.ok("Mobile Number Exists ");
             }

@@ -135,7 +135,7 @@ public class UserRepositoryImpl implements UserRepository {
     public UserRegistrationEntity findByMobileNo(Long mobileNumber) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
-            Query query = entityManager.createNamedQuery("");
+            Query query = entityManager.createNamedQuery("findByUserMobileNo");
             query.setParameter("mobileNumber",mobileNumber);
             return (UserRegistrationEntity) query.getSingleResult();
         }catch (Exception e){

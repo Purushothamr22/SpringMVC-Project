@@ -41,6 +41,8 @@
                     </div>
                 </nav>
 
+                <h3 class="text justify-content-center text-danger shadow-sm">${DisplayMsg}</h3>
+
                 <!-- Main Content -->
                 <div class="container my-5">
                     <h2 class="text-center mb-4">Metro Information</h2>
@@ -62,26 +64,29 @@
                                     <th>Price</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <c:forEach var="metroInfo" items="${stationDetailsDtoList}">
+                            <tbody id="detail">
+                                <c:forEach var="metroInfo"  items="${stationDetailsDtoList}">
                                     <c:forEach var="train" items="${metroInfo.trainTimeDetails}">
                                         <tr>
                                             <td>${metroInfo.stationId}</td>
                                             <td>${metroInfo.stationType}</td>
                                             <td>${metroInfo.stationNumber}</td>
-                                            <td>${station.stationName}</td>
+                                            <td>${metroInfo.stationName}</td>
                                             <td>${train.source}</td>
                                             <td>${train.destination}</td>
                                             <td>${train.fromDay}</td>
                                             <td>${train.toDay}</td>
                                             <td>${train.sourceTime}</td>
                                             <td>${train.destinationTime}</td>
+                                            <td>${train.price}</td>
                                         </tr>
                                     </c:forEach>
                                 </c:forEach>
                             </tbody>
                         </table>
                     </div>
+                </div>
+
                 </div>
 
                 <!-- Footer -->
@@ -93,6 +98,20 @@
 
                 <!-- Bootstrap JS -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script>
+                    var list = document.getElementById("detail");  
+                    console.log("List of the data is:", list);
+                
+                    // Example: Get all rows inside the table body
+                    var rows = list.getElementsByTagName("tr");
+                    console.log("Number of rows:", rows.length);
+                
+                    // Log each row's content for debugging
+                    Array.from(rows).forEach((row, index) => {
+                        console.log(`Row ${index + 1}:`, row.innerText);
+                    });
+                </script>
+                
             </body>
 
             </html>

@@ -8,8 +8,7 @@ import java.util.Date;
 @Entity
 @Data
 @Table(name = "registration_details")
-@NamedQuery(name = "fetchall", query = "select r from RegistrationEntity r")
-@NamedQuery(name = "fetchbyname", query = "SELECT r FROM RegistrationEntity r WHERE r.firstName = :name ")
+@NamedQuery(name = "fetchById", query = "SELECT r FROM RegistrationEntity r WHERE r.id = :id ")
 @NamedQuery(name = "fetchByEmail", query = "SELECT r FROM RegistrationEntity r WHERE r.emailId = :emailId")
 @NamedQuery(name = "updateByEmail",query = "UPDATE  RegistrationEntity r SET r.otp = :otp WHERE r.emailId = :emailId")
 @NamedQuery(name = "updatePassword",query = "UPDATE  RegistrationEntity r SET r.password = :password WHERE r.emailId = :emailId")

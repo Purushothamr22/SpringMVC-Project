@@ -57,7 +57,7 @@
                 <!-- image enlarge card -->
                 <div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-dialog modal-sm  modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="profileImageModalLabel">${verifyUserOtpDto.firstName}'s
@@ -83,7 +83,12 @@
                 <div class="card container-fluid  p-3" style="width:50%; margin:6rem;">
                     <form id="stationForm">
                         <h3 class="text-dark justify-content-center py-3"> Want to book your ticket </h3>
+                        <div class=" col-md-6 mb-3">
+                            <input type="text" id="userId" class="form-select rounded-0 shadow border-warning"
+                                name="userLoginId" value="${verifyUserOtpDto.userRegistrationId}" hidden>
+                        </div>
                         <div class="row ">
+
 
                             <!-- Source Selection -->
                             <div class=" col-md-6 mb-3 ">
@@ -105,15 +110,22 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                            
+
                         </div>
                         <div class="row ">
                             <div class="col-md-4 mb-3 mx-3">
                                 <h3 id="price" class="justify-content-center "></h3>
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div>
+                                <button type="button" id="tokenId"
+                                    class="form-control btn btn-dark shadow rounded-0 btn-outline-info"
+                                    onclick="getToken()">Book Ticket </button>
+                            </div>
+                        </div>
                     </form>
+
 
                 </div>
 
@@ -143,23 +155,39 @@
                         console.log("source is  =============== " + sourceId);
                         console.log("destination  is  =============== " + destinationId);
                         if (sourceId && destinationId) {
+                            tokenId.removeAttribute("disabled")
                             const response = await axios('http://localhost:8083/metro-application/isPriceExists?source=' + sourceId + '&destination=' + destinationId);
 
                             if (response.data) {
                                 var price = response.data;
                                 console.log("response price given is " + price);
-                                document.getElementById("price").textContent = "Amount is :-  "+ price;
+                                document.getElementById("price").textContent = "Amount is :-  " + price;
                             } else {
-                                document.getElementById("price").textContent =  "Amount is:  not found";
+                                document.getElementById("price").textContent = "Amount is:  not found";
+                            }
+
+                        }else{
+                            tokenId.setAttribute("disabled",'')
+                        }
+                    }
+
+                    const getToken = async () => {
+                        var sourceId = document.getElementById("sourceId").value;
+                        var destinationId = document.getElementById("destinationId").value;
+                        var userId = document.getElementById("userId").value;
+                        console.log("source is  =============== " + sourceId);
+                        console.log("destination  is  =============== " + destinationId);
+                        if (sourceId && destinationId) {
+                            const responseT = await axios('http://localhost:8083/metro-application/generateToken');
+                            console.log("generated token data  is ===================   "+responseT.data);
+                            if (responseT.data) {
+                                const responseS = await axios.post('http://localhost:8083/metro-application/saveTicketDetails?source=' + sourceId + '&destination=' + destinationId + '&userLoginId=' + userId+'&tokenNumber='+responseT.data);
+                                console.log("save  response is " + responseS.data);
                             }
 
                         }
-
-
+                    
                     }
-
-
-
                 </script>
             </body>
 

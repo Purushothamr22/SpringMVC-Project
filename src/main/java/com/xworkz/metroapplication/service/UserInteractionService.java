@@ -9,6 +9,8 @@ public interface UserInteractionService {
 
     TrainTimeDetailsDto onFindSourceDestinationDetails(String source, String destination);
     List<StationDetailsDto> onFindStationDetails();
-    List<TrainTimeDetailsDto> onFindAllDetails();
+    String saveTicketDetailsService(String source, String destination, String userLoginId,String tokenNumber );
+
+    String updatePriceService(String price,Integer trainId);
 
 }

@@ -31,8 +31,7 @@ public class MetroServiceImpl implements MetroService {
     private Encryption encryption;
     @Autowired
     private EmailClass emailClass;
-
-    private static String UPLOADED_FOLDER = "C://Users//NEW//IdeaProjects//metro-application//fileUploadImages//";
+    private static final String UPLOADED_FOLDER = "C://Users//NEW//IdeaProjects//metro-application//fileUploadImages//";
 
     @Override
     public boolean onSaveRegistrationDetails(RegistrationDto registrationDto) {
@@ -47,7 +46,7 @@ public class MetroServiceImpl implements MetroService {
             metroRepository.saveRegistrationDetails(registrationEntity);
             return true;
         }
-       return false;
+        return false;
     }
 
     @Override
@@ -62,17 +61,13 @@ public class MetroServiceImpl implements MetroService {
             RegistrationEntity registrationEntity = new RegistrationEntity();
             BeanUtils.copyProperties(registrationDto, registrationEntity);
             metroRepository.userBlockedByEmail(emailId, registrationEntity.isAccountBlocked(), registrationEntity.getNoOfAttempts());
-
-
             if (registrationDto.getNoOfAttempts() >= 3) {
                 registrationDto.setAccountBlocked(true);
                 BeanUtils.copyProperties(registrationDto, registrationEntity);
-
                 metroRepository.userBlockedByEmail(emailId, registrationEntity.isAccountBlocked(), registrationEntity.getNoOfAttempts());
             }
             return "Invalid Login";
         } else {
-
             LoginDto loginDto = new LoginDto();
             loginDto.setId(registrationDto.getId());
             loginDto.setFirstName(registrationDto.getFirstName());
@@ -83,7 +78,6 @@ public class MetroServiceImpl implements MetroService {
             LoginEntity loginEntity = new LoginEntity();
             BeanUtils.copyProperties(loginDto, loginEntity);
             metroRepository.saveLoginDetails(loginEntity);
-
             RegistrationEntity registrationEntity = new RegistrationEntity();
             registrationDto.setAccountBlocked(false);
             registrationDto.setNoOfAttempts(0);
@@ -92,35 +86,13 @@ public class MetroServiceImpl implements MetroService {
             return "Login Successful";
         }
     }
-
-
     @Override
-    public List<RegistrationDto> onFetchAll() {
-        List<RegistrationEntity> listOfEntity = metroRepository.fetchAll();
-        List<RegistrationDto> listOfDtos = new ArrayList<>();
-        if (!listOfEntity.isEmpty()) {
-            for (RegistrationEntity entity : listOfEntity) {
-                entity.setPassword(encryption.decrypt(entity.getPassword()));
-                System.out.println(entity);
-                RegistrationDto registrationDto = new RegistrationDto();
-                BeanUtils.copyProperties(entity, registrationDto);
-                listOfDtos.add(registrationDto);
-            }
-            System.err.println("the list of registration dto is  " + listOfDtos);
-            return listOfDtos;
-        }
-        return null;
-    }
-
-    @Override
-    public RegistrationDto onFindByName(String firstName) {
-        if (firstName != null) {
-            log.info("this is on find by user name service ");
+    public RegistrationDto onFindById(Integer id) {
+        if (id != null) {
             RegistrationDto registrationDto = new RegistrationDto();
-            RegistrationEntity registrationEntity = metroRepository.findByName(firstName);
+            RegistrationEntity registrationEntity = metroRepository.findById(id);
             registrationEntity.setPassword(encryption.decrypt(registrationEntity.getPassword()));
             BeanUtils.copyProperties(registrationEntity, registrationDto);
-
             return registrationDto;
         } else {
             System.out.println("User name is invalid or not given");
@@ -148,6 +120,7 @@ public class MetroServiceImpl implements MetroService {
             String sentEmail = emailClass.emailSend(emailId);
             String encryptedOtp = encryption.encrypt(sentEmail);
             metroRepository.updateOtp(encryptedOtp, emailId);
+            return "Otp Sent Successfully";
         }
         return "Can't find email";
     }
@@ -192,8 +165,7 @@ public class MetroServiceImpl implements MetroService {
     @Override
     public String updateProfile(RegistrationDto registrationDto) {
         if (registrationDto != null) {
-
-            RegistrationDto registrationDto1 = onFindByName(registrationDto.getFirstName());
+            RegistrationDto registrationDto1 = onFindById(registrationDto.getId());
             RegistrationEntity registrationEntity = new RegistrationEntity();
             registrationDto1.setPassword(encryption.encrypt(registrationDto1.getPassword()));
             BeanUtils.copyProperties(registrationDto1, registrationEntity);
@@ -218,38 +190,31 @@ public class MetroServiceImpl implements MetroService {
 
     @Override
     public boolean saveEditedProfile(RegistrationDto registrationDto, MultipartFile file) {
-
         RegistrationDto existingDto = onFindByEmailId(registrationDto.getEmailId());
         RegistrationEntity registerEntity = new RegistrationEntity();
-
         if (file != null && !file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
                 Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
                 Files.write(path, bytes);
-
                 registrationDto.setUserImage(file.getOriginalFilename());
                 registrationDto.setImageType(file.getContentType());
+                registrationDto.setPassword(encryption.encrypt(registrationDto.getPassword()));
                 BeanUtils.copyProperties(registrationDto, registerEntity);
                 metroRepository.updateUserProfile(registerEntity);
                 return true;
             } catch (IOException ignored) {
-                log.info("Error in saveEditedProfile       {}",ignored.getMessage());
+                log.info("Error in saveEditedProfile-------------------{}", ignored.getMessage());
             }
-        }else {
+        } else {
             registrationDto.setUserImage(existingDto.getUserImage());
             registrationDto.setImageType(existingDto.getImageType());
             BeanUtils.copyProperties(registrationDto, registerEntity);
             metroRepository.updateUserProfile(registerEntity);
-
             return true;
         }
-
         return false;
-
     }
-
-
 
 
 }

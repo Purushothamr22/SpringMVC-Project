@@ -31,67 +31,19 @@ public class RegistrationController {
     public String getRegistration() {
         return "Registration";
     }
-
     @PostMapping("/onSaveRegistration")
     public String onSaveRegistration(@Valid RegistrationDto registrationDto, BindingResult bindingResult, Model model) {
-
         if (bindingResult.hasErrors()) {
             model.addAttribute("registrationMsg", "Please enter details correctly");
             return "Registration";
         }
         boolean isSaved = metroService.onSaveRegistrationDetails(registrationDto);
         if(isSaved){
-            model.addAttribute("indexMsg", "registration successful");
-            return "index";
+            model.addAttribute("registrationMsg", "registration successful");
+            return "Registration";
         }
         return  "Registration";
     }
-
-    @GetMapping("/registration")
-    public String onSaveRegistration() {
-        return "registration";
-    }
-
-    @GetMapping("/metroFetch")
-    public String onFetchAll(Model model) {
-        List<RegistrationDto> registrationDto = metroService.onFetchAll();
-        if (!registrationDto.isEmpty()) {
-            model.addAttribute("users", registrationDto);
-            model.addAttribute("FetchSuccess", "Fetched details Successfully");
-            System.out.println(registrationDto);
-            log.info("on fetch method");
-            return "MetroFetch";
-        }
-        model.addAttribute("FetchError", "details not found");
-        return "MetroFetch";
-    }
-
-    @PostMapping("/onFindByName")
-    public String onFindByUName(@RequestParam String firstName, Model model) {
-        log.info("this is on find by user name controller ");
-        if (firstName != null) {
-            RegistrationDto registrationDto = metroService.onFindByName(firstName);
-            List<RegistrationDto> registrationDtos =new ArrayList<>();
-            registrationDtos.add(registrationDto);
-            log.info("this is on find by user name after calling  metroService.onFindByName(firstName) ");
-            model.addAttribute("users",registrationDtos);
-            model.addAttribute("message", "Details found Successfully");
-            return "MetroFetch";
-        }
-        model.addAttribute("message", "details not found");
-        return "MetroFetch";
-    }
-    @PostMapping("/onFindByEmail")
-    public String onFindByEmail(@RequestParam String firstName, Model model) {
-        if (firstName != null) {
-            RegistrationDto registrationDto = metroService.onFindByName(firstName);
-            model.addAttribute("metroDto", registrationDto);
-            return "MetroFetch";
-        }
-        model.addAttribute("FindBYNameError", "details not found");
-        return "MetroFetch";
-    }
-
     @GetMapping("/isEmailExists")
     public ResponseEntity<String> isEmailExists(@RequestParam String emailId) {
         if (emailId != null) {
@@ -112,6 +64,5 @@ public class RegistrationController {
         }
         return ResponseEntity.ok("Mobile Number Accepted");
     }
-
 
 }

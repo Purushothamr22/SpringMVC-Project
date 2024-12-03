@@ -8,18 +8,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Metro Home Page</title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-                <style>
-                    .promotion-banner--bootcamp {
-                        background-color: #ffc107;
-
-                    }
-
-                    .promotion-banner--bootcamp .btn-danger {
-                        background-color: #ff5722;
-
-                        border: none;
-                    }
-                </style>
+                
                 <style>
                     .bg-cover {
                         background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240729/pngtree-yellow-train-in-budapest-metro-hungary-image_15933708.jpg');
@@ -32,6 +21,15 @@
                         background: rgba(0, 0, 0, 0.7);
                     }
                 </style>
+                <style>
+                    .font-arial {
+                      font-family: Arial, sans-serif;
+                    }
+                    .font-georgia {
+                      font-family: Georgia, serif;
+                    }
+                  </style>
+                  
 
 
             </head>
@@ -40,13 +38,7 @@
                 <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
 
 
-                <!-- Promotion Banner with Bootcamp Modifier
-                <div class="promotion-banner promotion-banner--bootcamp text-center ">
-                    <div class="container">
-                        <h5 class="display">Join Our Coding Bootcamp</h5> <a href="/bootcamp" class="btn btn-danger btn-lg col-md-6">Learn More</a> 
-                        
-                    </div>
-                </div> -->
+               
 
 
                 </div>
@@ -55,7 +47,6 @@
                         <a class="navbar-brand">
                             <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 40px;">
                         </a>
-                        <span class="h5 text-white ">Metro Home Page</span>
 
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -69,12 +60,9 @@
                                     <a class="nav-link btn btn-primary  text-light" href="getUserRegistrationInfo"> New User
                                         Registration</a>
                                 </li>
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link btn btn-primary  text-light" href="getRegistration"> New Admin
-                                        Registration</a>
-                                </li> -->
+                            
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary  text-light" href="getLoginPage">Login</a>
+                                    <a class="nav-link btn btn-primary font-georgia text-light" href="getLoginPage">Login</a>
                                 </li>
                             </ul>
                         </div>
@@ -84,7 +72,7 @@
 
                 <!-- Main Section -->
                 <div class="container position-relative mt-5 text-center">
-                    <h2 class="py-5">Welcome to Namma Metro</h2>
+                    <h2 class="py-5 fw-bold fst-italic fs-4 text-primary">Welcome to Namma Metro</h2>
 
                 </div>
 

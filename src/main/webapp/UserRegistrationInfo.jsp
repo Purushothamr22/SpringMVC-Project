@@ -222,7 +222,7 @@
                             mobileNumber.innerHTML = "<span style='color:red'>Mobile Number length should be 10</span>";
                             button.setAttribute("disabled", "disabled");
                         } else {
-                            var response = await axios('http://localhost:8083/metro-application/isMobileNumberExists?mobileNumber=' + mNumber);
+                            var response = await axios('http://localhost:8083/metro-application/isMobileNoExists?mobileNumber=' + mNumber);
                             if (response.data === "Mobile Number Exists") {
                                 mobileNumber.innerHTML = "<span style='color:red'>Mobile Number Exists</span>";
                                 button.setAttribute("disabled", "disabled");

@@ -59,34 +59,17 @@ public class StationDetailsServiceImpl implements StationDetailsService {
             StationDetailsDto stationDetailsDto = new StationDetailsDto();
             BeanUtils.copyProperties(stationDetailsEntity, stationDetailsDto);
             if (stationDetailsEntity.getTrainTimeDetails() != null) {
-                List<TrainTimeDetailsDto> trainTimeDetailsDtoList = stationDetailsEntity.getTrainTimeDetails().stream()
-                        .map(trainEntity -> {
-                            TrainTimeDetailsDto detailsDto = new TrainTimeDetailsDto();
-                            BeanUtils.copyProperties(trainEntity, detailsDto);
+                List<TrainTimeDetailsDto> trainTimeDetailsDtoList = stationDetailsEntity.getTrainTimeDetails().stream().map(trainEntity -> {TrainTimeDetailsDto detailsDto = new TrainTimeDetailsDto();BeanUtils.copyProperties(trainEntity, detailsDto);
                             return detailsDto;
                         }).collect(Collectors.toList());
                 stationDetailsDto.setTrainTimeDetails(trainTimeDetailsDtoList);
             }
             return stationDetailsDto;
         }).collect(Collectors.toList());
-
+        log.info("metro details list provided is ----------------------    {}",stationDetailsDtoList);
         return stationDetailsDtoList;
 
     }
-
-    @Override
-    public List<StationDetailsDto> onFindAllDetails() {
-        List<StationDetailsEntity> entities = stationInfoRepo.findAll();
-        log.info("the entity of stationInfoRepo.findAll() is =============== {}", entities);
-        List<StationDetailsDto> detailsDtoList = new ArrayList<>();
-        for (StationDetailsEntity entity : entities) {
-            log.info("entered for loop      ========= ");
-
-        }
-        log.info("the dto list of stationInfoRepo.findAll() is =============== {}", detailsDtoList);
-        return detailsDtoList;
-    }
-
     @Override
     public StationDetailsEntity onFindById(Integer id) {
         return stationInfoRepo.findById(id);

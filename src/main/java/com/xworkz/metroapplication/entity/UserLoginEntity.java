@@ -11,12 +11,9 @@ public class UserLoginEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer userLoginId;
     private String firstName;
     private String loginTime;
     private String logoutTime;
     private String emailId;
-
-
-
 }

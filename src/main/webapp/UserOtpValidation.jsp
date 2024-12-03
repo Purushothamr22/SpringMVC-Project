@@ -49,13 +49,18 @@
                         </div>
                     </div>
                 </nav>
+                <h5 class="text-success justify-content-end">${OtpSuccessMsg}</h5>
+                <h5 class="text-danger justify-content-end">${OtpErrorMsg}</h5>
+                <h5 class="text-success justify-content-end">${otpSuccessMessage}</h5>
+                <h5 class="text-danger justify-content-end">${otpErrorMessage}</h5>
+
 
                 <div class="container my-5 ">
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="card shadow-sm p-5 mx-auto"
                                 style="background-color: rgba(51, 99, 119, 0.753); width: 50%; ">
-                                <h5 class="text-light justify-content-end">${Otpmsg}</h5>
+                       
                                 <form action="getOtpDetails" method="get">
                                     <div class="mb-4 ">
                                         <label for="emailId" class="form-label text-light">Email id</label>

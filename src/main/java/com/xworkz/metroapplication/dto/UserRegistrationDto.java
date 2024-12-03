@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 
 public class UserRegistrationDto {
 
-    private Integer id;
+    private Integer userRegistrationId;
     @NotBlank(message = "emailId must not be blank")
     @Email(message = "Email should be a valid email address")
     private String emailId;
