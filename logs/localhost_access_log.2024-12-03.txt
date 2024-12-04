@@ -177,3 +177,16 @@
 0:0:0:0:0:0:0:1 - - [03/Dec/2024:17:49:43 +0530] "GET /metro-application/getImage/uwp3869901.jpeg HTTP/1.1" 200 118360
 0:0:0:0:0:0:0:1 - - [03/Dec/2024:17:49:46 +0530] "GET /metro-application/editProfile?emailId=amith@gmail.com HTTP/1.1" 200 16481
 0:0:0:0:0:0:0:1 - - [03/Dec/2024:17:49:46 +0530] "GET /metro-application/getImage/uwp3869901.jpeg HTTP/1.1" 200 118360
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:53:46 +0530] "GET /metro-application HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:53:50 +0530] "GET /metro-application/ HTTP/1.1" 200 4209
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:53:51 +0530] "GET /favicon.ico HTTP/1.1" 404 682
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:53:55 +0530] "GET /metro-application/getLoginPage HTTP/1.1" 200 4032
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:53:57 +0530] "GET /metro-application/getAdminLogin? HTTP/1.1" 200 8010
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:54:06 +0530] "GET /metro-application/isEmailExists?emailId=amith@gmail.com HTTP/1.1" 200 12
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:54:08 +0530] "POST /metro-application/onLoginSaveDetailsByEmail HTTP/1.1" 200 8041
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:54:12 +0530] "GET /metro-application/isEmailExists?emailId=amith@gmail.com HTTP/1.1" 200 12
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:54:17 +0530] "POST /metro-application/onLoginSaveDetailsByEmail HTTP/1.1" 200 8041
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:54:24 +0530] "GET /metro-application/isEmailExists?emailId=amith@gmail.com HTTP/1.1" 200 12
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:54:31 +0530] "POST /metro-application/onLoginSaveDetailsByEmail HTTP/1.1" 200 8041
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:56:15 +0530] "GET /metro-application/getLoginPage HTTP/1.1" 200 4032
+0:0:0:0:0:0:0:1 - - [03/Dec/2024:22:56:17 +0530] "GET /metro-application/getIndex HTTP/1.1" 200 4209
