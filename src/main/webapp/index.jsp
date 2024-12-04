@@ -8,7 +8,7 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Metro Home Page</title>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-                
+
                 <style>
                     .bg-cover {
                         background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20240729/pngtree-yellow-train-in-budapest-metro-hungary-image_15933708.jpg');
@@ -23,13 +23,14 @@
                 </style>
                 <style>
                     .font-arial {
-                      font-family: Arial, sans-serif;
+                        font-family: Arial, sans-serif;
                     }
+
                     .font-georgia {
-                      font-family: Georgia, serif;
+                        font-family: Georgia, serif;
                     }
-                  </style>
-                  
+                </style>
+
 
 
             </head>
@@ -38,7 +39,7 @@
                 <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
 
 
-               
+
 
 
                 </div>
@@ -57,41 +58,71 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav ms-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary  text-light" href="getUserRegistrationInfo"> New User
+                                    <a class="nav-link btn btn-primary  text-light" href="getUserRegistrationInfo"> New
+                                        User
                                         Registration</a>
                                 </li>
-                            
+
                                 <li class="nav-item">
-                                    <a class="nav-link btn btn-primary font-georgia text-light" href="getLoginPage">Login</a>
+                                    <a class="nav-link btn btn-primary font-georgia text-light"
+                                        href="getLoginPage">Login</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
-                <span class=" h2 text-center justify-content-center" style="color: white;">${indexMsg}</span>
+                <div class="row w-100">
 
-                <!-- Main Section -->
-                <div class="container position-relative mt-5 text-center">
-                    <h2 class="py-5 fw-bold fst-italic fs-4 text-primary">Welcome to Namma Metro</h2>
+                    <!-- Image Section -->
+                    <!-- <div class="col-md-6 py-5 mx-0  ">
+                        <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="https://www.prestigesouthernstar.info/images/prestige/metro-bangalore.webp"
+                                        class="d-block w-100" alt="Registration image 1"
+                                        style="object-fit: cover; height: 50%;">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://png.pngtree.com/thumb_back/fh260/background/20230928/pngtree-a-green-and-white-metro-train-pull-into-a-station-image_13357538.jpg"
+                                        class="d-block w-100" alt="Registration image 2"
+                                        style="object-fit: cover; height: 50%;">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div> -->
 
-                </div>
+                    <!-- Main Section -->
+                    <div class="container position-relative mt-5 text-center">
+                        <h2 class="py-5 fw-bold fst-italic fs-4 text-primary">Welcome to Namma Metro</h2>
 
-
-
-
-                <!-- Footer Section -->
-                <footer class=" text-white py-3 fixed-bottom" style="background-color: rgb(3, 54, 255);">
-                    <div class="container text-center">
-                        <p class="mb-1">&copy; 2024 Metro Service. All rights reserved.</p>
-                        <nav>
-                            <a href="PrivacyPolicy.jsp" class="text-white me-3">Privacy Policy</a>
-                            <a href="TermsOfService.jsp" class="text-white me-3">Terms of Service</a>
-                        </nav>
                     </div>
-                </footer>
 
-                <!-- Bootstrap JS -->
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+                    <!-- Footer Section -->
+                    <footer class=" text-white py-3 fixed-bottom" style="background-color: rgb(3, 54, 255);">
+                        <div class="container text-center">
+                            <p class="mb-1">&copy; 2024 Metro Service. All rights reserved.</p>
+                            <nav>
+                                <a href="PrivacyPolicy.jsp" class="text-white me-3">Privacy Policy</a>
+                                <a href="TermsOfService.jsp" class="text-white me-3">Terms of Service</a>
+                            </nav>
+                        </div>
+                    </footer>
+
+                    <!-- Bootstrap JS -->
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
             </body>
 
             </html>

@@ -25,8 +25,8 @@
                             <span class="navbar-text h5 text-dark">Government Metro Registration</span>
                         </div>
                         <div>
-                            <li class="btn btn-primary btn-outline-dark">
-                                <a class="nav-link text-light" href="getIndex">Home</a>
+                            <li class="btn btn-primary font-georgia text-light" >
+                                <a class="nav-link " href="getIndex">Home</a>
                             </li>
                         </div>
                     </div>
@@ -34,42 +34,13 @@
                 <br>
 
                 <div class="container d-flex justify-content-center">
-                    <!-- <div class="row w-100"> -->
-
-                    <!-- Image Section -->
-                    <!-- <div class="col-md-6 py-5 mx-0  ">
-                            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="https://www.prestigesouthernstar.info/images/prestige/metro-bangalore.webp"
-                                            class="d-block w-100" alt="Registration image 1"
-                                            style="object-fit: cover; height: 50%;">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="https://png.pngtree.com/thumb_back/fh260/background/20230928/pngtree-a-green-and-white-metro-train-pull-into-a-station-image_13357538.jpg"
-                                            class="d-block w-100" alt="Registration image 2"
-                                            style="object-fit: cover; height: 50%;">
-                                    </div>
-                                </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel"
-                                    data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel"
-                                    data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div> -->
-
+                    
+                    <h2 class="text-center " style="color: #ff5722;">${userInfoMsg}</h2>
 
                     <!-- Registration Card Section -->
                     <div class="col-md-6 d-flex align-items-center py-5">
                         <div class="card rounded-0 text-dark w-100"
                             style="background-color: rgb(232, 245, 245); padding: 10px 15px;">
-                            <h5 class="text-center " style="color: #ff5722;">${userInfoMsg}</h5>
                             <div class="card-body p-3">
                                 <h2 class="text-center mb-3">User Registration Form</h2>
                                 <form action="saveUserInfo" method="post" onblur="form()">

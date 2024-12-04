@@ -2,6 +2,7 @@ package com.xworkz.metroapplication.controller;
 
 import com.xworkz.metroapplication.dto.RegistrationDto;
 import com.xworkz.metroapplication.service.MetroService;
+import com.xworkz.metroapplication.util.EmailClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,8 @@ import java.util.List;
 public class RegistrationController {
     @Autowired
     private MetroService metroService;
+    @Autowired
+    private EmailClass emailClass;
 
     public RegistrationController() {
         System.out.println("Registration controller created");
@@ -39,6 +42,8 @@ public class RegistrationController {
         }
         boolean isSaved = metroService.onSaveRegistrationDetails(registrationDto);
         if(isSaved){
+            String registrationEmail = emailClass.sendRegistrationEmail(registrationDto.getEmailId(), registrationDto.getFirstName());
+            log.info("email result is ---------------------- {}",registrationEmail);
             model.addAttribute("registrationMsg", "registration successful");
             return "Registration";
         }

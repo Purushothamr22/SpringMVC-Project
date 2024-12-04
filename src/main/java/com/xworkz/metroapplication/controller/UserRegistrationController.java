@@ -2,6 +2,7 @@ package com.xworkz.metroapplication.controller;
 
 import com.xworkz.metroapplication.dto.UserRegistrationDto;
 import com.xworkz.metroapplication.service.UserService;
+import com.xworkz.metroapplication.util.EmailClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ public class UserRegistrationController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailClass emailClass;
     @GetMapping("/getUserRegistrationInfo")
     public String getUserRegistrationInfo() {
         return "UserRegistrationInfo";
@@ -34,8 +37,10 @@ public class UserRegistrationController {
         }
         String onSaveUserInfo = userService.onSaveUserInfo(userRegistrationDto);
         if (onSaveUserInfo.equals("Data saved")) {
-            model.addAttribute("indexMsg", "Data Successfully Saved ");
-            return "index";
+            String registrationEmail = emailClass.sendRegistrationEmail(userRegistrationDto.getEmailId(), userRegistrationDto.getFirstName());
+            log.info("registration email result is ---------------- {}",registrationEmail);
+            model.addAttribute("userInfoMsg", "Registration Successful");
+            return "UserRegistrationInfo";
         }
         return "UserRegistrationInfo";
     }

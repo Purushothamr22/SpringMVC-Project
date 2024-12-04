@@ -52,13 +52,13 @@ public class EmailClass {
             LocalDateTime localDateTime = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             String formattedDateTime = localDateTime.format(formatter);
-            String htmlContent = "<h1>Congratulations Mr. " + firstName + "!</h1>"
+            String content = "<h1>Congratulations Mr. " + firstName + "!</h1>"
                     + "<p>Your Account has been <strong>Successfully registered</strong> in Namma Metro.</p>"
                     + "<p>Registered Email ID: <strong>" + emailId + "</strong></p>"
                     + "<p>Date of Registration: <strong>" + formattedDateTime + "</strong></p>";
-            helper.setText(htmlContent, true);
+            helper.setText(content, true);
             mailSender.send(mimeMailMessage);
-            return "Email sent successfully with HTML";
+            return "Email sent successfully ";
         }catch (MessagingException message){
             log.error("exception in  sendRegistrationEmail =============== {}",message.getMessage());
             return "Email sending failed";
