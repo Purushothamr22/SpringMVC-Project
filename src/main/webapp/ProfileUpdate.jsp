@@ -18,19 +18,17 @@
                 }
             </style>
 
-            <body class="bg-dark">
+            <body class="bg-light">
 
                 <!-- Navigation Bar -->
-                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(95, 101, 104);">
+                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(15, 15, 15);">
                     <div class="container-fluid">
                         <div>
                             <a class="navbar-brand" href="getIndex">
                                 <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
                             </a>
                         </div>
-                        <div>
-                            <span class="navbar-text h5 text-dark">Profile Update</span>
-                        </div>
+                        
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation">
@@ -52,12 +50,13 @@
                         </div>
                     </div>
                 </nav>
-
+                <h3 class="justify-content-center" style="color: green;">${msg}</h3>
+                <h3 class="justify-content-center" style="color: #ff5722">${errMsg}</h3>
 
                 <div class="row justify-content-center py-0 my-5">
-                    <div class="col-12 col-md-6 "> <!-- Increased card size -->
-                        <div class="card p-5 mx-auto shadow-lg hover-shadow-lg"
-                            style="background-color: rgba(159, 178, 255, 0.7);">
+                    <div class="  col-12 col-md-6 "> <!-- Increased card size -->
+                        <div class="card p-5 mx-auto  rounded-0 shadow-lg hover-shadow-lg border-dark"
+                            style="background-color: rgba(231, 234, 248, 0.7);">
 
                             <div class="card-header text-center bg-transparent border-0">
                                 <h3 class="text-dark">User Details</h3>
@@ -65,7 +64,7 @@
 
                             <div class="mb-4 text-center">
                                 <img src="getImage/${metroDto.userImage}" alt="Profile Image"
-                                    class="img-thumbnail rounded-circle shadow-lg border border-warning"
+                                    class="img-thumbnail rounded-circle shadow-lg border  border-warning"
                                     style="width: 180px; height: 180px;">
                             </div>
 
@@ -179,7 +178,7 @@
                 <br>
                 <br>
                 <!-- Footer -->
-                <footer class="fixed-bottom text-white text-center py-3 " style="background-color: rgb(153, 166, 172);">
+                <footer class=" text-white text-center py-3 " style="background-color: rgb(153, 166, 172);">
                     <div class="container">
                         <nav>
                             <a href="#" class="mx-2 text-white">Privacy Policy</a>

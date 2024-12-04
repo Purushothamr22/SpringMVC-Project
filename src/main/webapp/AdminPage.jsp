@@ -292,8 +292,7 @@
                 <div class="container position-relative mt-5 text-center">
                     <h3 class="text-light justify-content-center">${PriceMsg}</h3>
                 </div>
-                <h6 style="color: green;">${msg}</h6>
-                <h6 style="color: #ff5722">${errMsg}</h6>
+                
                 <h6 style="color: green;">${successMsg}</h6>
 
 

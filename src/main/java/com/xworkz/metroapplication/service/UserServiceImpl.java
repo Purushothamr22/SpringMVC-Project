@@ -29,14 +29,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public String onSaveUserInfo(UserRegistrationDto userRegistrationDto) {
         if (userRegistrationDto != null) {
-            UserRegistrationEntity userRegistrationEntity = new UserRegistrationEntity();
-            userRegistrationDto.setAccountBlocked(false);
-            userRegistrationDto.setNoOfAttempts(0);
-            userRegistrationDto.setUserImage("temp.jpg");
-            userRegistrationDto.setImageType("Image/jpeg");
-            BeanUtils.copyProperties(userRegistrationDto, userRegistrationEntity);
-            userRepository.saveUserInfo(userRegistrationEntity);
-            return "Data saved";
+            UserRegistrationDto registrationDto = onFindByUserEmail(userRegistrationDto.getEmailId());
+            if (registrationDto == null) {
+                UserRegistrationEntity userRegistrationEntity = new UserRegistrationEntity();
+                userRegistrationDto.setAccountBlocked(false);
+                userRegistrationDto.setNoOfAttempts(0);
+                userRegistrationDto.setUserImage("temp.jpg");
+                userRegistrationDto.setImageType("Image/jpeg");
+                BeanUtils.copyProperties(userRegistrationDto, userRegistrationEntity);
+                userRepository.saveUserInfo(userRegistrationEntity);
+                return "Data saved";
+            }
+            return "Data Present";
         }
         return "null";
     }
@@ -46,7 +50,6 @@ public class UserServiceImpl implements UserService {
         if (emailId != null) {
             UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
             UserRegistrationEntity userRegistrationEntity = userRepository.findByUserEmail(emailId);
-
             if (userRegistrationEntity != null) {
                 BeanUtils.copyProperties(userRegistrationEntity, userRegistrationDto);
                 return userRegistrationDto;

@@ -25,7 +25,7 @@
                             <span class="navbar-text h5 text-dark">Government Metro Registration</span>
                         </div>
                         <div>
-                            <li class="btn btn-primary font-georgia text-light" >
+                            <li class="btn btn-primary font-georgia text-light">
                                 <a class="nav-link " href="getIndex">Home</a>
                             </li>
                         </div>
@@ -34,7 +34,7 @@
                 <br>
 
                 <div class="container d-flex justify-content-center">
-                    
+
                     <h2 class="text-center " style="color: #ff5722;">${userInfoMsg}</h2>
 
                     <!-- Registration Card Section -->
@@ -70,8 +70,9 @@
                                     <div class="row mb-2">
                                         <div class="col-md-6">
                                             <label class="form-label">Birth Date:</label>
-                                            <input type="date" id="birthDate" name="birthdayDate" class="form-control">
-                                            
+                                            <input type="date" id="birthDate" name="birthdayDate"
+                                                onblur="validateBirthDate()" class="form-control">
+
                                         </div>
 
                                         <div class="col-md-6">
@@ -111,24 +112,6 @@
                                             <span id="mobileNumber"></span>
                                         </div>
                                     </div>
-
-                                    <!-- Row 5: Password, Confirm Password
-                                    <div class="row mb-2">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Password</label>
-                                            <input type="password" id="pass" name="password"
-                                                placeholder="Enter password" class="form-control"
-                                                onblur="checkPassword()" required>
-                                            <span id="password"></span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Confirm Password</label>
-                                            <input type="password" id="cpass" placeholder="Confirm password"
-                                                class="form-control" onblur="confirmPassword()" required>
-                                            <span id="cPassword"></span>
-                                        </div>
-                                    </div> -->
-
                                     <!-- Submit Button -->
                                     <div class="text-center mt-3">
                                         <button id="button" type="submit" class="btn btn-primary w-100">Submit</button>
@@ -172,9 +155,9 @@
                         }
                         checkForm();
                     }
-                    function lNameValidation(){
+                    function lNameValidation() {
                         var lname = document.getElementById("lName").value;
-                        
+
                         if (names.trim() !== '' && names.length > 0 && names.length <= 25 && !/\d/.test(names)) {
                             document.getElementById("lastName").innerHTML = "";
                         } else if (/\d/.test(names) || names.length < 1) {
@@ -183,7 +166,7 @@
                         checkForm();
                     }
 
-                   
+
                     const checkMobileNumber = async () => {
                         var mNumber = document.getElementById("mNumber").value;
                         var button = document.getElementById("button");
@@ -216,6 +199,17 @@
                             checkForm();
                         }
                     }
+                    const today = new Date();
+                    function validateBirthDate() {
+                        var birthDateValue = document.getElementById('birthDate').value;
+                        var birthDate = new Date(birthDateValue);
+                        
+                        if (birthDate > today) {
+                            button.setAttribute("disabled", "disabled");
+                        }
+                        checkForm();
+
+                    }
 
                     function checkForm() {
                         var names = document.getElementById("fName").value;
@@ -224,6 +218,7 @@
                         const cpass = document.getElementById("cpass").value;
                         var mNumber = document.getElementById("mNumber").value;
                         var email = document.getElementById("eId").value;
+                        var birthDateValue = document.getElementById('birthDate').value;
                         var button = document.getElementById("button");
 
 
@@ -231,7 +226,7 @@
                             (lnames.trim() !== '' && lnames.length > 0 && lnames.length <= 25 && !/\d/.test(lnames)) &&
                             (pass.trim() !== '' && pass.length >= 8 && pass.length <= 12 && pass === cpass) &&
                             (mNumber.length == 10) &&
-                            (email.trim() !== "")
+                            (email.trim() !== "")&&(birthDate < today)
                         ) {
                             button.removeAttribute("disabled")
                         } else {

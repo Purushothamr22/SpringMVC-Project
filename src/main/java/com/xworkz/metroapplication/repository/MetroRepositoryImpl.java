@@ -163,6 +163,7 @@ public class MetroRepositoryImpl implements MetroRepository {
             transaction.begin();
             entityManager.merge(registrationEntity);
             transaction.commit();
+            return "Profile updated";
         }catch (Exception e){
             log.error("error in update profile " +e.getMessage());
         }finally {

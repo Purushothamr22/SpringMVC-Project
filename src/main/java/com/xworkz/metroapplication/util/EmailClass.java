@@ -31,15 +31,29 @@ public class EmailClass {
 
 
     public String emailSend(String emailId) {
-        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        simpleMailMessage.setFrom("purushothamr22.xworkz@gmail.com");
-        simpleMailMessage.setTo(emailId);
-        simpleMailMessage.setSubject("reset Password Otp");
-        String otp = getOtp();
-        log.error("otp from email class" + otp);
-        simpleMailMessage.setText(otp);
-        mailSender.send(simpleMailMessage);
-        return otp;
+        try {
+            MimeMessage mimeMailMessage = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMailMessage, true);
+            helper.setFrom("purushothamr22.xworkz@gmail.com");
+            helper.setTo(emailId);
+            helper.setSubject("Registration Success");
+            String otp = getOtp();
+            LocalDateTime localDateTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            String formattedDateTime = localDateTime.format(formatter);
+            String content = " <p>Your Account Login  has been started  </p>"
+                    +" <p>Please <strong> Do Not Share <strong>this e-mail with <strong>OTP<strong>  </p>"
+                    + "<p>Registered Email ID: <strong>" + emailId + "</strong></p>"
+                    + "<p>Date of Registration: <strong>" + formattedDateTime + "</strong></p>"
+                    +"<p><strong> OTP <strong> For logging  your account is -<strong> "
+                    +otp+"<strong>";
+            helper.setText(content, true);
+            mailSender.send(mimeMailMessage);
+            return otp;
+        }catch (MessagingException message){
+            log.error("exception in  sendRegistrationEmail =============== {}",message.getMessage());
+            return "Email sending failed";
+        }
     }
 
     public String sendRegistrationEmail(String emailId, String firstName)  {

@@ -165,15 +165,18 @@ public class LoginController {
     public String editRegisterDetails(@RequestParam("file") MultipartFile file, RegistrationDto registrationDto, Model model) {
         RegistrationDto registrationDto1 = metroService.onFindByEmailId(registrationDto.getEmailId());
        log.info("file sent is =============   {}",file);
+        log.info("===================UPDATE DETAILS STARTED =====================");
         boolean updateMessage = metroService.saveEditedProfile(registrationDto, file);
         if (updateMessage) {
             model.addAttribute("msg", "data updated successfully");
-            model.addAttribute("details", registrationDto);
+            registrationDto.setPassword(encryption.decrypt(registrationDto.getPassword()));
+            model.addAttribute("metroDto", registrationDto);
+            return "ProfileUpdate";
         } else {
-            model.addAttribute("details", registrationDto1);
+            model.addAttribute("metroDto", registrationDto1);
             model.addAttribute("errMsg", "data not updated");
+            return "ProfileUpdate";
         }
-        return "AdminPage";
     }
 
     @GetMapping("getImage/{userImage}")
