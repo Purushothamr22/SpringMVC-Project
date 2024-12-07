@@ -3,9 +3,11 @@ package com.xworkz.metroapplication.service;
 import com.xworkz.metroapplication.dto.StationDetailsDto;
 import com.xworkz.metroapplication.dto.TicketBookingDto;
 import com.xworkz.metroapplication.dto.TrainTimeDetailsDto;
+import com.xworkz.metroapplication.dto.UserRegistrationDto;
 import com.xworkz.metroapplication.entity.StationDetailsEntity;
 import com.xworkz.metroapplication.entity.TicketBookingEntity;
 import com.xworkz.metroapplication.entity.TrainTimeDetailsEntity;
+import com.xworkz.metroapplication.entity.UserRegistrationEntity;
 import com.xworkz.metroapplication.repository.UserInteractionRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -64,12 +66,24 @@ public class UserInteractionServiceImpl implements UserInteractionService {
     }
 
     @Override
+    public UserRegistrationDto findByUserId(Integer userId) {
+        if (userId != null) {
+            UserRegistrationEntity entity = userInteractionRepo.findByUserIdRepo(userId);
+            UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
+            BeanUtils.copyProperties(entity,userRegistrationDto);
+            return userRegistrationDto;
+        }
+        return null;
+    }
+
+    @Override
     public TrainTimeDetailsDto onFindSourceDestinationDetails(String source, String destination) {
         TrainTimeDetailsEntity sourceDestinationDetails = userInteractionRepo.findSourceDestinationDetails(source, destination);
         TrainTimeDetailsDto detailsDto = new TrainTimeDetailsDto();
         BeanUtils.copyProperties(sourceDestinationDetails, detailsDto);
         return detailsDto;
     }
+
 
 
 

@@ -9,7 +9,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 public class StationDetailsServiceImpl implements StationDetailsService {
     @Autowired
     private StationInfoRepo stationInfoRepo;
+    private List<TrainTimeDetailsDto> trainTimeDetailsDtoList;
 
     @Override
     public String saveTrainDetails(StationDetailsDto addStationDetailsDto) {
@@ -59,17 +59,20 @@ public class StationDetailsServiceImpl implements StationDetailsService {
             StationDetailsDto stationDetailsDto = new StationDetailsDto();
             BeanUtils.copyProperties(stationDetailsEntity, stationDetailsDto);
             if (stationDetailsEntity.getTrainTimeDetails() != null) {
-                List<TrainTimeDetailsDto> trainTimeDetailsDtoList = stationDetailsEntity.getTrainTimeDetails().stream().map(trainEntity -> {TrainTimeDetailsDto detailsDto = new TrainTimeDetailsDto();BeanUtils.copyProperties(trainEntity, detailsDto);
-                            return detailsDto;
-                        }).collect(Collectors.toList());
+                List<TrainTimeDetailsDto> trainTimeDetailsDtoList = stationDetailsEntity.getTrainTimeDetails().stream().map(trainEntity -> {
+                    TrainTimeDetailsDto detailsDto = new TrainTimeDetailsDto();
+                    BeanUtils.copyProperties(trainEntity, detailsDto);
+                    return detailsDto;
+                }).collect(Collectors.toList());
                 stationDetailsDto.setTrainTimeDetails(trainTimeDetailsDtoList);
             }
             return stationDetailsDto;
         }).collect(Collectors.toList());
-        log.info("metro details list provided is ----------------------    {}",stationDetailsDtoList);
+        log.info("metro details list provided is ----------------------    {}", stationDetailsDtoList);
         return stationDetailsDtoList;
 
     }
+
     @Override
     public StationDetailsEntity onFindById(Integer id) {
         return stationInfoRepo.findById(id);

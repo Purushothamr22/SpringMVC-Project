@@ -43,7 +43,7 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getLoginByEmail">Back</a>
+                                        href="getAdminLogin">Back</a>
                                 </li>
                             </ul>
                         </div>
@@ -55,7 +55,9 @@
                         <div class="col-md-8">
                             <div class="card shadow-sm p-5 mx-auto"
                                 style="background-color: rgba(51, 99, 119, 0.753); width: 50%; ">
-                                <h5 class="text-light justify-content-end">${Otpmsg}</h5>
+                                <h5 class="text-light justify-content-end">${otpSuccessMessage}</h5>
+                                <h5 class="text-light justify-content-end">${otpErrorMessage}</h5>
+
                                 <form action="getOtpDetails" method="get">
                                     <div class="mb-4 ">
                                         <label for="emailId" class="form-label text-light">Email id</label>
@@ -65,7 +67,7 @@
                                         <span id="email"></span>
                                     </div>
                                     <div class="d-grid col-4 mx-auto">
-                                        <button type="submit" class="btn btn-primary">Get OTP</button>
+                                        <button type="submit" class="btn btn-primary" id="getOtp">Get OTP</button>
                                     </div>
                                 </form>
 
@@ -99,25 +101,28 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
                 <script>
                     const checkEmail = async () => {
-                       
-                        var email = document.getElementById("emailId").value;
-                        var button = document.getElementById("button");
 
-                        console.log("email id in otp is "+ email);
+                        var email = document.getElementById("emailId").value;
+                        console.log("email id in otp is " + email);
 
                         var response = await axios('http://localhost:8083/metro-application/isEmailExists?emailId=' + email);
+                        console.log("response  in otp is " + response.data);
                         if (response.data === "Email Exists") {
-                            document.getElementById("emailId").innerHTML = "";
-                            button.setAttribute("disabled", "");
+                            document.getElementById("email").innerHTML = "";
+                            document.getElementById("getOtp").removeAttribute("disabled");
+
 
                         } else if (response.data === "Email Accepted") {
-                            document.getElementById("emailId").innerHTML = "<span style ='color:yellow'> Email does not exists </span>";
-                            button.removeAttribute("disabled");
+                            document.getElementById("email").innerHTML = "<span style ='color:yellow'> Email does not exists </span>";
+                            document.getElementById("getOtp").setAttribute("disabled", "");
+
                         }
 
                     }
 
                 </script>
+                <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
             </body>
 
             </html>

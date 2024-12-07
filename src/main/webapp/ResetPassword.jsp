@@ -9,7 +9,6 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Namma Metro</title>
 
-                <!-- Include Bootstrap CSS for styling and responsiveness -->
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
             </head>
 
@@ -46,8 +45,8 @@
                     </div>
                 </nav>
 
-                <span class="text text-success justify-content-center shadow ">Password Update status :  ${passwordSuccess}</span>
-                <span class="text text-success justify-content-center shadow ">Password Update status :  ${passwordError}</span>
+                <span class="text text-success justify-content-center shadow ">  ${passwordSuccess}</span>
+                <span class="text text-success justify-content-center shadow ">  ${passwordError}</span>
 
 
                 <div class="container-fluid my-5">
@@ -59,20 +58,20 @@
                                 <h2 class="text-center text-light justify-content-center mb-3">Password Reset </h2>
                                 <form action="onPasswordReset" method="post" onblur="checkForm()">
                                     <div class="mb-3">
-                                        <label class="form-label text-light"> Email Id </label>
+                                        <label class="form-label rounded-0 border-dark text-light"> Email Id </label>
                                         <input type="email" id="emailId" name="emailId"
                                             placeholder="${registrationDto.emailId}" class="form-control"
                                             value="${registrationDto.emailId}" readonly>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label text-light">New Password</label>
+                                        <label class="form-label rounded-0 border-dark text-light">New Password</label>
                                         <input type="password" id="pass" name="password"
                                             placeholder="Enter New Password" onblur="checkPassword()"
                                             class="form-control" required>
                                         <span id="password"></span>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label text-light">Confirm Password</label>
+                                        <label class="form-label rounded-0 border-dark text-light">Confirm Password</label>
                                         <input type="password" id="cPassword" name="confirmPassword"
                                             onblur="checkConfirmPassword()" placeholder="Confirm Password"
                                             class="form-control" required>
@@ -96,7 +95,6 @@
                     </div>
                 </footer>
 
-                <!-- Bootstrap JS -->
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 

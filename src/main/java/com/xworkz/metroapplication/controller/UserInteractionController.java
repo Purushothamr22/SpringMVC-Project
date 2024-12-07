@@ -1,8 +1,10 @@
 package com.xworkz.metroapplication.controller;
 
 import com.xworkz.metroapplication.dto.TrainTimeDetailsDto;
+import com.xworkz.metroapplication.dto.UserRegistrationDto;
 import com.xworkz.metroapplication.service.FareCalculator;
 import com.xworkz.metroapplication.service.UserInteractionService;
+import com.xworkz.metroapplication.util.EmailClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,9 @@ public class UserInteractionController {
 
     @Autowired
     UserInteractionService userInteractionService;
+    @Autowired
+    EmailClass emailClass;
+
     @Autowired
     FareCalculator fareCalculator;
     @GetMapping("/isPriceExists")
@@ -50,8 +55,11 @@ public class UserInteractionController {
     @PostMapping("/saveTicketDetails")
     public ResponseEntity<String> saveTicketDetails(@RequestParam String source,@RequestParam String destination,@RequestParam String userLoginId,@RequestParam String tokenNumber, Model model){
         if (source != null&&destination!=null&&userLoginId!=null) {
+            UserRegistrationDto dto = userInteractionService.findByUserId(Integer.valueOf(userLoginId));
             String ticketDetailsService = userInteractionService.saveTicketDetailsService(source, destination, userLoginId,tokenNumber );
             if (ticketDetailsService!=null){
+                String bookingEmail = emailClass.sendTicketBookingEmail(dto.getEmailId(), dto.getFirstName(), tokenNumber);
+                log.info("Ticket booking status :           {}",bookingEmail);
                 return ResponseEntity.ok("Token  Generated ");
             }
         }

@@ -3,6 +3,7 @@ package com.xworkz.metroapplication.repository;
 import com.xworkz.metroapplication.entity.StationDetailsEntity;
 import com.xworkz.metroapplication.entity.TicketBookingEntity;
 import com.xworkz.metroapplication.entity.TrainTimeDetailsEntity;
+import com.xworkz.metroapplication.entity.UserRegistrationEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -89,6 +90,23 @@ public class UserInteractionRepoImpl implements UserInteractionRepo {
             entityManager.close();
         }
 
+    }
+
+    @Override
+    public UserRegistrationEntity findByUserIdRepo(Integer userId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            EntityTransaction transaction = entityManager.getTransaction();
+            Query query = entityManager.createNamedQuery("");
+            transaction.begin();
+            query.setParameter("userId",userId);
+            UserRegistrationEntity result = (UserRegistrationEntity) query.getSingleResult();
+            transaction.commit();
+            return result;
+        }catch (Exception e){
+            log.error("Exception in findByUserIdRepo ========= {}",e.getMessage());
+            return null;
+        }
     }
 
 }

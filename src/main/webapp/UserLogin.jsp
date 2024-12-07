@@ -1,141 +1,217 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ page isELIgnored="false" %>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-            <html>
+<html lang="en">
 
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-                <title>Government Metro Service Login</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <title>Government Metro Service Login</title>
+    <style>
+        body {
+            background-image: url('https://www.googleapis.com/download/storage/v1/b/kaggle-user-content/o/inbox%2F14601120%2F818e48829e36eb2016662b44dfc55937%2Fbanner04.jpg?generation=1691950460844130&alt=media');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+        }
 
-                <style>
-                    body {
-                        background-size: cover;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                    }
-                </style>
-            </head>
+        /* Custom Metro Card */
+        .metro-card {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            margin-top: 60px;
+        }
 
-            <body class="bg bg-dark">
-                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
-                    <div class="container-fluid d-flex justify-content-between align-items-center">
-                        <div>
-                            <a class="navbar-brand" href="getIndex">
-                                <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
-                            </a>
+        .metro-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+            font-size: 2.5rem;
+        }
+
+        .metro-card p {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        /* Custom Button */
+        .btn-custom {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .btn-custom:hover {
+            background-color: #ff5a4e;
+        }
+
+        /* Form Inputs */
+        .form-control {
+            border-radius: 50px;
+            padding: 12px 20px;
+            border: 2px solid #ccc;
+            transition: border 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #ff6f61;
+            box-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .navbar-brand img {
+            max-height: 50px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: #ff6f61;
+            border-radius: 30px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="getIndex">
+                <img src="https://www.x-workz.in/Logo.png" alt="Metro Logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-light text-dark" href="getLoginPage">Back</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Namma Metro Corporation Custom Card -->
+    <div class="container">
+        <div class="metro-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw-aNLlRb7L5prZL2byTNKoT2nH20mBHiN9A&s" alt="Namma Metro Logo" class="mb-3" style="max-width: 300px; max-height: 150px;">
+            <h2>Welcome to Namma Metro Corporation</h2>
+            <p>Experience a smooth and seamless metro service designed for the citizens of Bangalore. We are committed to providing safe, clean, and efficient transportation for all.</p>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card p-4 shadow-lg rounded">
+                    <h2 class="text-center mb-4">User Login</h2>
+                    <form action="getUserOtpDetails" method="get">
+                        <div class="mb-4">
+                            <label for="userEmail" class="form-label">Email ID</label>
+                            <input type="email" id="userEmail" name="emailId" class="form-control shadow-sm" placeholder="Enter your email ID" value="${userDto.emailId}" required onblur="checkUserEmail()">
+                            <span id="ueId" class="text-danger small"></span>
                         </div>
-                        <div>
-                            <span class="navbar-text h5 text-dark">Namma Metro</span>
+                        <div class="d-grid">
+                            <button type="submit" id="button" class="btn btn-custom rounded-pill">✈️ Get OTP</button>
                         </div>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                    </form>
 
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getLoginPage">Back</a>
-                                </li>
-                            </ul>
+                    <form action="verifyUserOtp" method="post" class="mt-4">
+                        <div class="mb-3">
+                            <label for="otp" class="form-label">Enter OTP</label>
+                            <input type="hidden" name="emailId" value="${userDto.emailId}">
+                            <input type="password" id="otp" name="otp" class="form-control shadow-sm" placeholder="Enter your OTP" required>
                         </div>
-                    </div>
-                </nav>
-
-                <div class="container my-5">
-                    <div class="row justify-content-center">
-                        <div class="col-md-5">
-                            <div class="card rounded-0 border-warning box-shadow p-4" style="background-color: rgba(235, 242, 247, 0.6);">
-                                
-                                <h2 class="text-center mb-4 text-dark text-shadow">User Login</h2>
-                                <form action="getUserOtpDetails" method="get">
-                                    <div class="mb-4   ">
-                                        <label for="emailId" class="form-label text-light"> Email id</label>
-                                        <input type="email" id="userEmail" name="emailId"
-                                            placeholder="Enter your email id" class="form-control border-dark shadow-sm "  onblur="checkUserEmail()"
-                                            value="${userDto.emailId}" required>
-                                        <span id="ueId"></span>
-                                    </div>
-                                    <div class="d-grid col-4 mx-auto">
-                                        <button type="submit" class="btn btn-primary rounded-pill"> ✈️ Get OTP</button>
-                                    </div>
-                                </form>
-
-                                <form action="verifyUserOtp" method="post" class="mt-4">
-                                    <div class="mb-3">
-                                        <input type="email" class="form-control" placeholder="Enter your email"
-                                            name="emailId" value="${userDto.emailId}" hidden>
-                                        <label for="inputPassword5" class="form-label text-light">Enter OTP</label>
-                                        <input type="password" class="form-control border-dark shadow-sm" placeholder="Enter your otp"
-                                            name="otp" required>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-success rounded-3" id="verifyOtp"> Login
-                                                </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success rounded-pill">Login</button>
                         </div>
-                    </div>
+                    </form>
                 </div>
-                <footer class="footer fixed-bottom py-3" style="background-color: rgb(87, 93, 95);">
-                    <div class="text-white text-center">
-                        <nav>
-                            <a href="#" class="mx-2 text-white">Privacy Policy</a>
-                            <a href="#" class="mx-2 text-white">Terms of Service</a>
-                        </nav>
-                    </div>
-                </footer>
+            </div>
+        </div>
+    </div>
 
-                <!-- Bootstrap JS -->
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- Footer -->
+    <footer>
+        <div>
+            <nav>
+                <a href="#" class="mx-3">Privacy Policy</a>
+                <a href="#" class="mx-3">Terms of Service</a>
+            </nav>
+        </div>
+        <p class="mb-0">&copy; 2024 Government Metro Service. All rights reserved.</p>
+    </footer>
 
-                <script>
-                    
-                    const checkUserEmail = async () => {
-                        const email = document.getElementById("userEmail").value;
-                        const button = document.getElementById("button");
-                        const ueId = document.getElementById("ueId");
-                        ueId.innerHTML ="";
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const checkUserEmail = async () => {
+            const email = document.getElementById("userEmail").value;
+            const button = document.getElementById("button");
+            const ueId = document.getElementById("ueId");
+            ueId.innerHTML = "";
 
-                        if (email.length < 5) {
-                            ueId.innerHTML = "<span style='color:red;'>Invalid email</span>";
-                            button.setAttribute("disabled", "true");
-                            return;
-                        }
-                        const response = await axios('http://localhost:8083/metro-application/isUserEmailExists?emailId=' + email);
-                        if (response.data === "Email Exists") {
-                            ueId.innerHTML = "";
-                            button.removeAttribute("disabled");
-                        } else if (response.data === "Email Does not exists") {
-                            ueId.innerHTML = "<span style='color:red;'>Email does not exist</span>";
-                            button.setAttribute("disabled", "true");
-                        }
+            if (email.length < 5) {
+                ueId.innerHTML = "<span class='text-danger'>Invalid email</span>";
+                button.setAttribute("disabled", "true");
+                return;
+            }
+             console.log("email  is ================== "+email);
+            const response = await axios('http://localhost:8083/metro-application/isUserEmailExists?emailId='+email);
+            console.log("email  is ================== "+email);
+            console.log("email response is ================== "+response.data);
+            if (response.data === "Email Exists") {
+                console.log("email response if exists  is ================== "+response.data);
+                ueId.innerHTML = "";
+                button.removeAttribute("disabled");
+            } else {
+                console.log("email response if not exists  is ================== "+response.data);
+                ueId.innerHTML = "<span class='text-danger'>Email does not exist</span>";
+                button.setAttribute("disabled", "true");
+            }
+        };
+    </script>
+</body>
 
-                        checkUserForm();
-                    };
-                    function checkUserForm() {
-                        var email = document.getElementById("userEmail").value;
-                        
-                        var button = document.getElementById("button");
-                        if (email.length >= 5 ) {
-                            button.removeAttribute("disabled");
-                        } else {
-                            button.setAttribute("disabled", "true");
-                        }
-                    }
-
-
-                </script>
-
-            </body>
-
-            </html>
+</html>

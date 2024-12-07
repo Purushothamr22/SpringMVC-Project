@@ -4,6 +4,7 @@ import com.xworkz.metroapplication.dto.RegistrationDto;
 import com.xworkz.metroapplication.dto.StationDetailsDto;
 import com.xworkz.metroapplication.service.MetroService;
 import com.xworkz.metroapplication.service.StationDetailsService;
+import com.xworkz.metroapplication.service.UserInteractionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,23 +29,30 @@ public class StationDetailsController {
     @Autowired
     private StationDetailsService stationDetailsService;
     @Autowired
+    private UserInteractionService userInteractionService;
+    @Autowired
     private MetroService metroService;
     @PostMapping("/addStationDetails")
     public String addStationDetails(@Valid StationDetailsDto addStationDetailsDto, String emailId, BindingResult bindingResult, Model model) {
         RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
         String saveTrainDetails = stationDetailsService.saveTrainDetails(addStationDetailsDto);
+        List<StationDetailsDto> stationDetailsDtoList = userInteractionService.onFindStationDetails();
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("trainMsg", "Error in saving");
             model.addAttribute("details", registrationDto);
+            model.addAttribute("stationDetailsDtoList",stationDetailsDtoList);
             return "AdminPage";
         }
         if (saveTrainDetails.equals("save error")) {
             model.addAttribute("trainMsg", "Enter details correctly");
             model.addAttribute("details", registrationDto);
+            model.addAttribute("stationDetailsDtoList",stationDetailsDtoList);
             return "AdminPage";
         } else if (saveTrainDetails.equals("saved Successfully")) {
             model.addAttribute("trainMsg", "Details saved Successfully");
             model.addAttribute("details", registrationDto);
+            model.addAttribute("stationDetailsDtoList",stationDetailsDtoList);
             return "AdminPage";
         }
         return "AdminPage";

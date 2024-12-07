@@ -12,9 +12,29 @@
 
                 <style>
                     body {
-                        background-size: cover;
-                        background-repeat: no-repeat;
-                        background-position: center;
+                        background: linear-gradient(to right, #2c3e50, #3498db);
+                        color: #ecf0f1;
+                    }
+
+                    .navbar {
+                        background-color: #34495e;
+                    }
+
+                    .card {
+                        background-color: rgba(52, 73, 85, 0.8);
+                    }
+
+                    .footer {
+                        background-color: #34495e;
+                    }
+
+                    .btn-primary {
+                        background-color: #2980b9;
+                        border: none;
+                    }
+
+                    .btn-primary:hover {
+                        background-color: #3498db;
                     }
                 </style>
             </head>
@@ -57,38 +77,37 @@
                     <div class="row justify-content-center">
                         <!-- Left Form -->
                         <div class="col-md-5">
-                            <div class="card p-4" style="background-color: rgba(52, 73, 85, 0.6);">
-                                <h2 class="text-center mb-4 text-white">Admin Login</h2>
+                            <div class="card p-4">
+                                <h2 class="text-center mb-4">Admin Login</h2>
                                 <form action="onLoginSaveDetailsByEmail" method="post" onblur="checkForm()">
                                     <div class="mb-3">
-                                        <label class="form-label text-light">E-mail</label>
+                                        <label class="form-label">E-mail</label>
                                         <input type="email" id="email" name="emailId" placeholder="Enter E-mail Id"
                                             class="form-control" onblur="checkEmail()" required>
                                         <span id="eId"></span>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label text-light">Password</label>
+                                        <label class="form-label">Password</label>
                                         <input type="password" id="pass" name="password" placeholder="Enter Password"
                                             class="form-control" onblur="checkPassword()" required>
                                         <span id="password"></span>
                                     </div>
 
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-danger">Login</button>
+                                        <button type="submit" class="btn btn-primary">Login</button>
                                         <span id="button"></span>
                                     </div>
 
-                                    <p class="text-center text-light mt-3">
+                                    <p class="text-center mt-3">
                                         Forgot Password? <a class="text-warning" href="getForgotPassword">Reset</a>
                                     </p>
-                                    
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
 
-              
+
 
                 <!-- Footer -->
                 <footer class="footer fixed-bottom py-3" style="background-color: rgb(87, 93, 95);">
@@ -105,12 +124,12 @@
                 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
                 <script>
-                    
+
                     const checkEmail = async () => {
-                        
+
                         var email = document.getElementById("email").value;
                         var button = document.getElementById("button");
-                        console.log("email id is ========== "+email);
+                        console.log("email id is ========== " + email);
                         var response = await axios('http://localhost:8083/metro-application/isEmailExists?emailId=' + email);
                         if (email.length < 5) {
                             document.getElementById("eId").innerHTML = "<span style='color:red;'>invalid email</span>";
@@ -133,7 +152,7 @@
                             document.getElementById("password").innerHTML = "";
                             button.removeAttribute("disabled")
                         } else {
-                            document.getElementById("upassword").innerHTML = "<span style = 'color :yellow'> password must have atleast 8 letters </span>";
+                            document.getElementById("password").innerHTML = "<span style = 'color :yellow'> password must have atleast 8 letters </span>";
                             button.setAttribute("disabled", "");
                         }
                         checkForm();
@@ -150,7 +169,7 @@
                         }
                     }
 
-                    
+
 
 
                 </script>

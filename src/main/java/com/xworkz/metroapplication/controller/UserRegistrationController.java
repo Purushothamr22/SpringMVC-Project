@@ -47,9 +47,11 @@ public class UserRegistrationController {
     @GetMapping("/isUserEmailExists")
     public ResponseEntity<String> isUserEmailExists(@RequestParam String emailId) {
         if (emailId != null) {
+            log.info("email sent is ==================== "+emailId);
             UserRegistrationDto userRegistrationDto = userService.onFindByUserEmail(emailId);
+            log.info("dto obtained  is ==================== {}",userRegistrationDto);
             if (userRegistrationDto != null) {
-                return ResponseEntity.ok("Email Exists ");
+                return ResponseEntity.ok("Email Exists");
             }
         }
         return ResponseEntity.ok("Email Does not exists");
