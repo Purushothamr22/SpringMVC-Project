@@ -10,10 +10,12 @@ import java.util.List;
 public interface UserInteractionRepo {
     TrainTimeDetailsEntity findSourceDestinationDetails(String source, String destination);
     List<StationDetailsEntity> findStationDetails();
-    String updateTicketPrice(String price ,Integer trainId);
 
     String saveTicketDetails(TicketBookingEntity ticketBookingEntity);
 
     UserRegistrationEntity findByUserIdRepo(Integer userId);
+    String updateUserProfile(UserRegistrationEntity userRegistrationEntity);
+    List<TicketBookingEntity> getBookingDetails(Integer userLoginId);
+
 
 }

@@ -18,21 +18,22 @@ import java.util.List;
 @Slf4j
 
 public class UserInteractionRepoImpl implements UserInteractionRepo {
-@Autowired
+    @Autowired
     EntityManagerFactory entityManagerFactory;
+
     @Override
     public TrainTimeDetailsEntity findSourceDestinationDetails(String source, String destination) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             Query query = entityManager.createNamedQuery("FindSandD");
-            query.setParameter("source",source);
-            query.setParameter("destination",destination);
+            query.setParameter("source", source);
+            query.setParameter("destination", destination);
             TrainTimeDetailsEntity result = (TrainTimeDetailsEntity) query.getSingleResult();
-            log.info("the entity in repo is ============================ {}",result);
+            log.info("the entity in repo is ============================ {}", result);
             return result;
-        }catch (Exception e){
-            log.error("error in findSourceDetails repo ========================= {}",e.getMessage());
-        }finally {
+        } catch (Exception e) {
+            log.error("error in findSourceDetails repo ========================= {}", e.getMessage());
+        } finally {
             entityManager.close();
         }
         return null;
@@ -45,34 +46,14 @@ public class UserInteractionRepoImpl implements UserInteractionRepo {
             Query query = entityManager.createNamedQuery("findStationDetails");
             List<StationDetailsEntity> resultList = query.getResultList();
             return resultList;
-        }catch (Exception e){
-            log.error("error in findStationDetails repo ============ {}",e.getMessage());
-        }finally {
+        } catch (Exception e) {
+            log.error("error in findStationDetails repo ============ {}", e.getMessage());
+        } finally {
             entityManager.close();
         }
         return null;
     }
 
-    @Override
-    public String updateTicketPrice(String price,Integer trainId) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            EntityTransaction transaction = entityManager.getTransaction();
-            Query query = entityManager.createNamedQuery("updateTicketPrice");
-            transaction.begin();
-            query.setParameter("price",price);
-            query.setParameter("trainId",trainId);
-            query.executeUpdate();
-            transaction.commit();
-            return "Price Saved";
-        }catch (Exception e){
-            log.error("error in updatePrice repo  ====================  {}",e.getMessage());
-            return "Save Error";
-        }finally {
-            entityManager.close();
-        }
-
-    }
 
     @Override
     public String saveTicketDetails(TicketBookingEntity ticketBookingEntity) {
@@ -83,30 +64,66 @@ public class UserInteractionRepoImpl implements UserInteractionRepo {
             entityManager.persist(ticketBookingEntity);
             transaction.commit();
             return "Save Success";
-        }catch (Exception e){
-            log.error("error in saveTicketDetails repo =============== {} ",e.getMessage());
+        } catch (Exception e) {
+            log.error("error in saveTicketDetails repo =============== {} ", e.getMessage());
             return "Save Error";
-        }finally {
+        } finally {
             entityManager.close();
         }
 
     }
 
     @Override
-    public UserRegistrationEntity findByUserIdRepo(Integer userId) {
+    public UserRegistrationEntity findByUserIdRepo(Integer userRegistrationId) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             EntityTransaction transaction = entityManager.getTransaction();
-            Query query = entityManager.createNamedQuery("");
+            Query query = entityManager.createNamedQuery("findByUserId");
             transaction.begin();
-            query.setParameter("userId",userId);
+            query.setParameter("userRegistrationId", userRegistrationId);
             UserRegistrationEntity result = (UserRegistrationEntity) query.getSingleResult();
             transaction.commit();
             return result;
-        }catch (Exception e){
-            log.error("Exception in findByUserIdRepo ========= {}",e.getMessage());
+        } catch (Exception e) {
+            log.error("Exception in findByUserIdRepo ========= {}", e.getMessage());
             return null;
         }
     }
+
+    @Override
+    public String updateUserProfile(UserRegistrationEntity userRegistrationEntity) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(userRegistrationEntity);
+            transaction.commit();
+            return "Profile updated";
+        } catch (Exception e) {
+            log.error("error in update profile " + e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return "user not updated";
+    }
+
+    @Override
+    public List<TicketBookingEntity> getBookingDetails(Integer userLoginId) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            EntityTransaction transaction = entityManager.getTransaction();
+            Query query = entityManager.createNamedQuery("findByUserLoginId");
+            transaction.begin();
+            query.setParameter("userLoginId", userLoginId);
+            List<TicketBookingEntity> resultList = query.getResultList();
+            transaction.commit();
+            log.info("List of booking details entity is ==============   {}",resultList);
+            return resultList;
+        } catch (Exception e) {
+            log.error("Exception in findByUserIdRepo ========= {}", e.getMessage());
+            return null;
+        }
+    }
+
 
 }

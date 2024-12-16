@@ -23,17 +23,16 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
     public String saveTimeDetails(TrainTimeDetailsEntity trainTimeDetailsEntity) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
-        log.info("the given data to the repo is ....................    "+trainTimeDetailsEntity);
+        log.info("the given data to the repo is ....................    " + trainTimeDetailsEntity);
         try {
             transaction.begin();
 
             entityManager.persist(trainTimeDetailsEntity);
 
             transaction.commit();
-        }catch (Exception e){
-            log.info("error in saveTimeDetails ............." +e.getMessage());
-        }
-        finally {
+        } catch (Exception e) {
+            log.info("error in saveTimeDetails ............." + e.getMessage());
+        } finally {
             entityManager.close();
         }
         return "Save Error";
@@ -44,12 +43,12 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             Query query = entityManager.createNamedQuery("findBySourceAndDestination");
-            query.setParameter("source",source);
-            query.setParameter("destination",destination);
-            return  (TrainTimeDetailsEntity) query.getSingleResult();
-        }catch (Exception e){
-            log.error("got error in findBySourceAndDestination.....................  " +e.getMessage());
-        }finally {
+            query.setParameter("source", source);
+            query.setParameter("destination", destination);
+            return (TrainTimeDetailsEntity) query.getSingleResult();
+        } catch (Exception e) {
+            log.error("got error in findBySourceAndDestination.....................  " + e.getMessage());
+        } finally {
             entityManager.close();
         }
         return null;
@@ -60,14 +59,14 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             Query query = entityManager.createNamedQuery("findBySourceDestinationAndTimings");
-            query.setParameter("source",source);
-            query.setParameter("destination",destination);
-            query.setParameter("sourceTime",sourceTime);
-            query.setParameter("destinationTime",destinationTime);
-            return  (TrainTimeDetailsEntity) query.getSingleResult();
-        }catch (Exception e){
-            log.error("got error in findBySourceAndDestination.....................  " +e.getMessage());
-        }finally {
+            query.setParameter("source", source);
+            query.setParameter("destination", destination);
+            query.setParameter("sourceTime", sourceTime);
+            query.setParameter("destinationTime", destinationTime);
+            return (TrainTimeDetailsEntity) query.getSingleResult();
+        } catch (Exception e) {
+            log.error("got error in findBySourceAndDestination.....................  " + e.getMessage());
+        } finally {
             entityManager.close();
         }
         return null;
@@ -78,11 +77,11 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             Query query = entityManager.createNamedQuery("findAllTime");
-            List<TrainTimeDetailsEntity>  resultList = query.getResultList();
+            List<TrainTimeDetailsEntity> resultList = query.getResultList();
             return resultList;
-        }catch (Exception e){
-            log.error("got error in findBySource.....................  " +e.getMessage());
-        }finally {
+        } catch (Exception e) {
+            log.error("got error in findBySource.....................  " + e.getMessage());
+        } finally {
             entityManager.close();
         }
         return null;
@@ -93,14 +92,32 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         try {
             Query query = entityManager.createNamedQuery("findByTrainId");
-            query.setParameter("trainId",trainId);
+            query.setParameter("trainId", trainId);
             return (TrainTimeDetailsEntity) query.getSingleResult();
-        }catch (Exception e ){
-            log.error("error in findByTrainId repo    "+e.getMessage());
+        } catch (Exception e) {
+            log.error("error in findByTrainId repo    " + e.getMessage());
             return null;
-        }finally {
+        } finally {
             entityManager.close();
         }
 
+    }
+
+    @Override
+    public String updateTimingDetails(TrainTimeDetailsEntity timeDetailsEntity) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(timeDetailsEntity);
+            transaction.commit();
+            log.info("Save Success in updateTimingDetails ");
+            return "Save success";
+        } catch (Exception e) {
+            log.error("got error in save train details ......................     " + e.getMessage());
+        } finally {
+            entityManager.close();
+        }
+        return "failed to save ";
     }
 }

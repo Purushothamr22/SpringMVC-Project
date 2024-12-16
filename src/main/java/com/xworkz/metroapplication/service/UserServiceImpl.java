@@ -96,13 +96,10 @@ public class UserServiceImpl implements UserService {
     public UserRegistrationDto getUserOtpDetails(String emailId) {
         if (emailId != null) {
             UserRegistrationEntity userOtpDetailsByEmail = userRepository.findUserOtpDetailsByEmail(emailId);
-            log.error("the email id of getUserOtpDetails repo is ====================== {}", emailId);
-            log.error("the  entity of getUserOtpDetail repo is ====================== {}", userOtpDetailsByEmail);
-            updateUserOtp(emailId);
-            if (userOtpDetailsByEmail != null) {
+            String updateUserOtp = updateUserOtp(emailId);
+            if (userOtpDetailsByEmail != null&&updateUserOtp.equalsIgnoreCase("otp updated")) {
                 UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
                 BeanUtils.copyProperties(userOtpDetailsByEmail, userRegistrationDto);
-                log.error("the  dto of getUserOtpDetail repo is ====================== {}", userRegistrationDto);
                 return userRegistrationDto;
             }
         }
@@ -115,6 +112,7 @@ public class UserServiceImpl implements UserService {
             String emailSend = emailClass.emailSend(emailId);
             String encryptedOtp = encryption.encrypt(emailSend);
             userRepository.updateUserOtp(emailId, encryptedOtp);
+            return "otp updated";
         }
         return "Update Error";
     }

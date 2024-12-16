@@ -189,34 +189,24 @@ public class MetroServiceImpl implements MetroService {
     @Override
     public boolean saveEditedProfile(RegistrationDto registrationDto, MultipartFile file) {
         RegistrationDto existingDto = onFindByEmailId(registrationDto.getEmailId());
-        log.info("saveEditedProfile dto in service  =============== {}",existingDto);
         RegistrationEntity registerEntity = new RegistrationEntity();
-        log.info("File  status in service  =============== {}",file);
         if (file != null && !file.isEmpty()) {
             try {
-                log.info("File is not null  =============== ");
                 byte[] bytes = file.getBytes();
                 Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
                 Files.write(path, bytes);
                 registrationDto.setUserImage(file.getOriginalFilename());
                 registrationDto.setImageType(file.getContentType());
-                registrationDto.setPassword(encryption.encrypt(registrationDto.getPassword()));
-                log.info("saveEditedProfile dto in service  =============== {}",registrationDto);
                 BeanUtils.copyProperties(registrationDto, registerEntity);
-                log.info("saveEditedProfile entity in service  =============== {}",registerEntity);
                 metroRepository.updateUserProfile(registerEntity);
                 return true;
             } catch (IOException ignored) {
                 log.info("Error in saveEditedProfile-------------------{}", ignored.getMessage());
             }
         } else {
-            log.info("File is  null  =============== ");
             registrationDto.setUserImage(existingDto.getUserImage());
             registrationDto.setImageType(existingDto.getImageType());
-            registrationDto.setPassword(encryption.encrypt(registrationDto.getPassword()));
-            log.info("saveEditedProfile dto if null in service  =============== {}",registrationDto);
             BeanUtils.copyProperties(registrationDto, registerEntity);
-            log.info("saveEditedProfile entity if null in service  =============== {}",registerEntity);
             metroRepository.updateUserProfile(registerEntity);
             return true;
         }

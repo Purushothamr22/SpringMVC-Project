@@ -1,145 +1,109 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <%@ page isELIgnored="false" %>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-            <html>
+<html>
 
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Namma Metro</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Reset Password</title>
+</head>
 
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-            </head>
+<style>
+    i {
+        cursor: pointer;
+    }
+</style>
 
-            <body class="bg-dark">
-                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
-                    <div class="container-fluid d-flex justify-content-between align-items-center">
-                        <div>
-                            <a class="navbar-brand" href="getIndex">
-                                <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
-                            </a>
-                        </div>
-                        <div>
-                            <span class="navbar-text h5 text-dark  ">Government Metro </span>
-                        </div>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+<body class="bg-light">
 
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getIndex">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getForgotPassword">Back</a>
-                                </li>
-                            </ul>
-                        </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(12, 13, 14);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="https://www.x-workz.in/Logo.png" alt="Company Logo" style="max-height: 40px;">
+            </a>
+        </div>
+    </nav>
 
+    <div class="row justify-content-center py-0 my-5">
+        <div class="col-12 col-md-6">
+            <div class="card p-5 mx-auto rounded-0 shadow-lg hover-shadow-lg border-dark" style="background-color: rgba(231, 234, 248, 0.7);">
+                <div class="card-header text-center bg-transparent border-0">
+                    <h3 class="text-dark">Reset Your Password</h3>
+                </div>
+                <form action="resetPassword" method="post">
+
+                    <!-- Current Password -->
+                    <div class="mb-4">
+                        <label for="currentPassword" class="form-label">Current Password</label>
+                        <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter Current Password" class="form-control shadow-sm border border-dark">
+                        <span id="currentPasswordError" class="text-danger"></span>
                     </div>
-                </nav>
 
-                <span class="text text-success justify-content-center shadow ">  ${passwordSuccess}</span>
-                <span class="text text-success justify-content-center shadow ">  ${passwordError}</span>
+                    <!-- New Password -->
+                    <div class="mb-4">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" id="newPassword" name="newPassword" placeholder="Enter New Password" class="form-control shadow-sm border border-dark">
+                        <span id="newPasswordError" class="text-danger"></span>
+                    </div>
 
+                    <!-- Confirm New Password -->
+                    <div class="mb-4">
+                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm New Password" class="form-control shadow-sm border border-dark">
+                        <span id="confirmPasswordError" class="text-danger"></span>
+                    </div>
 
-                <div class="container-fluid my-5">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="card p-4 mx-auto"
-                                style="background-color: rgba(145, 150, 161, 0.534); width: 35vw;">
+                    <!-- Submit Button -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary w-100 py-2 shadow">Update Password</button>
+                    </div>
 
-                                <h2 class="text-center text-light justify-content-center mb-3">Password Reset </h2>
-                                <form action="onPasswordReset" method="post" onblur="checkForm()">
-                                    <div class="mb-3">
-                                        <label class="form-label rounded-0 border-dark text-light"> Email Id </label>
-                                        <input type="email" id="emailId" name="emailId"
-                                            placeholder="${registrationDto.emailId}" class="form-control"
-                                            value="${registrationDto.emailId}" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label rounded-0 border-dark text-light">New Password</label>
-                                        <input type="password" id="pass" name="password"
-                                            placeholder="Enter New Password" onblur="checkPassword()"
-                                            class="form-control" required>
-                                        <span id="password"></span>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label rounded-0 border-dark text-light">Confirm Password</label>
-                                        <input type="password" id="cPassword" name="confirmPassword"
-                                            onblur="checkConfirmPassword()" placeholder="Confirm Password"
-                                            class="form-control" required>
-                                        <span id="confirPassword"></span>
-                                    </div>
-                                    <div class="d-grid">
-                                        <button type="submit" id="button" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-                                    </div>
-                                </form>
-
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 p-3   text-center ">
+                        <div class="container-fluid">
+                            <p class="mb-2">For assistance, email us at <strong>support@namma.metro.in</strong></p>
+                            <p class="mb-2">&copy; 2024 Namma Metro. All rights reserved.</p>
+                            <div>
+                                <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/facebook-new.png"
+                                        alt="Facebook"></a>
+                                <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/twitter.png"
+                                        alt="Twitter"></a>
+                                <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png"
+                                        alt="Instagram"></a>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </footer>
 
-                <footer class="footer text-white py-3 fixed-bottom"
-                    style="background-color: rgba(124, 128, 133, 0.534);">
-                    <div class="container text-center">
-                        <p class="mb-0">User Password Reset Page</p>
-                    </div>
-                </footer>
 
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-                <script>
-                    function checkPassword() {
-                        var pass = document.getElementById("pass").value;
-                        var password = document.getElementById("password");
-                        if (pass.trim !== '' && pass.length >= 8 && pass.length <= 12) {
-                            password.innerHTML = "";
-                        } else {
-                            password.innerHTML = "<span style ='color:yellow'> password must have atleast 8 letters </span>";
-                        }
-                        checkForm();
-                    }
+    <script>
+        document.getElementById("newPassword").addEventListener("input", validatePasswords);
+        document.getElementById("confirmPassword").addEventListener("input", validatePasswords);
 
-                    function checkConfirmPassword() {
-                        var pass = document.getElementById("pass").value;
-                        var cpass = document.getElementById("cPassword").value;
-                        var confirmPassword = document.getElementById("confirPassword");
-                        if (cpass.trim !== '' && cpass.length >= 8 && cpass.length <= 12) {
-                            confirmPassword.innerHTML = "";
-                        }else{
-                            confirmPassword.innerHTML = "<span style ='color:yellow'> password must have atleast 8 letters </span>";
-                        }
-                        if (pass === cpass) {
-                            confirmPassword.innerHTML = "";
-                        } else {
-                            confirmPassword.innerHTML = "<span style ='color:yellow'> password does not match </span>";
-                        }
-                        checkForm();
-                    }
+        function validatePasswords() {
+            const newPassword = document.getElementById("newPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const confirmPasswordError = document.getElementById("confirmPasswordError");
 
-                    function checkForm() {
-                        var pass = document.getElementById("pass").value;
-                        var cpass = document.getElementById("cPassword").value;
-                        var button = document.getElementById("button");
+            if (newPassword !== confirmPassword) {
+                confirmPasswordError.textContent = "Passwords do not match.";
+            } else {
+                confirmPasswordError.textContent = "";
+            }
+        }
+    </script>
 
-                        if ((pass.trim !== '' && pass.length >= 8 && pass.length <= 12) && (cpass.trim !== '' && cpass.length >= 8 && cpass.length <= 12) && (pass === cpass)) {
-                            button.removeAttribute("disabled");
-                        } else {
-                            button.setAttribute("disabled", "");
-                        }
-                    }
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-                </script>
-            </body>
-
-            </html>
+</html>

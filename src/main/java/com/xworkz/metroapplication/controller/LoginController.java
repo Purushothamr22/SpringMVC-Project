@@ -40,6 +40,13 @@ public class LoginController {
     @Autowired
     private StationDetailsService stationDetailsService;
 
+    @GetMapping("/getAdminPage")
+    public String getAdminPage(@RequestParam String emailId,Model model){
+        RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
+        model.addAttribute("details",registrationDto);
+        return "AdminPage";
+    }
+
     @GetMapping("/getAdminLogin")
     public String getAdminLogin() {
         return "LoginByEmail";
@@ -114,7 +121,6 @@ public class LoginController {
     public String verifyOtp(@RequestParam String otp, @RequestParam String emailId, Model model) {
         if (otp != null && emailId != null) {
             RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
-            log.info("emailId is =================  " + emailId);
             boolean isVerifiedOtp = metroService.verifyOtp(emailId, otp);
             if (isVerifiedOtp) {
                 model.addAttribute("registrationDto", registrationDto);
@@ -129,8 +135,6 @@ public class LoginController {
 
     @PostMapping("/onPasswordReset")
     public String onPasswordReset(String password, String confirmPassword, String emailId, Model model) {
-        log.info("onPasswordReset emailId is =================  " + emailId);
-        log.info("onPasswordReset password is =================  " + password);
         if (password != null && emailId != null) {
             boolean isPasswordUpdated = metroService.onUpdatePasswordByEmailId(password, confirmPassword, emailId);
             if (isPasswordUpdated) {
@@ -148,7 +152,6 @@ public class LoginController {
     public String getEditProfile(@RequestParam String emailId, Model model) {
         RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
         log.info("image name is ========== " + registrationDto.getUserImage());
-        registrationDto.setPassword(encryption.decrypt(registrationDto.getPassword()));
         model.addAttribute("metroDto", registrationDto);
         return "ProfileUpdate";
     }
@@ -161,7 +164,7 @@ public class LoginController {
         return "AdminPage";
     }
 
-    @PostMapping("updateDetails")
+    @PostMapping("updateStationDetails")
     public String editRegisterDetails(@RequestParam("file") MultipartFile file, RegistrationDto registrationDto, Model model) {
         RegistrationDto registrationDto1 = metroService.onFindByEmailId(registrationDto.getEmailId());
        log.info("file sent is =============   {}",file);
@@ -169,7 +172,6 @@ public class LoginController {
         boolean updateMessage = metroService.saveEditedProfile(registrationDto, file);
         if (updateMessage) {
             model.addAttribute("msg", "data updated successfully");
-            registrationDto.setPassword(encryption.decrypt(registrationDto.getPassword()));
             model.addAttribute("metroDto", registrationDto);
             return "ProfileUpdate";
         } else {

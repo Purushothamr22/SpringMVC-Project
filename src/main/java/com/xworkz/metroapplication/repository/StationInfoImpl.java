@@ -76,4 +76,22 @@ public class StationInfoImpl implements StationInfoRepo {
         }
         return null;
     }
+
+    @Override
+    public String updateStationDetails(StationDetailsEntity stationDetailsEntity) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.merge(stationDetailsEntity);
+            transaction.commit();
+            log.info("save success in updateStationDetails ");
+            return "Save success";
+        }catch (Exception e){
+            log.error("got error in save train details ......................     "+e.getMessage());
+        }finally {
+            entityManager.close();
+        }
+        return "failed to save ";
+    }
 }

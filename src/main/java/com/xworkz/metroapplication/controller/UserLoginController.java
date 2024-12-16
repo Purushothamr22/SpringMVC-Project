@@ -29,15 +29,13 @@ public class UserLoginController {
     }
     @GetMapping("/getUserOtpDetails")
     public String getUserOtpDetails(@RequestParam String emailId, Model model) {
-        if (emailId == null) {
-            model.addAttribute("UserLoginMsg", "Enter correct emailId");
-            return "UserLogin";
-        }
         UserRegistrationDto userOtpDetails = userService.getUserOtpDetails(emailId);
         if (userOtpDetails != null) {
+            model.addAttribute("OtpMsg","Otp Sent Successfully");
             model.addAttribute("userDto",userOtpDetails);
             return "UserLogin";
         }
+        model.addAttribute("OtpMsg","Otp Sending error");
         return "UserLogin";
     }
     @PostMapping("/verifyUserOtp")
@@ -49,9 +47,7 @@ public class UserLoginController {
         UserRegistrationDto userRegistrationDto = userService.onFindByUserEmail(emailId);
         boolean isPresent = userService.verifyUserOtp(emailId, otp);
         if (isPresent){
-            List<StationDetailsDto> stationDetailsDtoList = userInteractionService.onFindStationDetails();
             model.addAttribute("verifyUserOtpDto",userRegistrationDto);
-            model.addAttribute("stationDetailsDtoList",stationDetailsDtoList);
             return "UserPage";
         }
         return "UserLogin";

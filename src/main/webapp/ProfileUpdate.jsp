@@ -21,14 +21,13 @@
             <body class="bg-light">
 
                 <!-- Navigation Bar -->
-                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(15, 15, 15);">
+                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(12, 13, 14);">
                     <div class="container-fluid">
-                        <div>
-                            <a class="navbar-brand" href="getIndex">
-                                <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
-                            </a>
-                        </div>
-                        
+                        <a class="navbar-brand" href="getAdminPage?emailId=${metroDto.emailId}">
+                            <img src="https://www.x-workz.in/Logo.png" alt="Company Logo" style="max-height: 40px;">
+                        </a>
+                        <h1 class="h3 text-white mx-2">Admin Page</h1>
+
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation">
@@ -36,20 +35,69 @@
                         </button>
 
                         <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getIndex">Home</a>
+                            <ul class="navbar-nav ms-auto text-center align-items-center">
+                                <li class="nav-item mx-3">
+                                    <a class="nav-link btn btn-primary text-light"
+                                        href="getDetails?emailId=${metroDto.emailId}">Metro Details</a>
+                                </li>
+                                <li class="nav-item mx-3">
+                                    <a class="nav-link btn btn-primary text-light"
+                                        href="getStationDetails?emailId=${metroDto.emailId}">Add Station Details</a>
+                                </li>
+                                <li class="nav-item mx-3">
+                                    <a class="nav-link btn btn-primary text-light"
+                                        href="getTimeDetails?emailId=${metroDto.emailId}">Add Time Details</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getAdminPageByMail?emailId=${metroDto.emailId}">Back</a>
+
+                                <li class="nav-item mx-auto">
+                                    <img src="getImage/${metroDto.userImage}" alt="User Image"
+                                        class="rounded-circle border border-warning shadow-sm"
+                                        style="width: 50px; height: 50px; cursor: pointer;" data-bs-toggle="modal"
+                                        data-bs-target="#profileImageModal">
+                                </li>
+
+                                <!-- Dropdown Menu -->
+                                <li class="nav-item dropdown mx-3">
+                                    <a class="nav-link dropdown-toggle btn btn-primary text-light" href="#"
+                                        id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        ${metroDto.firstName}
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                        <li><a class="dropdown-item"
+                                                href="editProfile?emailId=${metroDto.emailId}">Profile Edit</a></li>
+                                        <li><a class="dropdown-item" href="getLoginPage">Log out</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </nav>
+
+
+                <div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-dark" id="profileImageModalLabel">${metroDto.firstName}'s
+                                    Profile</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card">
+                                    <img src="getImage/${metroDto.userImage}" class="card-img-top" alt="User Image">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">${metroDto.firstName}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <h3 class="justify-content-center" style="color: green;">${msg}</h3>
                 <h3 class="justify-content-center" style="color: #ff5722">${errMsg}</h3>
 
@@ -117,32 +165,7 @@
                                             onblur="checkMobileNumber()">
                                         <span id="mobileNumber" class="text-danger"></span>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                        <label class="form-label">Password</label>
-                                        <div class="input-group">
-                                            <input type="password" id="pass" name="password"
-                                                placeholder="Enter Password" value="${metroDto.password}"
-                                                class="form-control shadow-sm border border-dark"
-                                                onblur="checkPassword()" />
-                                            <button class="btn btn-outline-dark" type="button"
-                                                onclick="myFunction()">
-                                                <i class="fa fa-eye"></i>
-                                            </button>
-                                        </div>
-                                        <span id="password" class="text-danger"></span>
-                                    </div>
 
-                                </div>
-                                <!-- Row 4: Confirm Password (Hidden) -->
-                                <div class="row g-3 gx-5 mb-3">
-                                    <div class="col-12 col-md-6" hidden>
-                                        <label class="form-label">Confirm Password</label>
-                                        <input type="password" id="cpass" name="confirmPassword"
-                                            placeholder="Confirm Password"
-                                            class="form-control shadow-sm border border-dark"
-                                            onblur="confirmPasswordValidation()">
-                                        <span id="confirmPassword" class="text-danger"></span>
-                                    </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">gender </label>
                                         <input type="text" id="gen" name="gender" placeholder=" Enter gender"
@@ -253,7 +276,7 @@
                             }
                         }
                     }
-                    
+
                     const checkEmail = async () => {
                         var email = document.getElementById("eId").value;
                         var button = document.getElementById("button");
@@ -276,11 +299,13 @@
                         } else {
                             x.type = "password";
                         }
-                    } 
+                    }
 
-                    
+
 
                 </script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
             </body>
 
             </html>

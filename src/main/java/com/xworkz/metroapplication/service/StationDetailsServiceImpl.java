@@ -3,7 +3,9 @@ package com.xworkz.metroapplication.service;
 import com.xworkz.metroapplication.dto.StationDetailsDto;
 import com.xworkz.metroapplication.dto.TrainTimeDetailsDto;
 import com.xworkz.metroapplication.entity.StationDetailsEntity;
+import com.xworkz.metroapplication.entity.TrainTimeDetailsEntity;
 import com.xworkz.metroapplication.repository.StationInfoRepo;
+import com.xworkz.metroapplication.repository.TrainTimeDetailsRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ import java.util.stream.Collectors;
 public class StationDetailsServiceImpl implements StationDetailsService {
     @Autowired
     private StationInfoRepo stationInfoRepo;
+    @Autowired
+    private TrainTimeDetailsRepo trainTimeDetailsRepo;
     private List<TrainTimeDetailsDto> trainTimeDetailsDtoList;
 
     @Override
@@ -38,13 +42,17 @@ public class StationDetailsServiceImpl implements StationDetailsService {
     @Override
     public StationDetailsDto onFindByStationNameService(String stationName) {
         if (stationName != null) {
+            log.info("onFindByStationNameService service   started ");
             StationDetailsEntity trainDetailsEntity = stationInfoRepo.findByStationName(stationName);
-            log.info("trainDetailsEntity for findByStationName is ============  " + trainDetailsEntity);
             StationDetailsDto trainDetailsDto = new StationDetailsDto();
             if (trainDetailsEntity != null) {
                 BeanUtils.copyProperties(trainDetailsEntity, trainDetailsDto);
-                log.info("trainDetailsDto for onFindByStationNameService is ============  " + trainDetailsDto);
-
+                List<TrainTimeDetailsDto> trainTimeDetailsDtoList = trainDetailsEntity.getTrainTimeDetails().stream().map(trainEntity -> {
+                    TrainTimeDetailsDto detailsDto = new TrainTimeDetailsDto();
+                    BeanUtils.copyProperties(trainEntity, detailsDto);
+                    return detailsDto;
+                }).collect(Collectors.toList());
+                trainDetailsDto.setTrainTimeDetails(trainTimeDetailsDtoList);
                 return trainDetailsDto;
             }
         }
@@ -76,6 +84,36 @@ public class StationDetailsServiceImpl implements StationDetailsService {
     @Override
     public StationDetailsEntity onFindById(Integer id) {
         return stationInfoRepo.findById(id);
+    }
+
+    @Override
+    public StationDetailsDto onFindByStationId(Integer stationId) {
+        StationDetailsEntity stationDetailsEntity = onFindById(stationId);
+        StationDetailsDto detailsDto=new StationDetailsDto();
+        BeanUtils.copyProperties(stationDetailsEntity,detailsDto);
+        return detailsDto;
+    }
+
+    @Override
+    public String updateMetroDetails(StationDetailsDto stationDetailsDto, TrainTimeDetailsDto trainTimeDetailsDto) {
+
+        if (stationDetailsDto != null&&trainTimeDetailsDto!=null) {
+            stationDetailsDto.setStationName(trainTimeDetailsDto.getSource());
+            stationDetailsDto.setStationType(trainTimeDetailsDto.getTrainType());
+            trainTimeDetailsDto.setStation(stationDetailsDto);
+            StationDetailsEntity stationDetailsEntity=new StationDetailsEntity();
+            TrainTimeDetailsEntity trainTimeDetailsEntity=new TrainTimeDetailsEntity();
+            BeanUtils.copyProperties(stationDetailsDto,stationDetailsEntity);
+            BeanUtils.copyProperties(trainTimeDetailsDto,trainTimeDetailsEntity);
+            String updateStationDetails = stationInfoRepo.updateStationDetails(stationDetailsEntity);
+            String updateTimingDetails = trainTimeDetailsRepo.updateTimingDetails(trainTimeDetailsEntity);
+            log.info("Station Details Status :    {}",updateStationDetails);
+            log.info("Timing Details Status :    {}",updateTimingDetails);
+            if (updateTimingDetails.equalsIgnoreCase( "Save success") && updateStationDetails.equalsIgnoreCase( "Save success")) {
+                return "Save success";
+            }
+        }
+        return "Save error";
     }
 
 

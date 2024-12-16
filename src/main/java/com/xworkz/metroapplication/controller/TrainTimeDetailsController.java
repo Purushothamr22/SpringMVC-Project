@@ -6,13 +6,16 @@ import com.xworkz.metroapplication.dto.TrainTimeDetailsDto;
 import com.xworkz.metroapplication.service.MetroService;
 import com.xworkz.metroapplication.service.StationDetailsService;
 import com.xworkz.metroapplication.service.TrainTimeDetailsService;
+import com.xworkz.metroapplication.service.UserInteractionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -32,27 +35,36 @@ public class TrainTimeDetailsController {
         log.info("TrainTimeDetails Controller created ");
     }
 
+    @GetMapping("/getTimeDetails")
+    public  String getTimeDetails(@RequestParam String emailId,Model model){
+        RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
+        List<StationDetailsDto> stationDetailsDtoList = stationDetailsService.onFindAll();
+        model.addAttribute("stationDetailsDtoList", stationDetailsDtoList);
+        model.addAttribute("details",registrationDto);
+        return "TrainTimeDetails";
+    }
+
+
     @PostMapping("addTrainTimeDetails")
     public String addTrainTimeDetails(@Valid TrainTimeDetailsDto trainTimeDetailsDto, String emailId, BindingResult bindingResult, Model model) {
         RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
+        List<StationDetailsDto> stationDetailsDtoList = stationDetailsService.onFindAll();
         if (bindingResult.hasErrors()) {
             model.addAttribute("TimeDetailsMsg", "Please Enter Correct Details");
             model.addAttribute("details", registrationDto);
-            return "AdminPage";
+            model.addAttribute("stationDetailsDtoList",stationDetailsDtoList);
+            return "TrainTimeDetails";
         }
         String onSaveTimeDetails = timeDetailsService.onSaveTimeDetails(trainTimeDetailsDto);
         if (onSaveTimeDetails.equals("Data Saved")) {
-            List<StationDetailsDto> stationDetailsDtoList = stationDetailsService.onFindAll();
             model.addAttribute("TimeDetailsMsg","Data Saved Successfully");
             model.addAttribute("details", registrationDto);
             model.addAttribute("stationDetailsDtoList",stationDetailsDtoList);
-            return "AdminPage";
-        } else if (onSaveTimeDetails.equals("Data Error")) {
-            model.addAttribute("TimeDetailsMsg","Error in Data ");
-            model.addAttribute("details", registrationDto);
-            return "AdminPage";
+            return "TrainTimeDetails";
         }
-        return "AdminPage";
+        return "TrainTimeDetails";
     }
+
+
 
 }

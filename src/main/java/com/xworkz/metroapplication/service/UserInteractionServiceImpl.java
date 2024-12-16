@@ -13,9 +13,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -23,13 +29,16 @@ import java.util.List;
 public class UserInteractionServiceImpl implements UserInteractionService {
     @Autowired
     UserInteractionRepo userInteractionRepo;
+    @Autowired
+    UserService userService;
 
+    private static final String UPLOADED_FOLDER = "C://Users//NEW//IdeaProjects//metro-application//UserUploadedImages";
 
     @Override
     public List<StationDetailsDto> onFindStationDetails() {
         List<StationDetailsEntity> stationDetails = userInteractionRepo.findStationDetails();
         List<StationDetailsDto> stationDetailsDtoList = new ArrayList<>();
-        stationDetails.stream().forEach(entity -> {
+        stationDetails.forEach(entity -> {
             StationDetailsDto stationDetailsDto = new StationDetailsDto();
             BeanUtils.copyProperties(entity, stationDetailsDto);
             stationDetailsDtoList.add(stationDetailsDto);
@@ -40,7 +49,7 @@ public class UserInteractionServiceImpl implements UserInteractionService {
     }
 
     @Override
-    public String saveTicketDetailsService(String source, String destination, String userLoginId,String tokenNumber) {
+    public String saveTicketDetailsService(String source, String destination, String userLoginId, String tokenNumber) {
         TrainTimeDetailsDto trainTimeDetailsDto = onFindSourceDestinationDetails(source, destination);
         TicketBookingDto ticketBookingDto = new TicketBookingDto();
         ticketBookingDto.setSource(trainTimeDetailsDto.getSource());
@@ -55,22 +64,13 @@ public class UserInteractionServiceImpl implements UserInteractionService {
         return userInteractionRepo.saveTicketDetails(ticketBookingEntity);
     }
 
-    @Override
-    public String updatePriceService(String price, Integer trainId) {
-        if (price != null&&trainId!=null) {
-            String updateTicketPrice = userInteractionRepo.updateTicketPrice(price, trainId);
-            log.info("Price  update status is ============= {}",updateTicketPrice);
-            return updateTicketPrice;
-        }
-        return null;
-    }
 
     @Override
     public UserRegistrationDto findByUserId(Integer userId) {
         if (userId != null) {
             UserRegistrationEntity entity = userInteractionRepo.findByUserIdRepo(userId);
             UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
-            BeanUtils.copyProperties(entity,userRegistrationDto);
+            BeanUtils.copyProperties(entity, userRegistrationDto);
             return userRegistrationDto;
         }
         return null;
@@ -84,7 +84,47 @@ public class UserInteractionServiceImpl implements UserInteractionService {
         return detailsDto;
     }
 
+    @Override
+    public boolean saveUserEditedProfile(UserRegistrationDto userRegistrationDto, MultipartFile file) {
+        UserRegistrationDto registrationDto = userService.onFindByUserEmail(userRegistrationDto.getEmailId());
+        UserRegistrationEntity userRegistrationEntity = new UserRegistrationEntity();
+        if (file != null && !file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+                Files.write(path, bytes);
+                registrationDto.setUserImage(file.getOriginalFilename());
+                registrationDto.setImageType(file.getContentType());
+                BeanUtils.copyProperties(registrationDto, userRegistrationEntity);
+                userInteractionRepo.updateUserProfile(userRegistrationEntity);
+                return true;
+            } catch (IOException e) {
+                log.info("Error in saveUserEditedProfile-------------------{}", e.getMessage());
+            }
+        } else {
+            registrationDto.setUserImage(registrationDto.getUserImage());
+            registrationDto.setImageType(registrationDto.getImageType());
+            BeanUtils.copyProperties(registrationDto, userRegistrationEntity);
+            userInteractionRepo.updateUserProfile(userRegistrationEntity);
+            return true;
+        }
+        return false;
+    }
 
+    @Override
+    public List<TicketBookingDto> getBookingDetails(Integer userLoginId) {
+        if (userLoginId!=null) {
+            List<TicketBookingEntity> bookingDetails = userInteractionRepo.getBookingDetails(userLoginId);
+            List<TicketBookingDto>  ticketBookingDtoList=  bookingDetails.stream().map(ticketBookingEntity -> {
+                TicketBookingDto ticketBookingDto1=new TicketBookingDto();
+                BeanUtils.copyProperties(ticketBookingEntity,ticketBookingDto1);
+                return ticketBookingDto1;
+            }).collect(Collectors.toList());
+            log.info("ticket booking details dto is ======================   {}",ticketBookingDtoList);
+          return ticketBookingDtoList;
+        }
+        return null;
+    }
 
 
 }

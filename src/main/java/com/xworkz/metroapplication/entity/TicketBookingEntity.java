@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Data
 @Slf4j
 @Table(name = "Booking_details")
+@NamedQuery(name = "findByUserLoginId" ,query = "SELECT T FROM TicketBookingEntity T WHERE T.userLoginId=:userLoginId")
 public class TicketBookingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

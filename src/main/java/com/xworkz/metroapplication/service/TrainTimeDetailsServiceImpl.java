@@ -20,6 +20,8 @@ import java.util.stream.Stream;
 public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
     @Autowired
     private TrainTimeDetailsRepo trainTimeDetailsRepo;
+    @Autowired
+    private FareCalculator fareCalculator;
 
     @Autowired
     private StationDetailsService stationDetailsService;
@@ -35,9 +37,10 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
             StationDetailsDto stationDetailsDto = stationDetailsService.onFindByStationNameService(trainTimeDetailsDto.getSource());
             if (stationDetailsDto != null) {
                 StationDetailsEntity stationDetailsEntity = stationDetailsService.onFindById(stationDetailsDto.getStationId());
+                Long calculatePrice = fareCalculator.calculatePrice(trainTimeDetailsDto.getSource(), trainTimeDetailsDto.getDestination());
                 BeanUtils.copyProperties(trainTimeDetailsDto, trainTimeDetailsEntity);
                 trainTimeDetailsEntity.setStation(stationDetailsEntity);
-                trainTimeDetailsEntity.setPrice(null);
+                trainTimeDetailsEntity.setPrice(String.valueOf(calculatePrice));
                 trainTimeDetailsRepo.saveTimeDetails(trainTimeDetailsEntity);
                 return "Data Saved";
             }

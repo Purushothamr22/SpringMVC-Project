@@ -121,7 +121,7 @@
 
                             </div>
                             <div class="mt-2 text-center text-dark justify-content-center">
-                                Already have an account? <a href="LoginByEmail.jsp" class="text-warning mx-2">Login</a>
+                                Already have an account? <a href="getUserLogin" class="text-warning mx-2">Login</a>
                             </div>
                         </div>
 

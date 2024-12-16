@@ -43,7 +43,8 @@ public class EmailClass {
                     + " <p>Please <strong> Do Not Share <strong>this e-mail with <strong>OTP<strong>  </p>"
                     + "<p>Registered Email ID: <strong>" + emailId + "</strong></p>"
                     + "<p>Date of Registration: <strong>" + formattedDateTime + "</strong></p>"
-                    + "<p><strong> OTP <strong> For logging  your account is -<strong> "
+                    +"<br>"
+                    + "<p><strong> OTP <strong> For logging  your account is :---<strong> "
                     + otp + "<strong>";
             helper.setText(content, true);
             mailSender.send(mimeMailMessage);

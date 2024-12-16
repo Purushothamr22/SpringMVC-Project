@@ -8,7 +8,7 @@ public interface StationInfoRepo {
     String saveTrainDetails(StationDetailsEntity trainDetailsEntity);
     StationDetailsEntity findByStationName(String stationName);
     List<StationDetailsEntity> findAll();
-
     StationDetailsEntity findById(Integer id);
+    String updateStationDetails(StationDetailsEntity stationDetailsEntity);
 
 }

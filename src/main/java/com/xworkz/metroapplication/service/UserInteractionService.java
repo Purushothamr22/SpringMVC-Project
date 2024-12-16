@@ -1,8 +1,7 @@
 package com.xworkz.metroapplication.service;
 
-import com.xworkz.metroapplication.dto.StationDetailsDto;
-import com.xworkz.metroapplication.dto.TrainTimeDetailsDto;
-import com.xworkz.metroapplication.dto.UserRegistrationDto;
+import com.xworkz.metroapplication.dto.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -12,7 +11,8 @@ public interface UserInteractionService {
     List<StationDetailsDto> onFindStationDetails();
     String saveTicketDetailsService(String source, String destination, String userLoginId,String tokenNumber );
 
-    String updatePriceService(String price,Integer trainId);
     UserRegistrationDto findByUserId(Integer userId);
+    boolean saveUserEditedProfile(UserRegistrationDto userRegistrationDto, MultipartFile file);
+    List<TicketBookingDto>  getBookingDetails(Integer userLoginId);
 
 }
