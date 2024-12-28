@@ -27,6 +27,13 @@ public class UserLoginController {
     public String getUserLogin(){
         return "UserLogin";
     }
+    @GetMapping("/getLogout")
+    public String getLogout(String emailId,Model model){
+        log.info("log out controller ");
+        UserRegistrationDto userRegistrationDto = userService.onFindByUserEmail(emailId);
+        String updateLogout = userService.updateLogout(emailId);
+        return "UserLogin";
+    }
     @GetMapping("/getUserOtpDetails")
     public String getUserOtpDetails(@RequestParam String emailId, Model model) {
         UserRegistrationDto userOtpDetails = userService.getUserOtpDetails(emailId);

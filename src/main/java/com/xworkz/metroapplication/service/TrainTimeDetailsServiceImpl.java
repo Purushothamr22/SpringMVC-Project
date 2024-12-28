@@ -31,7 +31,8 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
         if (trainTimeDetailsDto == null) {
             return "Data Error";
         }
-        TrainTimeDetailsDto trainTimeDetailsDto1 = onFindBySourceDestinationAndTimings(trainTimeDetailsDto.getSource(), trainTimeDetailsDto.getDestination(),trainTimeDetailsDto.getSourceTime(),trainTimeDetailsDto.getDestinationTime());
+        TrainTimeDetailsDto trainTimeDetailsDto1 = onFindBySourceAndDestination(trainTimeDetailsDto.getSource(), trainTimeDetailsDto.getDestination());
+        log.info("train time details result is :        {}",trainTimeDetailsDto1);
         if (trainTimeDetailsDto1 == null) {
             TrainTimeDetailsEntity trainTimeDetailsEntity = new TrainTimeDetailsEntity();
             StationDetailsDto stationDetailsDto = stationDetailsService.onFindByStationNameService(trainTimeDetailsDto.getSource());
@@ -62,19 +63,6 @@ public class TrainTimeDetailsServiceImpl implements TrainTimeDetailsService {
         return null;
     }
 
-    @Override
-    public TrainTimeDetailsDto onFindBySourceDestinationAndTimings(String source, String destination, String sourceTime, String destinationTime) {
-        if (source != null&& destination != null && destinationTime != null && sourceTime!=null) {
-            TrainTimeDetailsEntity sourceDestinationAndTimings = trainTimeDetailsRepo.findBySourceDestinationAndTimings(source, destination, sourceTime, destinationTime);
-            if (sourceDestinationAndTimings != null) {
-                TrainTimeDetailsDto trainTimeDetailsDto = new TrainTimeDetailsDto();
-                BeanUtils.copyProperties(sourceDestinationAndTimings, trainTimeDetailsDto);
-                return trainTimeDetailsDto;
-            }
-
-        }
-        return null;
-    }
 
     @Override
     public List<TrainTimeDetailsDto> findAll() {

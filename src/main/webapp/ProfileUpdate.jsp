@@ -66,7 +66,7 @@
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                         <li><a class="dropdown-item"
                                                 href="editProfile?emailId=${metroDto.emailId}">Profile Edit</a></li>
-                                        <li><a class="dropdown-item" href="getLoginPage">Log out</a></li>
+                                        <li><a class="dropdown-item" href="getLoginPage?emailId=${metroDto.emailId}">Log out</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -116,7 +116,7 @@
                                     style="width: 180px; height: 180px;">
                             </div>
 
-                            <form action="updateDetails" method="post" enctype="multipart/form-data">
+                            <form action="updateStationDetails" method="post" enctype="multipart/form-data">
                                 <input type="number" name="id" value="${metroDto.id}" hidden>
 
                                 <!-- Row 1: First Name, Last Name -->

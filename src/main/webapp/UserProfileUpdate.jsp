@@ -20,56 +20,103 @@
 
             <body class="bg-light">
 
-                <!-- Navigation Bar -->
-                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(15, 15, 15);">
-                    <div class="container-fluid">
-                        <div>
+                <div>
+                    <nav class="navbar navbar-expand-lg navbar-dark vw-100" style="background-color: rgb(13, 16, 19);">
+                        <div class="container-fluid">
                             <a class="navbar-brand" href="getIndex">
-                                <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
+                                <img src="https://www.x-workz.in/Logo.png" alt="Company Logo" style="max-height: 40px;">
                             </a>
+
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ms-auto text-center align-items-center">
+
+                                    <li class="nav-item mx-auto">
+                                        <img src="getImage/${verifyUserOtpDto.userImage}" alt="User Image"
+                                            class="rounded-circle border border-warning shadow-sm"
+                                            style="width: 50px; height: 50px; cursor: pointer;" data-bs-toggle="modal"
+                                            data-bs-target="#profileImageModal">
+                                    </li>
+                                    <li class="nav-item mx-3">
+                                        <a class="nav-link btn btn-primary text-light"
+                                            href="getBookingPage?emailId=${verifyUserOtpDto.emailId}">Book
+                                            Ticket</a>
+                                    </li>
+                                    <li class="nav-item mx-3">
+                                        <a class="nav-link btn btn-primary text-light"
+                                            href="viewBookingHistory?userLoginId=${verifyUserOtpDto.userRegistrationId}">Booking
+                                            History</a>
+                                    </li>
+                                    <!-- Dropdown Menu -->
+                                    <li class="nav-item dropdown mx-3">
+                                        <a class="nav-link dropdown-toggle btn btn-primary text-light" href="#"
+                                            id="userDropdown" role="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            ${verifyUserOtpDto.firstName}
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                            <li><a class="dropdown-item"
+                                                    href="editUserProfile?emailId=${verifyUserOtpDto.emailId}">Profile</a>
+                                            </li>
+                                            <li><a class="dropdown-item"
+                                                    href="getLogout?emailId=${verifyUserOtpDto.emailId}">Log out</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                    </nav>
+                </div>
 
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getIndex">Home</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-primary btn-outline-dark text-light"
-                                        href="getAdminPageByMail?emailId=${userDto.emailId}">Back</a>
-                                </li>
-                            </ul>
+                <div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-sm  modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="profileImageModalLabel">${verifyUserOtpDto.firstName}'s
+                                    Profile</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card">
+                                    <img src="getImage/${verifyUserOtpDto.userImage}" class="card-img-top"
+                                        alt="User Image">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">${verifyUserOtpDto.firstName}</h5>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </nav>
-                <h3 class="justify-content-center" style="color: green;">${msg}</h3>
-                <h3 class="justify-content-center" style="color: #ff5722">${errMsg}</h3>
+                </div>
 
-                <div class="row justify-content-center py-0 my-5">
+
+                <div class="row justify-content-center py-3 my-5 mb-4">
                     <div class="  col-12 col-md-6 "> <!-- Increased card size -->
                         <div class="card p-5 mx-auto  rounded-0 shadow-lg hover-shadow-lg border-dark"
                             style="background-color: rgba(231, 234, 248, 0.7);">
 
                             <div class="card-header text-center bg-transparent border-0">
-                                <h3 class="text-dark">User Details</h3>
+                                <h2 class="text-dark">User Details</h2>
                             </div>
+                            <h4 class="text-center text-bold mt-3 mb-3 " style="color: red;">${UserUpdateMsg}</h4>
 
                             <div class="mb-4 text-center">
-                                <img src="getImage/${userDto.userImage}" alt="Profile Image"
+                                <img src="getImage/${verifyUserOtpDto.userImage}" alt="Profile Image"
                                     class="img-thumbnail rounded-circle shadow-lg border  border-warning"
                                     style="width: 180px; height: 180px;">
                             </div>
 
-                            <form action="updateDetails" method="post" enctype="multipart/form-data">
-                                <input type="number" name="id" value="${userDto.id}" hidden>
+                            <form action="updateUserProfile" method="post" enctype="multipart/form-data">
+                                <input type="number" name="userRegistrationId"
+                                    value="${verifyUserOtpDto.userRegistrationId}" hidden>
 
                                 <!-- Row 1: First Name, Last Name -->
                                 <div class="row g-3 gx-5 mb-4">
@@ -77,13 +124,13 @@
                                         <label class="form-label">First Name</label>
                                         <input type="text" id="fName" name="firstName" placeholder="Enter First Name"
                                             class="form-control shadow-sm border border-dark"
-                                            value="${userDto.firstName}" onblur="fNameValidation()">
+                                            value="${verifyUserOtpDto.firstName}" onblur="fNameValidation()">
                                         <span id="firstName" class="text-danger"></span>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Last Name</label>
                                         <input type="text" id="lName" name="lastName" placeholder="Enter Last Name"
-                                            value="${userDto.lastName}"
+                                            value="${verifyUserOtpDto.lastName}"
                                             class="form-control shadow-sm border border-dark"
                                             onblur="lNameValidation()">
                                         <span id="lastName" class="text-danger"></span>
@@ -96,12 +143,12 @@
                                         <label class="form-label">Birth Date:</label>
                                         <input type="date" id="birthDate" name="birthdayDate"
                                             class="form-control shadow-sm border border-dark"
-                                            value="${userDto.birthdayDate}">
+                                            value="${verifyUserOtpDto.birthdayDate}">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Email ID</label>
                                         <input type="email" id="eId" name="emailId" placeholder="Enter Email Id"
-                                            value="${userDto.emailId}"
+                                            value="${verifyUserOtpDto.emailId}"
                                             class="form-control shadow-sm border border-dark" onblur="checkEmail()">
                                         <span id="emailId" class="text-danger"></span>
                                     </div>
@@ -112,33 +159,29 @@
                                     <div class="col-12 col-md-6">
                                         <label class="form-label">Mobile Number</label>
                                         <input type="tel" id="mNumber" name="mobileNumber"
-                                            placeholder="Enter Mobile Number" value="${userDto.mobileNumber}"
+                                            placeholder="Enter Mobile Number" value="${verifyUserOtpDto.mobileNumber}"
                                             class="form-control shadow-sm border border-dark"
                                             onblur="checkMobileNumber()">
                                         <span id="mobileNumber" class="text-danger"></span>
                                     </div>
 
-                                     <div class="col-12 col-md-6">
-                                                                            <label class="form-label">gender </label>
-                                                                            <input type="text" id="gen" name="gender" placeholder=" Enter gender"
-                                                                                value="${userDto.gender}"
-                                                                                class="form-control shadow-sm border border-dark">
-                                                                            <span id="gender" class="text-danger"></span>
-                                                                        </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label">gender </label>
+                                        <input type="text" id="gen" name="gender" placeholder=" Enter gender"
+                                            value="${verifyUserOtpDto.gender}"
+                                            class="form-control shadow-sm border border-dark">
+                                        <span id="gender" class="text-danger"></span>
+                                    </div>
 
                                 </div>
                                 <!-- Row 4: File  -->
-
-
-                                    <div class="row g-3 gx-5 mb-4">
-                                     <div class="col-12">
+                                <div class="row g-3 gx-5 mb-4">
+                                    <div class="col-12">
                                         <label class="form-label">Upload Profile Image</label>
-                                         <input type="file" id="file" name="file"
-                                         class="form-control shadow-sm border border-dark" />
-                                         </div>
-                                     </div>
+                                        <input type="file" id="file" name="file"
+                                            class="form-control shadow-sm border border-dark" />
+                                    </div>
                                 </div>
-
 
                                 <!-- Submit Button -->
                                 <div class="text-center mt-4">
@@ -146,21 +189,32 @@
                                         Profile</button>
                                 </div>
                             </form>
+
+
+
+                            </form>
                         </div>
+
+
+
                     </div>
                 </div>
 
 
 
-                <br>
-                <br>
                 <!-- Footer -->
-                <footer class=" text-white text-center py-3 " style="background-color: rgb(153, 166, 172);">
-                    <div class="container">
-                        <nav>
-                            <a href="#" class="mx-2 text-white">Privacy Policy</a>
-                            <a href="#" class="mx-2 text-white">Terms of Service</a>
-                        </nav>
+                <footer class="  text-light py-4 p-3  mt-4 text-center vw-100 " style="background-color: rgb(6, 8, 8);">
+                    <div class="container-fluid">
+                        <p class="mb-2">For assistance, email us at <strong>support@namma.metro.in</strong></p>
+                        <p class="mb-2">&copy; 2024 Namma Metro. All rights reserved.</p>
+                        <div>
+                            <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/facebook-new.png"
+                                    alt="Facebook"></a>
+                            <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/twitter.png"
+                                    alt="Twitter"></a>
+                            <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png"
+                                    alt="Instagram"></a>
+                        </div>
                     </div>
                 </footer>
 
@@ -233,6 +287,9 @@
 
                     }
                 </script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+                </script>
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
             </body>
 
             </html>

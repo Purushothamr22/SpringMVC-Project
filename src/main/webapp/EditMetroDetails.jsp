@@ -67,7 +67,7 @@
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                             <li><a class="dropdown-item"
                                                     href="editProfile?emailId=${metroDto.emailId}">Profile Edit</a></li>
-                                            <li><a class="dropdown-item" href="getLoginPage">Log out</a></li>
+                                            <li><a class="dropdown-item" href="getLoginPage?emailId=${metroDto.emailId}">Log out</a></li>
                                         </ul>
                                     </li>
                                 </ul>

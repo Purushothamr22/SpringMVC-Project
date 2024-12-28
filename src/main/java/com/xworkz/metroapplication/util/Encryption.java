@@ -1,5 +1,6 @@
 package com.xworkz.metroapplication.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
@@ -9,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 @Component
+@Slf4j
 public class Encryption {
 
     static Cipher cipher;
@@ -26,7 +28,7 @@ public class Encryption {
             Base64.Encoder encoder = Base64.getEncoder();
             return encoder.encodeToString(encryptedByte);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.info("Error in encrypt method :   =========== {}",e.getMessage());
         }
         return null;
     }
@@ -42,7 +44,7 @@ public class Encryption {
             byte[] decryptedByte = cipher.doFinal(encryptedTextByte);
             return new String(decryptedByte);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.info("Error in decrypt method :   =========== {}",e.getMessage());
         }
         return null;
     }

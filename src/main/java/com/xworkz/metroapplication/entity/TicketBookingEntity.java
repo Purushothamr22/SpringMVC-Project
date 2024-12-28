@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Slf4j
 @Table(name = "Booking_details")
 @NamedQuery(name = "findByUserLoginId" ,query = "SELECT T FROM TicketBookingEntity T WHERE T.userLoginId=:userLoginId")
+@NamedQuery(name = "findByTokenNumber" ,query = "SELECT T FROM TicketBookingEntity T WHERE T.tokenNumber=:tokenNumber")
 public class TicketBookingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

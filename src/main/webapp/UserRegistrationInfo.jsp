@@ -8,26 +8,37 @@
                 <meta charset="ISO-8859-1">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+                rel="stylesheet">
                 <title>Registration Page</title>
             </head>
 
             <body class="text-light" style="background-color: rgb(173, 187, 187);">
 
                 <!-- Navbar -->
-                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
-                    <div class="container-fluid d-flex justify-content-between align-items-center">
-                        <div>
-                            <a class="navbar-brand" href="getIndex">
-                                <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
-                            </a>
-                        </div>
-                        <div>
-                            <span class="navbar-text h5 text-dark">Government Metro Registration</span>
-                        </div>
-                        <div>
-                            <li class="btn btn-primary font-georgia text-light">
-                                <a class="nav-link " href="getIndex">Home</a>
-                            </li>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="getIndex">
+                            <img src="https://www.x-workz.in/Logo.png" alt="Metro Logo" style="max-height: 50px;">
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item me-2">
+                                    <a class="nav-link btn btn-primary text-light" href="getUserRegistrationInfo">
+                                        <i class="bi bi-person-plus-fill me-1"></i> New User Registration
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-primary text-light" href="getLoginPage">
+                                        <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </nav>
@@ -35,13 +46,15 @@
 
                 <div class="container d-flex justify-content-center">
 
-                    <h2 class="text-center " style="color: #ff5722;">${userInfoMsg}</h2>
+
 
                     <!-- Registration Card Section -->
                     <div class="col-md-6 d-flex align-items-center py-5">
                         <div class="card rounded-0 text-dark w-100"
                             style="background-color: rgb(232, 245, 245); padding: 10px 15px;">
                             <div class="card-body p-3">
+                                <h4 class="text-center text-bold mt-3 mb-3 " style="color: green;">${userInfoMsg}</h4>
+                                <h4 class="text-center text-bold mt-3 mb-3 " style="color: red;">${userErrorMsg}</h4>
                                 <h2 class="text-center mb-3">User Registration Form</h2>
                                 <form action="saveUserInfo" method="post" onblur="form()">
                                     <span id="formMessage"></span>
@@ -70,8 +83,7 @@
                                     <div class="row mb-2">
                                         <div class="col-md-6">
                                             <label class="form-label">Birth Date:</label>
-                                            <input type="date" id="birthDate" name="birthdayDate"
-                                                onblur="validateBirthDate()" class="form-control">
+                                            <input type="date" id="birthDate" name="birthdayDate" class="form-control">
 
                                         </div>
 
@@ -112,9 +124,15 @@
                                             <span id="mobileNumber"></span>
                                         </div>
                                     </div>
+
+                                    <div class="text-bold fs-5">
+                                        <input class="form-check-input border-dark " type="radio" name="flexRadioDefault" id="flexRadioDefault1" required> <u >Register Your Details</u> 
+                                      </div>
+
+
                                     <!-- Submit Button -->
                                     <div class="text-center mt-3">
-                                        <button id="button" type="submit" class="btn btn-primary w-100">Submit</button>
+                                        <button id="button" type="submit" class="btn btn-primary w-100">Register </button>
                                     </div>
 
                                 </form>
@@ -131,21 +149,33 @@
 
 
 
-                <footer class=" text-white py-3" style="background-color: rgb(133, 128, 139); margin: 0;">
-                    <div class="container-fluid d-flex justify-content-between align-items-center">
-                        <p class="mb-1">&copy; 2024 Metro Service. All rights reserved.</p>
-                        <nav class="d-flex">
-                            <a href="PrivacyPolicy.jsp" class="text-white me-3">Privacy Policy</a>
-                            <a href="TermsOfService.jsp" class="text-white me-3">Terms of Service</a>
-                            <a href="Support.jsp" class="text-white">Support</a>
+                <footer class="py-4 text-center bg-dark">
+                    <div class="container">
+                        <p class="section-content text-light">For more information, complaints, or inquiries, feel free
+                            to reach out to
+                            our customer service team at:</p>
+                        <p class="section-content text-light"><strong>Email:</strong> support@namma.metro.in</p>
+                        <p class="mb-0">&copy; 2024 Namma Metro. All rights reserved.</p>
+                        <nav class="mt-2">
+                            <a href="#">Privacy Policy</a> |
+                            <a href="#">Terms of Service</a> |
+                            <a href="#">Contact Us</a>
                         </nav>
+                        <div class="mt-3">
+                            <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/facebook-new.png"
+                                    alt="Facebook"></a>
+                            <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/twitter.png"
+                                    alt="Twitter"></a>
+                            <a href="#"><img src="https://img.icons8.com/ios-glyphs/30/ffffff/instagram-new.png"
+                                    alt="Instagram"></a>
+                        </div>
                     </div>
                 </footer>
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
                 <script>
                     function fNameValidation() {
-                        var fname = document.getElementById("fName").value
+                        let fname = document.getElementById("fName").value;
                         if (fname.trim() !== '' && fname.length > 3 && fname.length <= 25 && !/\d/.test(fname)) {
                             document.getElementById("firstName").innerHTML = "";
                         } else if (/\d/.test(fname)) {
@@ -155,28 +185,29 @@
                         }
                         checkForm();
                     }
-                    function lNameValidation() {
-                        var lname = document.getElementById("lName").value;
 
-                        if (names.trim() !== '' && names.length > 0 && names.length <= 25 && !/\d/.test(names)) {
+                    function lNameValidation() {
+                        let lname = document.getElementById("lName").value;
+                        if (lname.trim() !== '' && lname.length > 0 && lname.length <= 25 && !/\d/.test(lname)) {
                             document.getElementById("lastName").innerHTML = "";
-                        } else if (/\d/.test(names) || names.length < 1) {
-                            document.getElementById("lastName").innerHTML = "<span style='color:red;'>Last name cannot be a number and must be atleast 1.</span>";
+                        } else if (/\d/.test(lname) || lname.length < 1) {
+                            document.getElementById("lastName").innerHTML = "<span style='color:red;'>Last name cannot contain numbers and must be at least 1 character.</span>";
                         }
                         checkForm();
                     }
 
 
+
                     const checkMobileNumber = async () => {
-                        var mNumber = document.getElementById("mNumber").value;
-                        var button = document.getElementById("button");
-                        var mobileNumber = document.getElementById("mobileNumber");
+                        let mNumber = document.getElementById("mNumber").value;
+                        let button = document.getElementById("button");
+                        let mobileNumber = document.getElementById("mobileNumber");
 
                         if (!(mNumber.length == 10)) {
                             mobileNumber.innerHTML = "<span style='color:red'>Mobile Number length should be 10</span>";
                             button.setAttribute("disabled", "disabled");
                         } else {
-                            var response = await axios('http://localhost:8083/metro-application/isMobileNoExists?mobileNumber=' + mNumber);
+                            let response = await axios('http://localhost:8083/metro-application/isMobileNoExists?mobileNumber=' + mNumber);
                             if (response.data === "Mobile Number Exists") {
                                 mobileNumber.innerHTML = "<span style='color:red'>Mobile Number Exists</span>";
                                 button.setAttribute("disabled", "disabled");
@@ -188,9 +219,9 @@
                     }
 
                     const checkEmail = async () => {
-                        var email = document.getElementById("eId").value;
-                        var button = document.getElementById("button");
-                        var response = await axios('http://localhost:8083/metro-application/isUserEmailExists?emailId=' + email);
+                        let email = document.getElementById("eId").value;
+                        let button = document.getElementById("button");
+                        let response = await axios('http://localhost:8083/metro-application/isUserEmailExists?emailId=' + email);
                         if (response.data === "Email Exists") {
                             document.getElementById("emailId").innerHTML = "<span style='color:red'>Email exists</span>";
                             button.setAttribute("disabled", "disabled");
@@ -199,41 +230,31 @@
                             checkForm();
                         }
                     }
-                    const today = new Date();
-                    function validateBirthDate() {
-                        var birthDateValue = document.getElementById('birthDate').value;
-                        var birthDate = new Date(birthDateValue);
-                        
-                        if (birthDate > today) {
-                            button.setAttribute("disabled", "disabled");
-                        }
-                        checkForm();
 
-                    }
+
 
                     function checkForm() {
-                        var names = document.getElementById("fName").value;
-                        var lnames = document.getElementById("lName").value;
-                        var pass = document.getElementById("pass").value;
-                        const cpass = document.getElementById("cpass").value;
-                        var mNumber = document.getElementById("mNumber").value;
-                        var email = document.getElementById("eId").value;
-                        var birthDateValue = document.getElementById('birthDate').value;
-                        var button = document.getElementById("button");
+                        let fname = document.getElementById("fName").value;
+                        let lname = document.getElementById("lName").value;
+                        let mNumber = document.getElementById("mNumber").value;
+                        let email = document.getElementById("eId").value;
+                        let button = document.getElementById("button");
 
-
-                        if ((names.trim() !== '' && names.length > 3 && names.length <= 25 && !/\d/.test(names)) &&
-                            (lnames.trim() !== '' && lnames.length > 0 && lnames.length <= 25 && !/\d/.test(lnames)) &&
-                            (pass.trim() !== '' && pass.length >= 8 && pass.length <= 12 && pass === cpass) &&
-                            (mNumber.length == 10) &&
-                            (email.trim() !== "")&&(birthDate < today)
+                        if (
+                            fname.trim() !== '' && fname.length > 3 && fname.length <= 25 && !/\d/.test(fname) &&
+                            lname.trim() !== '' && lname.length > 0 && lname.length <= 25 && !/\d/.test(lname) &&
+                            mNumber.length === 10 && !isNaN(mNumber) &&
+                            email.trim() !== "" && email.includes('@') && email.includes('.')
                         ) {
-                            button.removeAttribute("disabled")
-                        } else {
+                            button.removeAttribute("disabled");
                             document.getElementById("formMessage").innerHTML = "";
+                        } else {
+                            document.getElementById("formMessage").innerHTML = "<span style='color:red;'>   </span>";
                             button.setAttribute("disabled", "");
                         }
                     }
+
+
                 </script>
                 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 

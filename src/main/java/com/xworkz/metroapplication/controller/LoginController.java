@@ -58,7 +58,8 @@ public class LoginController {
     }
 
     @GetMapping("/getLoginPage")
-    public String getLoginPage() {
+    public String getLoginPage(String emailId,Model model) {
+        metroService.updateLogoutRepo(emailId);
         return "LoginPage";
     }
 

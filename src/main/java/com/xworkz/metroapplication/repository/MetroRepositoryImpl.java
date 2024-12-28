@@ -185,6 +185,25 @@ public class MetroRepositoryImpl implements MetroRepository {
         }
         return null;
     }
+    @Override
+    public String updateLogoutRepo(String emailId ,String logoutTime) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            EntityTransaction transaction = entityManager.getTransaction();
+            Query query = entityManager.createNamedQuery("adminUpdateLogout");
+            transaction.begin();
+            query.setParameter("emailId",emailId);
+            query.setParameter("logoutTime",logoutTime);
+            query.executeUpdate();
+            transaction.commit();
+            return "Save Success";
+        }catch (Exception e){
+            log.error("error in update log out time repo  ============= {}",e.getMessage());
+            return "Save Error";
+        }finally {
+            entityManager.close();
+        }
+    }
 
 
 

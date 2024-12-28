@@ -12,7 +12,8 @@ public interface UserInteractionService {
     String saveTicketDetailsService(String source, String destination, String userLoginId,String tokenNumber );
 
     UserRegistrationDto findByUserId(Integer userId);
-    boolean saveUserEditedProfile(UserRegistrationDto userRegistrationDto, MultipartFile file);
+    boolean updateUserProfileService(UserRegistrationDto userRegistrationDto, MultipartFile file);
     List<TicketBookingDto>  getBookingDetails(Integer userLoginId);
+    TicketBookingDto getHistoryByTid(String tokenNumber);
 
 }

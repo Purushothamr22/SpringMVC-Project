@@ -79,7 +79,6 @@ public class StationDetailsController {
     public String getByStationName( @RequestParam String stationName,@RequestParam String emailId, Model model){
         RegistrationDto registrationDto = metroService.onFindByEmailId(emailId);
         StationDetailsDto stationDetailsDto = stationDetailsService.onFindByStationNameService(stationName);
-        log.info("User Dto is given as :: ================== {}",registrationDto);
         model.addAttribute("stationDetailsDtoList",stationDetailsDto);
         model.addAttribute("metroDto",registrationDto);
         return "UpdatedDetails";
@@ -98,8 +97,6 @@ public class StationDetailsController {
 
     @PostMapping("/editMetroDetails")
     public  String editMetroDetails(TrainTimeDetailsDto trainTimeDetailsDto,StationDetailsDto stationDetailsDto, Model model){
-        log.info("train dto is ============== {}",trainTimeDetailsDto);
-        log.info("station dto is ================ {}",stationDetailsDto);
         String updateMetroDetails = stationDetailsService.updateMetroDetails(stationDetailsDto, trainTimeDetailsDto);
         if (updateMetroDetails.equalsIgnoreCase("Save success")) {
             return "UpdatedDetails";

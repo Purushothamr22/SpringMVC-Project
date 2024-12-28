@@ -13,34 +13,34 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa; /* Light gray for consistency */
+            background-color: #f8f9fa;
         }
 
         .navbar {
-            background-color: #090a0c; /* Primary blue */
+            background-color: #090a0c;
         }
 
         .navbar-text {
-            color: white; /* Ensure contrast against the navbar background */
+            color: white;
         }
 
         .card {
-            background-color: #ffffff; /* White background for content */
-            border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+            background-color: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary {
-            background-color: #0d6efd; /* Consistent primary blue */
+            background-color: #0d6efd;
             border-color: #0d6efd;
         }
 
         .btn-primary:hover {
-            background-color: #084298; /* Darker shade on hover */
+            background-color: #084298;
         }
 
         footer {
-            background-color: #080a0e; /* Primary blue */
-            color: white; /* Text contrast */
+            background-color: #080a0e;
+            color: white;
         }
 
         label {

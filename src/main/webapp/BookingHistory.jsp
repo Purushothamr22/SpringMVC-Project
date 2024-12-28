@@ -53,8 +53,11 @@
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                             <li><a class="dropdown-item"
-                                                    href="?emailId=${verifyUserOtpDto.emailId}">Profile</a></li>
-                                            <li><a class="dropdown-item" href="getUserLogin">Log out</a></li>
+                                                    href="editUserProfile?emailId=${verifyUserOtpDto.emailId}">Profile</a>
+                                            </li>
+                                            <li><a class="dropdown-item"
+                                                    href="getLogout?emailId=${verifyUserOtpDto.emailId}">Log out</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -86,7 +89,27 @@
                     </div>
                 </div>
 
+                <!-- Search by token  -->
+                <div class="input-group d-flex align-items-center justify-content-start py-4 mx-3"
+                    style="max-width: 25%;">
+                    <form action="getHistoryById" class="d-flex w-100">
+                        <input type="text" class="form-control border-dark rounded-0 me-2"
+                            placeholder="Enter Token Number" name="tokenNumber">
 
+                        <input type="text" name="userLoginId" value="${verifyUserOtpDto.userRegistrationId}" hidden>
+
+                        <!-- Search Button -->
+                        <button class="btn btn-primary btn-outline-secondary text-dark px-4" type="submit"
+                            id="button-addon1" 
+                            >Search</button>
+                    </form>
+                </div>
+
+
+               
+                
+
+                <!-- displaying Booking Details  -->
                 <div class="container my-5 py-4 p-3">
                     <h2 class="text-center mb-4">Booking Information</h2>
 
@@ -94,7 +117,6 @@
                         <table class="table table-bordered table-hover table-dark table-striped">
                             <thead class="table-dark">
                                 <tr>
-                                    <th>Booking ID</th>
                                     <th>Token Number </th>
                                     <th>Source </th>
                                     <th>Destination</th>
@@ -106,7 +128,6 @@
                             <tbody id="detail">
                                 <c:forEach var="metroInfo" items="${bookingList}">
                                     <tr>
-                                        <td>${metroInfo.bookingId}</td>
                                         <td>${metroInfo.tokenNumber}</td>
                                         <td>${metroInfo.source}</th>
                                         <td>${metroInfo.destination}</th>
@@ -120,6 +141,7 @@
                     </div>
                 </div>
 
+                <!-- footer  -->
                 <footer class="bg-dark text-light py-4 p-3   text-center ">
                     <div class="container-fluid">
                         <p class="mb-2">For assistance, email us at <strong>support@namma.metro.in</strong></p>

@@ -17,4 +17,6 @@ public interface UserRepository {
 
     UserRegistrationEntity findByMobileNo(Long mobileNumber);
 
+    String updateLogoutRepo(String emailId,String logoutTime);
+
 }

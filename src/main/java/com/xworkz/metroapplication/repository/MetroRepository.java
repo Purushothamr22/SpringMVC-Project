@@ -19,6 +19,7 @@ public interface MetroRepository {
     boolean userBlockedByEmail(String emailId, boolean isAccountBlocked, Integer noOfAttempts);
     String updateUserProfile(RegistrationEntity registrationEntity);
     RegistrationEntity findByMobileNumber(Long mobileNumber);
+    String updateLogoutRepo(String emailId,String logoutTime);
 
 
 }

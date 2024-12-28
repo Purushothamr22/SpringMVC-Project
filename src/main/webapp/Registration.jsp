@@ -13,12 +13,9 @@
 
             <body class="bg-light text-dark">
 
-                <!-- Full Mask Overlay -->
-                <!-- <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.7);">
-                </div> -->
-
+                
                 <!-- Navbar -->
-                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(127, 134, 138);">
+                <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(0, 0, 0);">
                     <div class="container-fluid d-flex justify-content-between align-items-center">
                         <div>
                             <a class="navbar-brand" href="getIndex">
@@ -26,11 +23,11 @@
                             </a>
                         </div>
                         <div>
-                            <span class="navbar-text h5 text-dark  ">Government Metro Registratioin </span>
+                            <span class="navbar-text h5 text-light  ">Government Metro Registratioin </span>
                         </div>
                         <div>
                             <li class="btn btn-primary btn-outline-dark">
-                                <a class="nav-link text-light " href="getIndex">Home</a>
+                                <a class="nav-link text-light " href="getIndex">Back</a>
                             </li>
                         </div>
                     </div>
@@ -148,7 +145,7 @@
                 </div>
 
                 <br>
-                <footer class=" text-white py-3" style="background-color: rgb(133, 128, 139);">
+                <footer class=" text-white py-3" style="background-color: rgb(0, 0, 0);">
                     <div class="container text-center">
                         <p class="mb-1">&copy; 2024 Metro Service. All rights reserved.</p>
                         <nav>

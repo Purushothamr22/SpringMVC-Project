@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @Repository
 @Slf4j
 
+
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
@@ -76,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
         if (emailId != null && otp != null) {
             UserRegistrationDto userRegistrationDto = onFindByUserEmail(emailId);
-            log.info("user dto from onSaveLoginInfo is ============== "+userRegistrationDto);
+            log.info("user dto from onSaveLoginInfo is ============== " + userRegistrationDto);
             UserLoginDto userLoginDto = new UserLoginDto();
             userLoginDto.setUserLoginId(userRegistrationDto.getUserRegistrationId());
             userLoginDto.setFirstName(userRegistrationDto.getFirstName());
@@ -97,7 +98,7 @@ public class UserServiceImpl implements UserService {
         if (emailId != null) {
             UserRegistrationEntity userOtpDetailsByEmail = userRepository.findUserOtpDetailsByEmail(emailId);
             String updateUserOtp = updateUserOtp(emailId);
-            if (userOtpDetailsByEmail != null&&updateUserOtp.equalsIgnoreCase("otp updated")) {
+            if (userOtpDetailsByEmail != null && updateUserOtp.equalsIgnoreCase("otp updated")) {
                 UserRegistrationDto userRegistrationDto = new UserRegistrationDto();
                 BeanUtils.copyProperties(userOtpDetailsByEmail, userRegistrationDto);
                 return userRegistrationDto;
@@ -122,11 +123,16 @@ public class UserServiceImpl implements UserService {
         UserRegistrationDto userRegistrationDto = onFindByUserEmail(emailId);
         if (otp.equals(encryption.decrypt(userRegistrationDto.getOtp()))) {
             String onSaveLoginInfo = onSaveLoginInfo(emailId, otp);
-            log.info("saving details is ===================== " + onSaveLoginInfo);
-            log.info("otp is present");
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String updateLogout(String emailId) {
+        String logoutTime = LocalDateTime.now().toString();
+        log.info("Log out time is ============= {}", logoutTime);
+        return userRepository.updateLogoutRepo(emailId, logoutTime);
     }
 
 

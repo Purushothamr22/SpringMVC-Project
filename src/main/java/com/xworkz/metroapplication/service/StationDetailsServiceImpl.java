@@ -42,7 +42,6 @@ public class StationDetailsServiceImpl implements StationDetailsService {
     @Override
     public StationDetailsDto onFindByStationNameService(String stationName) {
         if (stationName != null) {
-            log.info("onFindByStationNameService service   started ");
             StationDetailsEntity trainDetailsEntity = stationInfoRepo.findByStationName(stationName);
             StationDetailsDto trainDetailsDto = new StationDetailsDto();
             if (trainDetailsEntity != null) {
@@ -107,8 +106,6 @@ public class StationDetailsServiceImpl implements StationDetailsService {
             BeanUtils.copyProperties(trainTimeDetailsDto,trainTimeDetailsEntity);
             String updateStationDetails = stationInfoRepo.updateStationDetails(stationDetailsEntity);
             String updateTimingDetails = trainTimeDetailsRepo.updateTimingDetails(trainTimeDetailsEntity);
-            log.info("Station Details Status :    {}",updateStationDetails);
-            log.info("Timing Details Status :    {}",updateTimingDetails);
             if (updateTimingDetails.equalsIgnoreCase( "Save success") && updateStationDetails.equalsIgnoreCase( "Save success")) {
                 return "Save success";
             }

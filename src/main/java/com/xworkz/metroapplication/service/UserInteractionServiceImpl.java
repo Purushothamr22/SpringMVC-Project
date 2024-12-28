@@ -85,7 +85,8 @@ public class UserInteractionServiceImpl implements UserInteractionService {
     }
 
     @Override
-    public boolean saveUserEditedProfile(UserRegistrationDto userRegistrationDto, MultipartFile file) {
+    public boolean updateUserProfileService(UserRegistrationDto userRegistrationDto, MultipartFile file) {
+        log.info("given dto from ui is ==================== {}",userRegistrationDto);
         UserRegistrationDto registrationDto = userService.onFindByUserEmail(userRegistrationDto.getEmailId());
         UserRegistrationEntity userRegistrationEntity = new UserRegistrationEntity();
         if (file != null && !file.isEmpty()) {
@@ -95,17 +96,29 @@ public class UserInteractionServiceImpl implements UserInteractionService {
                 Files.write(path, bytes);
                 registrationDto.setUserImage(file.getOriginalFilename());
                 registrationDto.setImageType(file.getContentType());
+                registrationDto.setFirstName(userRegistrationDto.getFirstName());
+                registrationDto.setBirthdayDate(userRegistrationDto.getBirthdayDate());
+                registrationDto.setGender(userRegistrationDto.getGender());
+                registrationDto.setLastName(userRegistrationDto.getLastName());
+                registrationDto.setMobileNumber(userRegistrationDto.getMobileNumber());
+                registrationDto.setEmailId(userRegistrationDto.getEmailId());
                 BeanUtils.copyProperties(registrationDto, userRegistrationEntity);
-                userInteractionRepo.updateUserProfile(userRegistrationEntity);
+                userInteractionRepo.updateUserProfileRepo(userRegistrationEntity);
                 return true;
             } catch (IOException e) {
-                log.info("Error in saveUserEditedProfile-------------------{}", e.getMessage());
+                log.info("Error in updateUserProfileService-------------------{}", e.getMessage());
             }
         } else {
             registrationDto.setUserImage(registrationDto.getUserImage());
             registrationDto.setImageType(registrationDto.getImageType());
+            registrationDto.setFirstName(userRegistrationDto.getFirstName());
+            registrationDto.setBirthdayDate(userRegistrationDto.getBirthdayDate());
+            registrationDto.setGender(userRegistrationDto.getGender());
+            registrationDto.setLastName(userRegistrationDto.getLastName());
+            registrationDto.setMobileNumber(userRegistrationDto.getMobileNumber());
+            registrationDto.setEmailId(userRegistrationDto.getEmailId());
             BeanUtils.copyProperties(registrationDto, userRegistrationEntity);
-            userInteractionRepo.updateUserProfile(userRegistrationEntity);
+            userInteractionRepo.updateUserProfileRepo(userRegistrationEntity);
             return true;
         }
         return false;
@@ -120,8 +133,19 @@ public class UserInteractionServiceImpl implements UserInteractionService {
                 BeanUtils.copyProperties(ticketBookingEntity,ticketBookingDto1);
                 return ticketBookingDto1;
             }).collect(Collectors.toList());
-            log.info("ticket booking details dto is ======================   {}",ticketBookingDtoList);
+//            log.info("ticket booking details dto is ======================   {}",ticketBookingDtoList);
           return ticketBookingDtoList;
+        }
+        return null;
+    }
+
+    @Override
+    public TicketBookingDto getHistoryByTid(String tokenNumber){
+        if (tokenNumber != null) {
+            TicketBookingEntity historyByTid = userInteractionRepo.getHistoryByTid(tokenNumber);
+            TicketBookingDto ticketBookingDto=new TicketBookingDto();
+            BeanUtils.copyProperties(historyByTid,ticketBookingDto);
+            return ticketBookingDto;
         }
         return null;
     }

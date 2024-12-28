@@ -36,20 +36,19 @@ public class UserRegistrationController {
             return "UserRegistrationInfo";
         }
         String onSaveUserInfo = userService.onSaveUserInfo(userRegistrationDto);
+        log.info("Save registration status :         {}",onSaveUserInfo);
         if (onSaveUserInfo.equals("Data saved")) {
             String registrationEmail = emailClass.sendRegistrationEmail(userRegistrationDto.getEmailId(), userRegistrationDto.getFirstName());
-            log.info("registration email result is ---------------- {}",registrationEmail);
             model.addAttribute("userInfoMsg", "Registration Successful");
             return "UserRegistrationInfo";
         }
+        model.addAttribute("userErrorMsg", "Registration Error");
         return "UserRegistrationInfo";
     }
     @GetMapping("/isUserEmailExists")
     public ResponseEntity<String> isUserEmailExists(@RequestParam String emailId) {
         if (emailId != null) {
-            log.info("email sent is ==================== "+emailId);
             UserRegistrationDto userRegistrationDto = userService.onFindByUserEmail(emailId);
-            log.info("dto obtained  is ==================== {}",userRegistrationDto);
             if (userRegistrationDto != null) {
                 return ResponseEntity.ok("Email Exists");
             }

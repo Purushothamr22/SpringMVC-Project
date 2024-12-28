@@ -69,7 +69,7 @@
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                             <li><a class="dropdown-item"
                                                     href="editProfile?emailId=${details.emailId}">Profile Edit</a></li>
-                                            <li><a class="dropdown-item" href="getLoginPage">Log out</a></li>
+                                            <li><a class="dropdown-item" href="getLoginPage?emailId=${details.emailId}">Log out</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -105,6 +105,9 @@
 
                 <!-- Add Train Time Form -->
                 <div class="container my-5">
+                <div>
+                <h3 class="text-center text-warning mt-2 my-2  ">${TimeDetailsMsg}</h3>
+                </div>
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="card shadow rounded">

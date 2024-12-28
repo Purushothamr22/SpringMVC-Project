@@ -1,5 +1,6 @@
 package com.xworkz.metroapplication.repository;
 
+import com.xworkz.metroapplication.dto.TicketBookingDto;
 import com.xworkz.metroapplication.entity.StationDetailsEntity;
 import com.xworkz.metroapplication.entity.TicketBookingEntity;
 import com.xworkz.metroapplication.entity.TrainTimeDetailsEntity;
@@ -14,8 +15,8 @@ public interface UserInteractionRepo {
     String saveTicketDetails(TicketBookingEntity ticketBookingEntity);
 
     UserRegistrationEntity findByUserIdRepo(Integer userId);
-    String updateUserProfile(UserRegistrationEntity userRegistrationEntity);
+    String updateUserProfileRepo(UserRegistrationEntity userRegistrationEntity);
     List<TicketBookingEntity> getBookingDetails(Integer userLoginId);
-
+    TicketBookingEntity getHistoryByTid(String tokenNumber);
 
 }

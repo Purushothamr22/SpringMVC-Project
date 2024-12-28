@@ -60,7 +60,7 @@
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                             <li><a class="dropdown-item"
                                                     href="editProfile?emailId=${details.emailId}">Profile Edit</a></li>
-                                            <li><a class="dropdown-item" href="getLoginPage">Log out</a></li>
+                                            <li><a class="dropdown-item" href="getLoginPage?emailId=${details.emailId}">Log out</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -112,7 +112,7 @@
 
 
                 <!-- Footer Section -->
-                <footer class="bg-dark text-light py-4 text-center fixed-bottom">
+                <footer class=" text-light py-4 text-center fixed-bottom" style="background-color: rgb(7, 8, 8);">
                     <div class="container">
                         <p class="mb-2">For assistance, email us at <strong>support@namma.metro.in</strong></p>
                         <p class="mb-2">&copy; 2024 Namma Metro. All rights reserved.</p>

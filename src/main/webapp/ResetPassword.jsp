@@ -16,18 +16,50 @@
     i {
         cursor: pointer;
     }
+    .navbar {
+                background-color: #090a0c;
+            }
+    .navbar-text {
+      color: white;
+    }
+    .btn-primary {
+      background-color: #0d6efd;
+      border-color: #0d6efd;
+    }
+
+    .btn-primary:hover {
+       background-color: #084298;
+    }
 </style>
 
 <body class="bg-light">
 
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(12, 13, 14);">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="https://www.x-workz.in/Logo.png" alt="Company Logo" style="max-height: 40px;">
-            </a>
-        </div>
-    </nav>
+     <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid d-flex justify-content-between align-items-center">
+                <div>
+                    <a class="navbar-brand" href="getIndex">
+                        <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo" style="max-height: 50px;">
+                    </a>
+                </div>
+                <div>
+                    <span class="navbar-text h5">Government Metro</span>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-primary text-light" href="getForgotPassword">Back</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
     <div class="row justify-content-center py-0 my-5">
         <div class="col-12 col-md-6">
@@ -37,12 +69,7 @@
                 </div>
                 <form action="resetPassword" method="post">
 
-                    <!-- Current Password -->
-                    <div class="mb-4">
-                        <label for="currentPassword" class="form-label">Current Password</label>
-                        <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter Current Password" class="form-control shadow-sm border border-dark">
-                        <span id="currentPasswordError" class="text-danger"></span>
-                    </div>
+
 
                     <!-- New Password -->
                     <div class="mb-4">

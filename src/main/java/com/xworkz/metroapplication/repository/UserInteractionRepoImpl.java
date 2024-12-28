@@ -91,7 +91,8 @@ public class UserInteractionRepoImpl implements UserInteractionRepo {
     }
 
     @Override
-    public String updateUserProfile(UserRegistrationEntity userRegistrationEntity) {
+    public String updateUserProfileRepo(UserRegistrationEntity userRegistrationEntity) {
+        log.info("Entity given to repo is ++++++++++++++++++++ {}",userRegistrationEntity);
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
@@ -117,8 +118,26 @@ public class UserInteractionRepoImpl implements UserInteractionRepo {
             query.setParameter("userLoginId", userLoginId);
             List<TicketBookingEntity> resultList = query.getResultList();
             transaction.commit();
-            log.info("List of booking details entity is ==============   {}",resultList);
+//            log.info("List of booking details entity is ==============   {}",resultList);
             return resultList;
+        } catch (Exception e) {
+            log.error("Exception in findByUserIdRepo ========= {}", e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public TicketBookingEntity getHistoryByTid(String tokenNumber) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        try {
+            EntityTransaction transaction = entityManager.getTransaction();
+            Query query = entityManager.createNamedQuery("findByTokenNumber");
+            transaction.begin();
+            query.setParameter("tokenNumber", tokenNumber);
+            TicketBookingEntity result = (TicketBookingEntity) query.getSingleResult();
+            transaction.commit();
+            log.info(" booking details entity is ==============   {}",result);
+            return result;
         } catch (Exception e) {
             log.error("Exception in findByUserIdRepo ========= {}", e.getMessage());
             return null;

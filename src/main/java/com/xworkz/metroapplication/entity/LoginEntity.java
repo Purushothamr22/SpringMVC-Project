@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "login_details")
-
+@NamedQuery(name = "adminUpdateLogout",query = "UPDATE  LoginEntity r SET r.logoutTime = :logoutTime WHERE r.emailId = :emailId")
 public class LoginEntity {
 
     @Id

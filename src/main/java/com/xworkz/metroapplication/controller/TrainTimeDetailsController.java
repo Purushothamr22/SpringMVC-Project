@@ -62,6 +62,9 @@ public class TrainTimeDetailsController {
             model.addAttribute("stationDetailsDtoList",stationDetailsDtoList);
             return "TrainTimeDetails";
         }
+        model.addAttribute("TimeDetailsMsg","Data is  Present ");
+        model.addAttribute("details", registrationDto);
+        model.addAttribute("stationDetailsDtoList",stationDetailsDtoList);
         return "TrainTimeDetails";
     }
 

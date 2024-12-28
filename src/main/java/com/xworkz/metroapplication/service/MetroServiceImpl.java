@@ -213,6 +213,12 @@ public class MetroServiceImpl implements MetroService {
         return false;
     }
 
+    @Override
+    public String updateLogoutRepo(String emailId) {
+       String logoutTime=LocalDateTime.now().toString();
+        return metroRepository.updateLogoutRepo(emailId, logoutTime);
+    }
+
 
 }
 

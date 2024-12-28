@@ -14,47 +14,56 @@
 
 <body class="bg-light">
 
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #030303;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="getIndex">
-                <img src="https://www.x-workz.in/Logo.png" alt="Company Logo" style="max-height: 50px;">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <div>
+                        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(8, 9, 10);">
+                            <div class="container-fluid">
+                                <a class="navbar-brand" href="getIndex">
+                                    <img src="https://www.x-workz.in/Logo.png" alt="Company Logo" style="max-height: 40px;">
+                                </a>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto text-center align-items-center">
-                    <li class="nav-item mx-2">
-                        <img src="getImage/${verifyUserOtpDto.userImage}" alt="User Image"
-                            class="rounded-circle border border-warning shadow-sm" style="width: 50px; height: 50px;"
-                            data-bs-toggle="modal" data-bs-target="#profileImageModal">
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="btn btn-primary text-light"
-                            href="getBookingPage?emailId=${verifyUserOtpDto.emailId}">Book Ticket</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a class="btn btn-primary text-light"
-                            href="viewBookingHistory?userLoginId=${verifyUserOtpDto.userRegistrationId}">Booking
-                            History</a>
-                    </li>
-                    <li class="nav-item dropdown mx-2">
-                        <a class="btn btn-primary dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            ${verifyUserOtpDto.firstName}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="?emailId=${verifyUserOtpDto.emailId}">Profile</a></li>
-                            <li><a class="dropdown-item" href="getUserLogin">Log out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                    aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+
+                                <div class="collapse navbar-collapse" id="navbarNav">
+                                    <ul class="navbar-nav ms-auto text-center align-items-center">
+
+                                        <li class="nav-item mx-auto">
+                                            <img src="getImage/${verifyUserOtpDto.userImage}" alt="User Image"
+                                                class="rounded-circle border border-warning shadow-sm"
+                                                style="width: 50px; height: 50px; cursor: pointer;" data-bs-toggle="modal"
+                                                data-bs-target="#profileImageModal">
+                                        </li>
+                                        <li class="nav-item mx-3">
+                                            <a class="nav-link btn btn-primary text-light"
+                                                href="getBookingPage?emailId=${verifyUserOtpDto.emailId}">Book
+                                                Ticket</a>
+                                        </li>
+                                        <li class="nav-item mx-3">
+                                            <a class="nav-link btn btn-primary text-light"
+                                                href="viewBookingHistory?userLoginId=${verifyUserOtpDto.userRegistrationId}">Booking
+                                                History</a>
+                                        </li>
+                                        <!-- Dropdown Menu -->
+                                        <li class="nav-item dropdown mx-3">
+                                            <a class="nav-link dropdown-toggle btn btn-primary text-light" href="#"
+                                                id="userDropdown" role="button" data-bs-toggle="dropdown"
+                                                aria-expanded="false">
+                                                ${verifyUserOtpDto.firstName}
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                                <li><a class="dropdown-item"
+                                                        href="editUserProfile?emailId=${verifyUserOtpDto.emailId}">Profile</a></li>
+                                                <li><a class="dropdown-item" href="getLogout?emailId=${verifyUserOtpDto.emailId}">Log out</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
 
     <!-- Profile Image Modal -->
     <div class="modal fade" id="profileImageModal" tabindex="-1" aria-labelledby="profileImageModalLabel"
@@ -75,7 +84,7 @@
     </div>
 
     <!-- Booking Section -->
-    <section class="container my-5 py-4">
+    <section class="container my-5 py-4 p-5">
         <div class="card mx-auto shadow p-4" style="max-width: 600px;">
             <h3 class="text-center mb-4">Book Your Ticket</h3>
             <form id="stationForm">
@@ -92,7 +101,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <select id="destinationId" class="form-select" name="destination" onblur="checkPrice()">
+                    <select id="destinationId" class="form-select" name="destination" ">
                         <option value="" disabled selected>Select Destination</option>
                         <c:forEach var="station" items="${stationDetailsDtoList}">
                             <option value="${station.stationName}">${station.stationName}</option>
@@ -100,6 +109,13 @@
                     </select>
                     <span id="des" class="text-danger small"></span>
                 </div>
+                <div class="form-check mb-3 text-center">
+
+                        <label class="form-check-label " for="agreeTerms">
+                            Generate Price !!!!!!!!!!
+                        </label>
+                        <input class="form-check-input border-success " type="checkbox" onclick="checkPrice() ">
+                    </div>
 
                 <div class="text-center mb-3">
                     <h4 id="price" class="text-primary"></h4>
@@ -112,7 +128,7 @@
     </section>
 
     <!-- Footer Section -->
-    <footer class="text-light py-4 p-3 text-center fixed-bottom" style="background-color: #08090a;">
+    <footer class="text-light py-4  p-3 text-center " style="background-color: #08090a;">
         <div class="container-fluid">
             <p class="mb-2">For assistance, email us at <strong>support@namma.metro.in</strong></p>
             <p class="mb-2">&copy; 2024 Namma Metro. All rights reserved.</p>
@@ -137,12 +153,14 @@
             var sourceId = document.getElementById("sourceId").value;
             var destinationId = document.getElementById("destinationId").value;
             if (sourceId && destinationId) {
-                tokenId.removeAttribute("disabled")
-                if (sourceId === destinationId) {
-                    console.log("source and destination cannot be same ");
+                tokenId.removeAttribute("disabled");
+                if (sourceId === destinationId &&  destinationId  === sourceId) {
                     document.getElementById("des").innerHTML = "<span style='color:red'><i>source and destination cannot be same </i> </span>";
+                    document.getElementById("price").textContent = "Amount is:  not found";
+                     tokenId.setAttribute("disabled","true");
                 }
                 else {
+                    tokenId.removeAttribute("disabled");
                     document.getElementById("des").innerHTML ="";
                     const response = await axios('http://localhost:8083/metro-application/isPriceExists?source=' + sourceId + '&destination=' + destinationId);
 

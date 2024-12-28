@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Data
 @Table(name = "user_login_Details")
 @NamedQuery(name = "findByUserId",query = "SELECT U FROM UserRegistrationEntity U WHERE U.userRegistrationId=:userRegistrationId")
+@NamedQuery(name="updateLogout",query="UPDATE   UserLoginEntity U SET U.logoutTime = :logoutTime WHERE U.emailId= :emailId")
 public class UserLoginEntity {
 
     @Id

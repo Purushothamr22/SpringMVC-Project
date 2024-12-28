@@ -12,4 +12,5 @@ public interface UserService {
     String updateUserOtp(String emailId);
 
     boolean verifyUserOtp(String emailId ,String otp);
+    String updateLogout(String emailId);
 }

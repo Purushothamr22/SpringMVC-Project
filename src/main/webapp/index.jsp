@@ -13,6 +13,7 @@
                 <!-- Bootstrap Icons -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
                     rel="stylesheet">
+
             </head>
 
             <body class="bg-light text-dark d-flex flex-column min-vh-100">
@@ -54,34 +55,34 @@
                     <div class="d-block ">
                         <img src="https://blog.tummoc.com/wp-content/uploads/2021/06/Namma-Metro-Green-Line_-Routes-Stations-Fares-Timings-More-1.png"
                             alt="Metro Map" class="img-fluid mt-4 mx-3" style="max-width: 300px;">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9VIqsuk0gwNEmyihuh0XB4y1OvYJESdR6FA&s"
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR_hIWXUrSCdBEhaY3np1GsVC3TExWYx--Rw&s"
                             alt="Metro Map" class="img-fluid mt-4 mx-3" style="max-width: 300px;">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZaS7FDck1cpi2cGD0umX7O3qAGvd1mYZJsQ&s"
                             alt="Metro Map" class="img-fluid mt-4" style="max-width: 300px;">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR_hIWXUrSCdBEhaY3np1GsVC3TExWYx--Rw&s"
-                            alt="Metro Map" class="img-fluid mt-4" style="max-width: 300px;">
+
                     </div>
                 </div>
 
-                <div class="container my-5 py-5">
-                
-                    <div class="card shadow-lg border-0 rounded-3">
-                        <div class="card-body">
-                            <div class="text-center mb-4">
-                                <h3 class="fs-4 fw-bold mb-4 text-primary">About Us</h3>
-                            </div>
-                            <h3 class="fs-5 fw-bold mb-3 text-dark">Bangalore Metro Rail Corporation Limited (BMRCL)</h3>
-                
-                            <!-- Card Text -->
-                            <p class="fs-6 text-muted mb-2">A joint venture between the Government of India and the Government of Karnataka, BMRCL is a Special Purpose Vehicle entrusted with the responsibility of implementing and operating the Bangalore Metro Rail Project.</p>
-                
-                            <p class="fs-6 text-muted mb-2">'Namma Metro' is not just a contribution to the beauty of Bangalore’s skyline, but it also provides a safe, quick, reliable, and comfortable public transport system. More importantly, it is an environmentally friendly addition to the city, significantly reducing carbon emissions and contributing to a sustainable future.</p>
-                
-                            <p class="fs-6 text-muted mb-2">The metro services currently span a total of 77 km, enhancing daily commutes for thousands of citizens.</p>
-            
-                        </div>
-                    </div>
-                </div>
+               <div class="container my-5 py-3 " style="width: 950px;">
+                   <div class="card shadow-lg border-0 rounded-3">
+                       <div class="row g-0">
+                           <div class="col-md-4">
+                               <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9VIqsuk0gwNEmyihuh0XB4y1OvYJESdR6FA&s"
+                                    alt="Metro Logo" class="img-fluid rounded-start " style="width: 100%; height: 100%;">
+                           </div>
+                           <div class="col-md-8">
+                               <div class="card-body text-center ">
+                                   <h2 class="fs-3 fw-bold mb-4 mt-4 mx-3 text-primary text-start">About Us</h2>
+                                   <h4 class="fs-5 fw-bold mb-3 mx-5 text-start  text-dark">Bangalore Metro Rail Corporation Limited (BMRCL)</h4>
+                                   <p class="fs-6 text-muted mb-2">BMRCL is a joint venture between the Government of India and the Government of Karnataka. It is a Special Purpose Vehicle entrusted with implementing and operating the Bangalore Metro Rail Project.</p>
+                                   <p class="fs-6 text-muted mb-2">'Namma Metro' is not only a contribution to Bangalore’s skyline but also provides a safe, quick, reliable, and comfortable public transport system. It is an environmentally friendly initiative, significantly reducing carbon emissions and contributing to a sustainable future.</p>
+                                   <p class="fs-6 text-muted mb-2">Currently, the metro services span a total of 77 km, enhancing daily commutes for thousands of citizens.</p>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+
                 
 
 
@@ -89,7 +90,7 @@
 
                 <div class="container my-5 py-5">
                     <h2 class="text-center fw-bold mb-4">Our Services</h2>
-                    <div class="row g-4">
+                    <div class="row mt-4 p-3 g-4">
                         <div class="col-md-4">
                             <div class="card h-100">
                                 <div class="card-body text-center">

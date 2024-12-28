@@ -53,8 +53,8 @@
                                         </a>
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                             <li><a class="dropdown-item"
-                                                    href="?emailId=${verifyUserOtpDto.emailId}">Profile</a></li>
-                                            <li><a class="dropdown-item" href="getUserLogin">Log out</a></li>
+                                                    href="editUserProfile?emailId=${verifyUserOtpDto.emailId}">Profile</a></li>
+                                            <li><a class="dropdown-item" href="getLogout?emailId=${verifyUserOtpDto.emailId}">Log out</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -88,6 +88,7 @@
                     </div>
                 </div>
 
+    <h4 class="text-center text-bold mt-3 mb-3 " style="color: green;">${UserUpdateMsg}</h4>
 
 
                 <!-- Footer Section -->

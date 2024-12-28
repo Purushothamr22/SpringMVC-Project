@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+ <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ page isELIgnored="false" %>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
             <html >
@@ -63,7 +63,7 @@
                                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                             <li><a class="dropdown-item"
                                                     href="editProfile?emailId=${metroDto.emailId}">Profile Edit</a></li>
-                                            <li><a class="dropdown-item" href="getLoginPage">Log out</a></li>
+                                            <li><a class="dropdown-item" href="getLoginPage?emailId=${metroDto.emailId}">Log out</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -95,14 +95,23 @@
                     </div>
                 </div>
 
-                <div class="input-group  mb-3  py-4 mx-3" style="width: 25%;">
-                    <form action="getByStationName">
-                        <input type="text" class="form-control border-dark  " placeholder="Enter Station Name " name="stationName" >
-                        <button class="btn btn-outline-secondary  " type="submit" id="button-addon1">Search</button>
-                        <input type="text" class="form-control" placeholder="" name="emailId" value="${metroDto.emailId}" hidden >
+               <div class="input-group d-flex align-items-center justify-content-start py-4 mx-3" style="max-width: 25%;">
+                   <form action="getByStationName" class="d-flex w-100">
+                       <input type="text"
+                              class="form-control border-dark rounded-0 me-2"
+                              placeholder="Enter Station Name"
+                              name="stationName">
 
-                    </form>
-                </div>
+                       <input type="text"
+                              name="emailId"
+                              value="${metroDto.emailId}"
+                              hidden>
+
+                       <!-- Search Button -->
+                       <button class="btn btn-primary btn-outline-secondary text-dark px-4" type="submit" id="button-addon1">Search</button>
+                   </form>
+               </div>
+
 
 
                 <h3 class="text justify-content-center text-danger shadow-sm">${DisplayMsg}</h3>

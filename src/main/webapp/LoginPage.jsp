@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <title>Government Metro Service Login</title>
     <style>
         body {
@@ -15,7 +16,7 @@
         }
 
         .navbar {
-            background-color: #00796b;
+            background-color: #000000;
         }
 
         .navbar-brand img {
@@ -27,17 +28,17 @@
         }
 
         .btn-primary {
-            background-color: #00796b;
-            border-color: #00796b;
+            background-color: #000000;
+            border-color: #2f4d55cc;
         }
 
         .btn-primary:hover {
-            background-color: #004d40;
-            border-color: #004d40;
+            background-color: #3f19c9;
+            border-color: #1a33a5;
         }
 
         .footer {
-            background-color: #004d40;
+            background-color: #000000;
             color: white;
             text-align: center;
             padding: 30px 0;
@@ -58,16 +59,23 @@
             color: #00796b;
         }
 
-        /* Custom styles */
         .section-header {
             font-size: 1.75rem;
             font-weight: 600;
             color: #00796b;
+            justify-content: center;
+            text-align-last: auto;
         }
 
         .section-content {
             font-size: 1.1rem;
             color: #5d6d7e;
+        }
+
+        .card-header {
+            background-color: #1a0101ef;
+            color: #fff;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -75,10 +83,10 @@
 <body>
 
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+        <div class="container-fluid">
             <a class="navbar-brand" href="getIndex">
-                <img src="https://www.x-workz.in/Logo.png" alt="xworkz logo">
+                <img src="https://www.x-workz.in/Logo.png" alt="Metro Logo" style="max-height: 50px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,8 +94,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item me-2">
+                        <a class="nav-link btn btn-primary text-light" href="getUserRegistrationInfo">
+                            <i class="bi bi-person-plus-fill me-1"></i> New User Registration
+                        </a>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link btn-primary btn-outline-light px-4" href="getIndex">Back</a>
+                        <a class="nav-link btn btn-primary text-light" href="getLoginPage">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Login
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -95,66 +110,42 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container my-5 py-5">
-        <div class="row justify-content-center g-4">
-            <!-- Admin Login Card -->
-            <div class="col-md-5">
-                <div class="card shadow-lg rounded-3">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">Admin Login</h2>
+
+    <!-- Admin Login Card -->
+    <section class="container px-4 mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-4">
+                <div class="card shadow-lg rounded-3 border-0">
+                    <div class="card-header text-center">Admin Login</div>
+                    <div class="card-body mt-4 my-3">
                         <form action="getAdminLogin" method="get">
                             <button type="submit" class="btn btn-primary w-100">Login as Admin</button>
                         </form>
                     </div>
                 </div>
             </div>
-
-            <!-- Divider -->
-            <div class="col-md-2 divider">
-                <h3>|||||</h3>
-            </div>
-
-            <!-- User Login Card -->
-            <div class="col-md-5">
-                <div class="card shadow-lg rounded-3">
-                    <div class="card-body">
-                        <h2 class="card-title text-center mb-4">User Login</h2>
+            <div class="col-md-5 mb-4">
+                <div class="card shadow-lg rounded-3 border-0">
+                    <div class="card-header text-center">User Login</div>
+                    <div class="card-body mt-4 my-3">
                         <form action="getUserLogin" method="get">
-                            <button type="submit" class="btn btn-success w-100">Login as User</button>
+                            <button type="submit" class="btn btn-primary w-100">Login as User</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Extra Sections -->
-        <div class="row mt-5">
-            <div class="col-md-6 py-5">
-                <div class="card p-4 shadow-sm rounded-3">
-                    <h3 class="section-header">How It Works</h3>
-                    <p class="section-content">The Namma Metro service is designed to reduce traffic congestion and
-                        provide a clean, safe, and fast mode of transportation across Bangalore. With multiple
-                        routes connecting the city's key locations, you can rely on us for quick and efficient
-                        travel.</p>
-                </div>
-            </div>
 
-            <div class="col-md-6 py-5">
-                <div class="card p-4 shadow-sm rounded-3">
-                    <h3 class="section-header">Ticketing and Payment</h3>
-                    <p class="section-content">You can buy tickets at any metro station or use the Namma Metro app
-                        for quick and easy ticket purchasing. We also offer various passes for frequent travelers to
-                        enjoy discounted rates and unlimited travel within specific zones.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Footer -->
-    <footer class="footer py-3">
+    <footer class="footer fixed-bottom py-3">
         <div>
             <h2 class="section-header text-light">Contact Us</h2>
-            <p class="section-content text-light">For more information, complaints, or inquiries, feel free to reach out to
+            <p class="section-content text-light">For more information, complaints, or inquiries, feel free to reach
+                out to
                 our customer service team at:</p>
             <p class="section-content text-light"><strong>Email:</strong> support@namma.metro.in</p>
         </div>

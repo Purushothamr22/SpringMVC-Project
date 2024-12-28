@@ -155,7 +155,7 @@
                             <button type="submit" id="button" class="btn btn-custom rounded-pill">✈️ Get OTP</button>
                         </div>
                     </form>
-
+                    <div  class="text-center text-success mt-3"> ${OtpMsg}</div>
                     <form action="verifyUserOtp" method="post" class="mt-4">
                         <div class="mb-3">
                             <label for="otp" class="form-label">Enter OTP</label>
@@ -166,6 +166,7 @@
                             <button type="submit" class="btn btn-success rounded-pill">Login</button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>

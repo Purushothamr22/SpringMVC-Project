@@ -23,12 +23,9 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
     public String saveTimeDetails(TrainTimeDetailsEntity trainTimeDetailsEntity) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
-        log.info("the given data to the repo is ....................    " + trainTimeDetailsEntity);
         try {
             transaction.begin();
-
             entityManager.persist(trainTimeDetailsEntity);
-
             transaction.commit();
         } catch (Exception e) {
             log.info("error in saveTimeDetails ............." + e.getMessage());
@@ -54,23 +51,7 @@ public class TrainTimeDetailsRepoImpl implements TrainTimeDetailsRepo {
         return null;
     }
 
-    @Override
-    public TrainTimeDetailsEntity findBySourceDestinationAndTimings(String source, String destination, String sourceTime, String destinationTime) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        try {
-            Query query = entityManager.createNamedQuery("findBySourceDestinationAndTimings");
-            query.setParameter("source", source);
-            query.setParameter("destination", destination);
-            query.setParameter("sourceTime", sourceTime);
-            query.setParameter("destinationTime", destinationTime);
-            return (TrainTimeDetailsEntity) query.getSingleResult();
-        } catch (Exception e) {
-            log.error("got error in findBySourceAndDestination.....................  " + e.getMessage());
-        } finally {
-            entityManager.close();
-        }
-        return null;
-    }
+
 
     @Override
     public List<TrainTimeDetailsEntity> findAll() {
